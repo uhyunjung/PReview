@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html leng="en">
+<head>
+    <meta charset = "UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>강의 리뷰 - 글 작성</title>
+</head>
+
+<body>
+    <!--메인부분(상단)-->
+    <header>
+        <div class="logo">PReview</div>
+        <div class="search">
+        </div>
+        <div class="log-in">
+            로그인 회원가입
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li>강의 리뷰</li>
+            <li>코딩 캠프 정보</li>
+            <li>솔루션 공유</li>
+            <li>커뮤니티</li>
+        </ul>
+    </nav>
+
+    <div id="main-sec">
+        <!--메인부분(사이드바)-->
+        <aside id="sidebar">
+            <p><b>언어</b></p>
+            <ul>
+                <li>C / C++</li>
+                <li>C#</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>Javascript</li>
+            </ul>
+
+            <p><b>분야</b></p>
+            <ul>
+                <li>Algorithm</li>
+                <li>HTML/CSS/Javascript</li>
+                <li>Server</li>
+                <li>Full Stack</li>
+                <li>ML/DL</li>
+            </ul>
+        </aside>
+
+
+        <!--글쓰기 부분-->
+        <article>
+            <header>Full Stack</header>
+
+            <!--강좌 이름 section-->
+            <section id="lecture-name" class="writing-block">
+                <!--리뷰 각 항목 .item-->
+                <div class="item">
+                    <div class="review-entry">
+                        <span>강좌 이름 :</span>
+                    </div>
+                    <div class="review-content">
+                        <input type="text" id="name" class="short-text" list="lecture-list">
+                        <datalist id="lecture-list">
+                            <!--DB에서 가져와 자동완성-->
+                            <option value="유튜브 클론코딩"></option>
+                            <option value="Amazing, awesome, incredible!"></option>
+                        </datalist>
+                    </div>
+                </div>
+            </section>
+
+            <!--강좌 리뷰 내용 section-->
+            <section id="contants" class="writing-block">
+                <!--별점-->
+                <div id="star" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">별점</span>
+                    </div>
+                    <div class="review-content">
+                        <select id="star-score">
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★☆</option>
+                            <option value="3">★★★☆☆</option>
+                            <option value="2">★★☆☆☆</option>
+                            <option value="1">★☆☆☆☆</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--태그-->
+                <div id="hashtags" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">태그</span>
+                    </div>
+                    <div class="review-content">
+                        <ul class="tags">
+                            <li><button>#쉬워요</button></li>
+                            <li><button>#적당해요</button></li>
+                            <li><button>#어려워요</button></li>
+                            <!--태그 추가-->
+                            <li><button>+</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--수강 정보-->
+                <div id="lecture-info" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">수강 정보</span>
+                    </div>
+                    <div class="review-content">
+                        <span>수강 기간 : </span>
+                        <input type="text" id="period">
+                        <span> / 수강 비용 : </span>
+                        <input type="text" id="cost">
+                    </div>
+                </div>
+
+                <!--장점-->
+                <div id="pros" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">장점</span>
+                    </div>
+                    <div class="review-content">
+                        <input type="text" id="pros" class="long-text">
+                    </div>
+                </div>
+
+                <!--단점-->
+                <div id="cons" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">단점</span>
+                    </div>
+                    <div class="review-content">
+                        <input type="text" id="cons" class="long-text">
+                    </div>
+                </div>
+
+                <!--강의 링크-->
+                <div id="link" class="item">
+                    <div class="review-entry">
+                        <span class="entry-name">강의 링크</span>
+                    </div>
+                    <div class="review-content">
+                        <input type="text" id="link" class="short-text">
+                    </div>
+                </div>
+            </section>
+
+            <!--글 작성 버튼 section-->
+            <section id="submit-button">
+                <!--DB로 전송-->
+                <input type="submit" value=" 글 작성 ">
+            </section>
+        </article>
+    </div>
+
+</body>
+</html>
