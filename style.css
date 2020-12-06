@@ -20,6 +20,7 @@ ul {
     list-style: none;
 }
 
+/* tag button */
 .tags li {
     display: inline-block;
     padding: 0px 1px;
@@ -31,12 +32,12 @@ ul {
     border-radius: 2em;
     padding: 0px 4px;
 }
-
+/* 리뷰내용 각 항목 */
 .item {
     display: flex;
     padding: 7px 0px;
 }
-
+/* 항목 이름 */
 .review-entry {
     width: 150px;
     text-align: center;
@@ -49,7 +50,7 @@ ul {
     border-radius: 2em;
     margin: 0px auto;
 }
-
+/* 항목별 내용 */
 .review-content {
     width: 100%;
     text-align: left;
@@ -68,7 +69,7 @@ ul {
     text-align: right;
     padding: 5px 0px 20px 0px;
 }
-
+/* 강의명, 내용, 제출버튼 구역 */
 .writing-block {
     border-bottom: 2px solid #999999;
     padding: 5px 0px;
