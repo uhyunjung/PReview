@@ -1,4 +1,3 @@
-
 * {
     padding: 0;
     margin: 0;
@@ -75,7 +74,7 @@ ul {
     padding: 5px 0px;
 }
 
-article {float: left; border: 2px solid #999999; padding: 10px; margin: 10px;}
+article {float: left; border: 2px solid #d8d8d8; padding: 10px; margin: 10px;}
 
 aside {float: left; width: 180px; height: flex; border: 2px solid #999999; padding: 10px; margin: 10px;}
 
