@@ -8,6 +8,7 @@
 #search{
    text-align:left;
    padding-left: 40px;
+   background-image: url(icon.png);
    background-repeat: no-repeat;
    background-position: 10px center;
    position:absolute;
@@ -148,4 +149,15 @@ a:visited{
   border:0;
   outline:0;
   background-color:white;
+}
+#programming_site{
+  height:30px;
+  width:30px;
+  padding: 3px 3px 3px 3px
+  border: 1px solid gray
+  border-radius :3px;
+  font-size:small;
+  font-color:#585858;
+  margin-left:3px;
+  margin-right:3px;
 }
