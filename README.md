@@ -26,7 +26,8 @@ PReview는 코딩 강의 및 코딩 캠프에 대한 리뷰, 코딩 문제 및 �
 6. Visualization(시각화)-The number of reviews and average of star rating
 
 
-## 디렉토리 구조
+## 📁 디렉토리 구조
+```
 PReview
 ├── public/
 │   └── index.html                                     - 메인 html 파일
@@ -47,6 +48,7 @@ PReview
 ├── firestore.rules                                    - firebase 규칙 파일
 ├── package.json
 └── README.md
+```
 
 ## ⚙️ 언어 및 환경
 
