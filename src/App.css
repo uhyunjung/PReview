@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD:src/App.css
-=======
->>>>>>> 8c4459b57a651da010697f28e531318a01d6c1fb
 #PReview_logo{
   text-decoration:none;
   float:left;
@@ -12,7 +8,6 @@
 #search{
    text-align:left;
    padding-left: 40px;
-   background-image: url(icon.png);
    background-repeat: no-repeat;
    background-position: 10px center;
    position:absolute;
@@ -157,21 +152,18 @@ a:visited{
 #programming_site{
   height:30px;
   width:30px;
-  padding: 3px 3px 3px 3px
-  border: 1px solid gray
+  padding: 3px 3px 3px 3px;
+  border: 1px solid gray;
   border-radius :3px;
   font-size:small;
   font-color:#585858;
   margin-left:3px;
   margin-right:3px;
 }
-<<<<<<< HEAD
-=======
 
 #search{
    text-align:left;
    padding-left: 40px;
-   background-image: url(icon.png);
    background-repeat: no-repeat;
    background-position: 10px center;
    position:absolute;
@@ -337,6 +329,3 @@ a:visited{
   margin-left:3px;
   margin-right:3px;
 }
->>>>>>> ca57b7420282ffb6b2f8a1467a431f7702a80ae1:main_style.css
-=======
->>>>>>> 8c4459b57a651da010697f28e531318a01d6c1fb
