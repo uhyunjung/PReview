@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Paper, Button } from '@material-ui/core';
-import './Lecture_review_main.css';
+import './total.css';
 import { db, auth } from './firebase';
 
 // Paper 태그 스타일
