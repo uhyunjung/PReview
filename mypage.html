@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mypage_style.css">
+    <script src="https://kit.fontawesome.com/97c796bf3e.js" crossorigin="anonymous"></script>
+    <title>마이페이지</title>
+</head>
+<body>
+    <header id = "top" style="width:100%; height:30px;">
+        <img src="logo.png" width="200" style="margin-left:10px;">
+        <input id="search" type="text" placeholder="통합검색" >
+        <input id="signup" type="button" name="signup" value="회원가입">
+        <input id="login" type="button" name="login" value="로그인" >
+    </header>
+
+
+    <nav id='nav' style="width:100%; height:50px">
+        <ul >
+            <li  id='nav_item'><a href="">강의 리뷰</a> </li>
+            <li  id='nav_item'><a href="">코딩 캠프 리뷰</a> </li>
+            <li  id='nav_item'><a href="">솔루션 공유</a> </li>
+            <li  id='nav_item'><a href="">커뮤니티 </a> </li>
+        </ul>
+    </nav>
+    
+    <div id="wrapper">
+
+    <div id="sidebar">
+        <p id="mywrite">내가 작성한 글</p>
+        <p id="mylike">좋아요 / 댓글 작성한 글</p>
+        <p id="myinfo">내 계정 정보</p>
+        <ul class="category">
+            <li><a href="#">개인 정보 수정</a></li>
+            <li><a href="#">회원 탈퇴</a></li>
+        </ul>
+    </div>
+    
+    <div id="review_right">
+        <div id="category">내가 작성한 글</div>
+        <div id="lecture_review">
+            <div id="review_title">강의 리뷰</div>
+
+            <div id="review_nav">
+                <div id="nav_link">링크</div>
+                <div id="nav_content">내용</div>
+                <div >
+                    <button id="nav_date">작성날짜△</button>
+                    <button id="nav_like">좋아요</button>
+                </div>
+            </div>
+            <hr id="line">
+
+            <div class="review_item">
+                <div class="link">
+                    <a class="img_link" href="#"><img src="image.jpg" alt="" width="100"></a>
+                </div>
+                <div class="content">
+                    <div class="review_title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
+                    <div class="review_rank">★★★★☆</div>
+                    <div class="review_tag">
+                        <ul class="review_tags">
+                            <li><button>#쉬워요</button></li>
+                            <li><button>#효과적이에요</button></li>
+                            <li><button>#전체_구조를_보여줘요</button></li>
+                            <li><button>#실무적이에요</button></li>
+                        </ul>
+                    </div>
+                    <button class="review_btn">이 강의만 모아보기</button>
+                </div>
+                <div class="info">
+                    <div class="review_date">2020.02.27</div>
+                    <div class="review_like">
+                        <button class="review_like_btn">
+                            <i class="fas fa-heart" style="color:red;font-size: 30px;"></i>
+                        </button>
+                        <div class="review_like_num">54</div>
+                    </div>
+                    <div class="review_writer">작성자: 김작성</div>
+                </div> 
+            </div>
+
+            <div class="review_item">
+                <div class="link">
+                    <a class="img_link" href="#"><img src="image.jpg" alt="" width="100"></a>
+                </div>
+                <div class="content">
+                    <div class="review_title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
+                    <div class="review_rank">★★★★☆</div>
+                    <div class="review_tag">
+                        <ul class="review_tags">
+                            <li><button>#쉬워요</button></li>
+                            <li><button>#효과적이에요</button></li>
+                            <li><button>#전체_구조를_보여줘요</button></li>
+                            <li><button>#실무적이에요</button></li>
+                        </ul>
+                    </div>
+                    <button class="review_btn">이 강의만 모아보기</button>
+                </div>
+                <div class="info">
+                    <div class="review_date">2020.02.27</div>
+                    <div class="review_like">
+                        <button class="review_like_btn">
+                            <i class="fas fa-heart" style="color:red;font-size: 30px;"></i>
+                        </button>
+                        <div class="review_like_num">54</div>
+                    </div>
+                    <div class="review_writer">작성자: 김작성</div>
+                </div> 
+            </div>
+
+        </div>
+
+        <div id="community">
+            <div id="community_title">커뮤니티</div>
+            <nav id='community_header'>
+                <span id="nav_num">No.</span>
+                <span id="nav_title">제목</span>
+                <span id="nav_writer">작성자</span>
+                <button id="nav_date">작성날짜▲</button>
+                <button id="nav_view">조회수</button>
+                <span>/</span>
+                <button id="nav_like">좋아요</button>
+            </nav>
+            <hr id="line">
+    
+            <div class="community_item">
+                <div class="community_num">1231</div>
+                <div class="community_title">[우아한 테스코스] 후기 남깁니다.</div>
+                <div class="community_writer">김작성</div>
+                <div class="community_date">2020.12.03</div>
+                <div class="community_view">104</div>
+                <span>/</span>
+                <div class="community_like">26</div>
+            </div>
+
+            <div class="community_item">
+                <div class="community_num">1231</div>
+                <div class="community_title">[우아한 테스코스] 후기 남깁니다.</div>
+                <div class="community_writer">김작성</div>
+                <div class="community_date">2020.12.03</div>
+                <div class="community_view">104</div>
+                <span>/</span>
+                <div class="community_like">26</div>
+            </div>
+        </div>
+        
+        
+    </div>
+    </div>
+</body>
+</html>
