@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html leng="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style_community.css">
+  <title>커뮤니티</title>
+</head>
+
+<body>
+  <div className="sidebar">
+    <aside class="sidebar">
+      <p>언어</p>
+      <ul class="category">
+        <li><a href="#">C / C++</a></li>
+        <li><a href="#">C#</a></li>
+        <li><a href="#">Java</a></li>
+        <li><a href="#">Python</a></li>
+        <li><a href="#">Javascript</a></li>
+      </ul>
+      <p>분야</p>
+      <ul class="category">
+        <li><a href="#">Algorithm</a></li>
+        <li><a href="#">HTML/CSS/Javascript</a></li>
+        <li><a href="#">Server</a></li>
+        <li><a href="#">Full Stack</a></li>
+        <li><a href="#">ML/DL</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <article id="article">
+    <div id='wrapper'>
+      <header id="top" style="width:100%; height:30px;">
+        <img src="logo.png" width="200" style="margin-left:10px;">
+        <input id="search" type="text" placeholder="통합검색">
+        <input id="signup" type="button" name="signup" value="회원가입">
+        <input id="login" type="button" name="login" value="로그인">
+      </header>
+
+      <nav id='nav' style="width:100%; height:50px">
+        <ul>
+          <li id='nav_item'><a href="">강의 리뷰</a> </li>
+          <li id='nav_item'><a href="">코딩 캠프 리뷰</a> </li>
+          <li id='nav_item'><a href="">솔루션 공유</a> </li>
+          <li id='nav_item'><a href="">커뮤니티 </a> </li>
+        </ul>
+      </nav>
+
+      <div id='main_left'>
+        <ul class="category">
+          <li><a href="community_view_free.html">자유게시판</a></li>
+          <li><a href="community_view_qna.html">질문게시판</a></li>
+          <li><a href="community_view_crewgether.html">강의 수강원 모집</a></li>
+          <li><a href="community_view_projectgether.html">프로젝트 참가자 모집</a></li>
+        </ul>
+      </div>
+
+      <!--자유게시판, 질문게시판, 강의 수강원 모집, 프로젝트 참가자 모집-->
+
+      <section id="main">
+        <div id="main-top">
+          <span id="com-category">강의 수강원 모집</span>
+          <input id="com-search" type="text" placeholder="게시판에서 검색">
+          <input id="com-write" type="button" name="write" value="글 작성">
+        </div>
+
+        <div id="main-middle">
+          <span id="no">No.</span>
+          <span id="title">제목</span>
+          <span id="writer">작성자</span>
+          <!--작성날짜▼-->
+          <span id="date"><input type="button" id="sort-by-date" value="작성날짜▲"></span>
+          <span id="view-like">
+            <input type="button" id="sort-by-view" value="조회수"> /
+            <input type="button" id="sort-by-like" value="좋아요">
+          </span>
+        </div>
+
+        <div id="main-bottom">
+          <div id="com-post-item">
+            <span id="no">1231</span>
+            <span id="title"><a href="">뫄뫄 인강 공유할 두 분 구합니다(1/3)</a></span>
+            <span id="writer">김작성</span>
+            <span id="date">2020.12.03</span>
+            <span id="view-like">104 / 26</span>
+          </div>
+
+          <div id="com-post-item">
+            <span id="no">1247</span>
+            <span id="title"><a href="#">블라 강의 함께 들을 분 있나요</a></span>
+            <span id="writer">이작성</span>
+            <span id="date">2020.12.01</span>
+            <span id="view-like">203 / 54</span>
+          </div>
+
+        </div>
+
+      </section>
+</body>
+
+</html>
