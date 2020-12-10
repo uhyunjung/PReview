@@ -5,6 +5,17 @@ import './total.css';
 import { db } from './firebase.js';
 
 class Lecture_review_main extends Component {
+    printStar(star){
+        let ret = "";
+
+        for(let i=0; i<5; i++){
+            if(i < star) ret += "★";
+            else ret += "☆";
+        }
+        
+        return ret;
+    }
+
     // 렌더링
     render() {
         return (
@@ -56,8 +67,9 @@ class Lecture_review_main extends Component {
                     </div>
                     <div id="reviews">
                         {db.collection("reviews")
-                        .onSnapshot((snaps) => {
-                            snaps.forEach((doc) => {
+                        .onSnapshot(snaps => {
+                            document.getElementById("reviews").innerHTML='';
+                            snaps.forEach(doc => {
                                 const reviewDiv = document.createElement("div");
 
                                 const htmlContent =
@@ -67,23 +79,25 @@ class Lecture_review_main extends Component {
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
                                             <Link to='/Lecture_review_detail'><div class=\"title\">"+doc.data().lecture_id+"</div></Link>\
-                                                <div class=\"rank\">imsi</div>\
+                                                <div class=\"rank\">"+ this.printStar(doc.data().star) +"</div>\
                                                 <div class=\"tag\">"+doc.data().tags_attribute+"</div>\
                                                 <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                             </div>\
                                             <div class=\"like\">\
-                                                <span class=\"date\">imsi</span>\
+                                                <span class=\"date\">"+doc.data().date+"</span>\
                                                 <div class=\"likebtn\">\
                                                     <button>\
                                                         <i class=\"fas fa-heart\"></i>\
                                                     </button>\
-                                                <div class=\"likepeople\">imsi</div>\
+                                                <div class=\"likepeople\">"+doc.data().like+"</div>\
                                                 </div>\
-                                            <span class=\"writer\">작성자 : imsi</span>\
+                                            <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
                                             </div>\
                                         </li>\
                                     </ul>\
                                 </div>";
+
+                                console.log(htmlContent);
 
                                 reviewDiv.innerHTML = htmlContent;
 
