@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lecture_review_style.css">
+    <script src="https://kit.fontawesome.com/97c796bf3e.js" crossorigin="anonymous"></script>
+    <title>강의 리뷰 페이지</title>
+</head>
+<body>
+    <header id = "top" style="width:100%; height:30px;">
+        <img src="logo.png" width="200" style="margin-left:10px;">
+        <input id="search" type="text" placeholder="통합검색" >
+        <input id="signup" type="button" name="signup" value="회원가입">
+        <input id="login" type="button" name="login" value="로그인" >
+    </header>
+
+
+    <nav id='nav' style="width:100%; height:50px">
+        <ul >
+            <li  id='nav_item'><a href="">강의 리뷰</a> </li>
+            <li  id='nav_item'><a href="">코딩 캠프 리뷰</a> </li>
+            <li  id='nav_item'><a href="">솔루션 공유</a> </li>
+            <li  id='nav_item'><a href="">커뮤니티 </a> </li>
+        </ul>
+    </nav>
+    
+    <div id="wrapper">
+    <div id="sidebar">
+        <p id="lang">언어</p>
+        <ul class="category">
+            <li><a href="#">C / C++</a></li>
+            <li><a href="#">C#</a></li>
+            <li><a href="#">Java</a></li>
+            <li><a href="#">Python</a></li>
+            <li><a href="#">Javascript</a></li>
+        </ul>
+        <p id="field">분야</p>
+        <ul class="category">
+            <li><a href="#">Algorithm</a></li>
+            <li><a href="#">HTML/CSS/Javascript</a></li>
+            <li><a href="#">Server</a></li>
+            <li><a href="#">Full Stack</a></li>
+            <li><a href="#">ML/DL</a></li>
+        </ul>
+    </div>
+    
+
+    <div id="review_right">
+        <div id="review_search">
+            <div id="category_name">
+                Full Stack
+            </div>
+            <div>
+                <input id="small_search" type="text" placeholder="게시판에서 검색" >
+            </div>
+            <div>
+                <button id="write">글 작성</button>
+            </div>
+            
+            
+        </div>
+        <div id="review_nav">
+            <div id="nav_link">링크</div>
+            <div id="nav_content">내용</div>
+            <div >
+                <button id="nav_date">작성날짜△</button>
+                <button id="nav_like">좋아요</button>
+            </div>
+        </div>
+
+        <hr id="line">
+
+        <div class="item">
+            <div class="link">
+                <a class="img_link" href="#"><img src="image.jpg" alt="" width="100"></a>
+            </div>
+            <div class="content">
+                <div class="title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
+                <div class="rank">★★★★☆</div>
+                <div class="tag">
+                    <ul class="tags">
+                        <li><button>#쉬워요</button></li>
+                        <li><button>#효과적이에요</button></li>
+                        <li><button>#전체_구조를_보여줘요</button></li>
+                        <li><button>#실무적이에요</button></li>
+                    </ul>
+                </div>
+                <button class="btn">이 강의만 모아보기</button>
+            </div>
+            <div class="info">
+                <div class="date">2020.02.27</div>
+                <div class="like">
+                    <button class="like_btn">
+                        <i class="fas fa-heart" style="color:red;font-size: 30px;"></i>
+                    </button>
+                    <div class="like_num">54</div>
+                </div>
+                <div class="writer">작성자: 김작성</div>
+            </div> 
+        </div>
+
+        <div class="item">
+            <div class="link">
+                <a class="img_link" href="#"><img src="image.jpg" alt="" width="100"></a>
+            </div>
+            <div class="content">
+                <div class="title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
+                <div class="rank">★★★★☆</div>
+                <div class="tag">
+                    <ul class="tags">
+                        <li><button>#쉬워요</button></li>
+                        <li><button>#효과적이에요</button></li>
+                        <li><button>#전체_구조를_보여줘요</button></li>
+                        <li><button>#실무적이에요</button></li>
+                    </ul>
+                </div>
+                <button class="btn">이 강의만 모아보기</button>
+            </div>
+            <div class="info">
+                <div class="date">2020.02.27</div>
+                <div class="like">
+                    <button class="like_btn">
+                        <i class="fas fa-heart" style="color:red;font-size: 30px;"></i>
+                    </button>
+                    <div class="like_num">54</div>
+                </div>
+                <div class="writer">작성자: 김작성</div>
+            </div> 
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+#search {
+  text-align: left;
+  padding-left: 40px;
+  background-image: url(icon.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: absolute;
+  margin-left: 20%;
+  width: 300px;
+  height: 30px;
+  border-radius: 50px;
+  border-color: #bdbdbd;
+  box-shadow: none;
+}
+#small_search {
+  text-align: left;
+  padding-left: 40px;
+  background-image: url(icon.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: absolute;
+  width: 250px;
+  height: 25px;
+  border-radius: 50px;
+  border-color: #bdbdbd;
+  box-shadow: none;
+  margin-left: 13%;
+  margin-top: 10px;
+}
+#signup {
+  float: right;
+  border: 0;
+  outline: 0;
+  color: gray;
+  background-color: white;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+#login {
+  float: right;
+  border: 0;
+  outline: 0;
+  color: gray;
+  background-color: white;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#nav {
+  background-color: #bdbdbd;
+}
+
+#nav_item {
+  display: inline;
+  margin-left: 90px;
+  line-height: 55px;
+  padding: 0 40px;
+  color: #585858;
+  font-size: small;
+  font-weight: bold;
+}
+#main_left {
+  height: 620px;
+  width: 300px;
+  float: left;
+  margin-left: 15%;
+  margin-right: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #bdbdbd;
+  border-width: 2px;
+}
+#review {
+  height: 620px;
+  width: 700px;
+  float: left;
+  margin: 10px 10px 5px 5px;
+  border: 1px solid #bdbdbd;
+  border-width: 2px;
+}
+.review_search {
+  display: flex;
+}
+#write {
+  margin-left: 80%;
+  margin-top: 15px;
+  border-radius: 50px;
+  border-color: #bdbdbd;
+  box-shadow: none;
+}
+
+#schedule {
+  height: 300px;
+  width: 282px;
+  margin: 6px 6px 3px 6px;
+  border: 1px solid #bdbdbd;
+  border-width: 2px;
+}
+.tg {
+  width: 250px;
+  height: 230px;
+  margin-left: 15px;
+  border-collapse: collapse;
+  border-color: #ccc;
+  border-spacing: 0;
+}
+.tg td {
+  background-color: #fff;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg th {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg .saturday {
+  border-color: inherit;
+  color: #3531ff;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif !important;
+  text-align: left;
+  vertical-align: top;
+}
+.tg .weekday {
+  border-color: inherit;
+  color: #585858;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif !important;
+  text-align: left;
+  vertical-align: top;
+}
+.tg .sunday {
+  border-color: inherit;
+  color: #fe0000;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif !important;
+  text-align: left;
+  vertical-align: top;
+}
+.tg .day {
+  border-color: inherit;
+  text-align: left;
+  vertical-align: top;
+}
+
+#schedule2 {
+  margin-left: 15px;
+  font-size: small;
+}
+#schedule3 {
+  margin-left: 15px;
+  font-size: x-small;
+  color: #585858;
+  font-weight: bold;
+}
+
+#line {
+  margin-left: 20px;
+  width: 650px;
+  color: gray;
+}
+#nav2 {
+  height: 30px;
+  padding-top: 40px;
+}
+#nav_num {
+  padding-left: 5%;
+}
+#nav_title {
+  padding-left: 3%;
+}
+#nav_writer {
+  padding-left: 40%;
+  padding-right: 5px;
+}
+.item {
+  width: 650px;
+  margin-left: 20px;
+  display: flex;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid #bdbdbd;
+}
+.num {
+  width: 50px;
+  padding-left: 2%;
+}
+.title {
+  width: 320px;
+}
+.writer {
+  width: 50px;
+}
+.date {
+  padding-left: 2%;
+}
+.view {
+  padding-left: 5%;
+}
+
+#nav2 button {
+  border-radius: 50px;
+  border-color: #bdbdbd;
+}
+
+a {
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+  color: #585858;
+}
+a:visited {
+  text-decoration: none;
+  color: #585858;
+}
