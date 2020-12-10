@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Paper, Button } from '@material-ui/core';
-import './Lecture_review_main.css';
+import { db } from './firebase.js';
+import './total.css';
 
 class Mypage extends Component {
     // 렌더링
@@ -28,7 +29,9 @@ class Mypage extends Component {
                         </ul>
                     </aside>
                 </div>
+
                 <article id="article">
+                <Paper classname="paper" elevation={2}>
                     <div class="review_search">
                         <div class="category_name">
                             <span>Full Stack</span>
@@ -52,53 +55,44 @@ class Mypage extends Component {
                         </div>
 
                     </div>
-                    <div class="review">
-                        <ul>
-                            <li class="item">
-                                <a href="#"><img src="image.jpg" alt="" width="100"></img></a>
-                                <div class="info">
-                                    <div class="title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
-                                    <div class="rank">★★★★☆</div>
-                                    <div class="tag">#쉬워요 #효과적이에요 #전체_구조를_보여줘요 #실무적이에요</div>
-                                    <Button variant="outlined" color="primary" type="submit">이 강의만 모아보기</Button>
-                                </div>
-                                <div class="like">
-                                    <Button variant="outlined" color="primary" type="submit">삭제</Button>
-                                    <span class="date">2020.02.27</span>
-                                    <div class="likebtn">
-                                        <button>
-                                            <i class="fas fa-heart"></i>
-                                        </button>
-                                        <div class="likepeople">54</div>
-                                    </div>
-                                    <span class="writer">작성자 : 김작성</span>
-                                </div>
-                            </li>
-                        </ul>
+                    <div id="reviews">
+                        {db.collection("reviews")
+                        .onSnapshot((snaps) => {
+                            snaps.forEach((doc) => {
+                                const reviewDiv = document.createElement("div");
+
+                                const htmlContent =
+                                "<div class=\"review\">\
+                                    <ul>\
+                                        <li class=\"item\">\
+                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                            <div class=\"info\">\
+                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+doc.data().lecture_id+"</div></Link>\
+                                                <div class=\"rank\">imsi</div>\
+                                                <div class=\"tag\">"+doc.data().tags_attribute+"</div>\
+                                                <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                            </div>\
+                                            <div class=\"like\">\
+                                                <span class=\"date\">imsi</span>\
+                                                <div class=\"likebtn\">\
+                                                    <button>\
+                                                        <i class=\"fas fa-heart\"></i>\
+                                                    </button>\
+                                                <div class=\"likepeople\">imsi</div>\
+                                                </div>\
+                                            <span class=\"writer\">작성자 : imsi</span>\
+                                            </div>\
+                                        </li>\
+                                    </ul>\
+                                </div>";
+
+                                reviewDiv.innerHTML = htmlContent;
+
+                                document.getElementById("reviews").appendChild(reviewDiv);
+                            })
+                        })}
                     </div>
-                    <div class="review">
-                        <ul>
-                            <li class="item">
-                                <a href="#"><img src="image.jpg" alt="" width="100"></img></a>
-                                <div class="info">
-                                    <div class="title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
-                                    <div class="rank">★★★★☆</div>
-                                    <div class="tag">#쉬워요 #효과적이에요 #전체_구조를_보여줘요 #실무적이에요</div>
-                                    <Button variant="outlined" color="primary" type="submit">이 강의만 모아보기</Button>
-                                </div>
-                                <div class="like">
-                                    <span class="date">2020.02.27</span>
-                                    <div class="likebtn">
-                                        <button>
-                                            <i class="fas fa-heart"></i>
-                                        </button>
-                                        <div class="likepeople">54</div>
-                                    </div>
-                                    <span class="writer">작성자 : 김작성</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    </Paper>
                 </article>
             </div>
         )

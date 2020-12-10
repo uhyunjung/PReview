@@ -1,0 +1,389 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+  width: 100%;
+  height: 50%;
+  font-size: 25px;
+}
+
+body {
+  font-family: 'IBM Plex Mono';
+  text-align: center;
+  margin: 0;
+  -chrome-box-sizeing: border-box;
+  -wepkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+a{
+  text-decoration:none;
+}
+a:link{
+  text-decoration: none;
+  color:#585858
+}
+a:visited{
+  text-decoration:none;
+  color:#585858
+}
+
+/* header */
+#PReview_logo {
+  margin-left: 30%;
+}
+
+#search{
+  text-align: left;
+  text-indent: 2em;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position:absolute;
+  margin-left:30%;
+  width:35%;
+  height:5%;
+  border-radius:50px;
+  border-color:#BDBDBD;
+  box-shadow: none;
+  font-size: 20px;
+}
+
+
+
+/* navigation 바*/
+#nav{
+  background-color:#BDBDBD;
+  height: 50%;
+ }
+ 
+#nav_item{
+   display:inline;
+   font-family: 'IBM Plex Mono';
+   font-size: 17px;
+   margin-left: 15%;
+   line-height:55px;
+   color:#585858;
+   font-weight: bold;
+ }
+#ulmenu {
+  padding-left: 35px;
+  margin-bottom: 1%;
+  list-style: none;
+}
+
+/* 사이드바 */
+aside {
+  margin-top: 0.5%;
+  margin-left: 12%;
+  width: 16%;
+  float: left;
+  height: flex;
+  border: 2px solid #999999;
+  padding: 15px;
+}
+/* 리뷰 리스트, 작성 */
+#article {
+  margin-left: 1%;
+  height:100%;
+  width:60%;
+  display: inline-block;
+}
+.category {
+  margin-left: 10%;
+  margin-bottom: 10%;
+  width:100%;
+  display: inline-block;
+}
+.lecture_review_main {
+  width:100%;
+}
+
+
+
+
+#mainarticle {
+  height:100%;
+}
+#main_left{
+ height:620px;
+ width:25%;
+ float:left;
+ margin-left:10%;
+ margin-right:5px;
+ margin-bottom: 10px;
+ border: 1px solid #BDBDBD;
+ border-width: 2px;
+ }
+ #main_right_top{
+   height:220px;
+   width:55%;
+   float:left;
+   border: 1px solid #BDBDBD;
+   border-width: 2px;
+ }
+ #main_right_bottom{
+   height:390px;
+   width:55%;
+   float:left;
+   border: 1px solid #BDBDBD;
+   border-width: 2px;
+ }
+ #schedule{
+   height:60%;
+   width:97%;
+   margin: 6px 6px 3px 6px;
+   border: 1px solid #BDBDBD;
+   border-width: 2px;
+ }
+ .tg  {width:90%;height:80%;margin-left:5%;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+ .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+   font-family:'IBM Plex Mono';font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+ .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+   font-family:'IBM Plex Mono';font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+ .tg .saturday{border-color:inherit;color:#3531ff;font-weight: bold;font-family:Arial, Helvetica, sans-serif !important;;text-align:left;
+   vertical-align:top}
+ .tg .weekday{border-color:inherit;color:#585858;font-weight: bold;font-family:Arial, Helvetica, sans-serif !important;;text-align:left;vertical-align:top}
+ .tg .sunday{border-color:inherit;color:#fe0000;font-weight:bold;font-family:Arial, Helvetica, sans-serif !important;;text-align:left;
+   vertical-align:top}
+ .tg .day{border-color:inherit;text-align:left;vertical-align:top}
+ 
+ #schedule2{
+   margin-left:15px;
+   font-size: 15px;
+ }
+ #schedule3{
+   margin-left:15px;
+   font-size:x-small;
+   color:#585858;
+   font-weight: bold;
+ }
+ #small_title{
+   color:#585858;
+   font-size:small;
+   font-weight:bold;
+   margin-left: 15px;
+ }
+ #small_title_cal{
+  color:#585858;
+  font-size:15px;
+  font-weight:bold;
+  margin-top:3%;
+  margin-left:5%;
+  margin-bottom:3%;
+}
+
+ #line{
+   margin-left: 40px;
+   width:550px;
+   color:gray;
+ }
+ #nav2{
+   height:15px;
+ }
+
+ 
+#nav_item2{
+  display:inline;
+  border-left: 1px solid gray;
+  padding:0px 10px 0px 10px;
+  color:gray;
+  font-size:x-small;
+  font-weight: bold;
+}
+#main_post_item{
+   color:gray;
+   font-size: x-small;
+   margin-top:2px;
+ }
+
+ #next{
+   border:0;
+   outline:0;
+   background-color:white;
+   float:left;
+ }
+ #main_algorithm,#main_camp,#main_career{
+   float:left;
+   width:600px;
+   height:100px;
+   text-align: center;
+ }
+ #site_box{
+   float:left;
+   height:40px;
+   width:40px;
+   padding: 15px 15px 15px 15px;
+   border: 1px solid gray;
+   border-radius:20px;
+   font-size: x-small;
+   font-weight: bold;
+   color:#585858;
+   margin-left:3px;
+   margin-right:3px;
+ }
+
+
+
+
+
+
+
+
+/* tag button */
+.tags li {
+    display: inline-block;
+    padding: 0px 1px;
+}
+
+.tags li button {
+    background: white;
+    border: 2px solid #999999;
+    border-radius: 2em;
+    padding: 0px 4px;
+}
+/* 리뷰내용 각 항목 */
+.item {
+    display: flex;
+    padding: 7px 0px;
+}
+/* 항목 이름 */
+.review-entry {
+    width: 150px;
+    text-align: center;
+}
+
+.entry-name {
+    display: block;
+    width: 80px;
+    border: 2px solid #999999;
+    border-radius: 2em;
+    margin: 0px auto;
+}
+/* 항목별 내용 */
+.review-content {
+    width: 100%;
+    text-align: left;
+}
+
+.short-text {
+    width: 100%;
+}
+
+.long-text {
+    width: 100%;
+    height: 140px;
+}
+
+#submit-button {
+    text-align: right;
+    padding: 5px 0px 20px 0px;
+}
+/* 강의명, 내용, 제출버튼 구역 */
+.writing-block {
+    border-bottom: 2px solid #999999;
+    padding: 5px 0px;
+}
+
+
+
+
+#main-sec {
+    display: flex;
+}
+
+
+
+
+#wrapper {
+    width: 1000px;
+    margin: 5px auto;
+    display: flex;
+  }
+  li {
+    list-style: none;
+  }
+  p {
+    padding-left: 10px;
+  }
+  
+
+
+  .item {
+    display: flex;
+  }
+  .review_search {
+    display: flex;
+    margin: 10px;
+  }
+  .info {
+    margin: 10px;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  .category_name {
+    padding: 10px;
+  }
+  .search {
+    padding: 10px;
+  }
+  .review_search {
+    display: flex;
+  }
+  .review {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+  }
+  
+  .lecturename {
+    margin: 10px;
+    padding: 10px;
+    height: 80px;
+    border-bottom: 1px solid black;
+  }
+  .writer_info {
+    display: inline;
+    float: right;
+  }
+  .reviewdetail {
+    margin: 10px;
+    height: 300px;
+    border-bottom: 1px solid black;
+  }
+  .star,
+  .tags,
+  .lecture_info,
+  .pros,
+  .cons {
+    margin: 5px;
+  }
+  .go {
+    float: right;
+  }
+  .comment {
+    margin: 10px;
+    height: 100px;
+  }
+  .comment_header,
+  .comment_write,
+  .comment_show {
+    margin: 10px;
+  }
+  .comment_header {
+    display: flex;
+    justify-content: space-between;
+  }
+  

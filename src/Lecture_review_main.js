@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Paper, Button } from '@material-ui/core';
-import './Lecture_review_main.css';
+import './total.css';
 import { db } from './firebase.js';
 
 class Lecture_review_main extends Component {
@@ -30,6 +30,7 @@ class Lecture_review_main extends Component {
                     </aside>
                 </div>
                 <article id="article">
+                <Paper classname="paper" elevation={2}>
                     <div class="review_search">
                         <div class="category_name">
                             <span>Full Stack</span>
@@ -65,9 +66,9 @@ class Lecture_review_main extends Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <Link to='/lecture_review_detail'><div class=\"title\">"+doc.data().pros+"</div></Link>\
+                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+doc.data().lecture_id+"</div></Link>\
                                                 <div class=\"rank\">imsi</div>\
-                                                <div class=\"tag\">#쉬워요 #효과적이에요 #전체_구조를_보여줘요 #실무적이에요</div>\
+                                                <div class=\"tag\">"+doc.data().tags_attribute+"</div>\
                                                 <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                             </div>\
                                             <div class=\"like\">\
@@ -90,6 +91,7 @@ class Lecture_review_main extends Component {
                             })
                         })}
                     </div>
+                    </Paper>
                 </article>
             </div>
         )

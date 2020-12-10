@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './total.css';
 
 class Main extends Component {
     // 렌더링
@@ -8,8 +8,8 @@ class Main extends Component {
             <div className="Main">
                 <div id='main_left'>
                     <div id='schedule'>
-                        <article>
-                            <p id='small_title'>12월의 일정</p>
+                        <article id="mainarticle">
+                            <p id='small_title_cal'>12월의 일정</p>
                             <table class="tg">
                                 <thead>
                                     <tr>
