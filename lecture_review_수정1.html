@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="lecture_review_style.css">
+    <link rel="stylesheet" href="lecture_review_style.css"> <!--css 파일 변경-->
     <script src="https://kit.fontawesome.com/97c796bf3e.js" crossorigin="anonymous"></script>
     <title>강의 리뷰 페이지</title>
 </head>
@@ -26,8 +26,9 @@
     </nav>
     
     <div id="wrapper">
-    <div id="sidebar">
-        <p id="lang">언어</p>
+        
+    <div id="sidebar"> <!--aside -> div, class->id로 변경-->
+        <p id="lang">언어</p> <!--id="lang" 추가-->
         <ul class="category">
             <li><a href="#">C / C++</a></li>
             <li><a href="#">C#</a></li>
@@ -35,7 +36,7 @@
             <li><a href="#">Python</a></li>
             <li><a href="#">Javascript</a></li>
         </ul>
-        <p id="field">분야</p>
+        <p id="field">분야</p> <!--id="field"추가-->
         <ul class="category">
             <li><a href="#">Algorithm</a></li>
             <li><a href="#">HTML/CSS/Javascript</a></li>
@@ -46,12 +47,23 @@
     </div>
     
 
-    <div id="review_right">
-        <div id="review_search">
-            <div id="category_name">
+    <div id="review_right"> <!--article->div, class->id="review_right"로 변경-->
+        <div id="review_search"> <!--class->id 변경-->
+            <div id="category_name"> <!--class->id 변경, span 태그 삭제-->
                 Full Stack
             </div>
             <div>
+                <!--
+                변경 전 :
+                <form class="search">
+                                <button>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <input class="keyword" type="text" name="search" size="80"></input>
+                            </form>
+                        
+                        
+                        -->
                 <input id="small_search" type="text" placeholder="게시판에서 검색" >
             </div>
             <div>
@@ -60,8 +72,8 @@
             
             
         </div>
-        <div id="review_nav">
-            <div id="nav_link">링크</div>
+        <div id="review_nav"> <!--class="header" -> id="review_nav" 변경-->
+            <div id="nav_link">링크</div> <!--span->div로 변경하고 id 추가-->
             <div id="nav_content">내용</div>
             <div >
                 <button id="nav_date">작성날짜△</button>
@@ -69,8 +81,9 @@
             </div>
         </div>
 
-        <hr id="line">
-
+        <hr id="line"> <!--줄 추가-->
+        
+        <!--ul, li태그 삭제하고 태그 모두 div로 변경-->
         <div class="item">
             <div class="link">
                 <a class="img_link" href="#"><img src="image.jpg" alt="" width="100"></a>
@@ -79,7 +92,7 @@
                 <div class="title">[풀스택] 유튜브 클론코딩(유튜브 백엔드+프론트엔드+배포)</div>
                 <div class="rank">★★★★☆</div>
                 <div class="tag">
-                    <ul class="tags">
+                    <ul class="tags"> <!--태그를 버튼으로 변경-->
                         <li><button>#쉬워요</button></li>
                         <li><button>#효과적이에요</button></li>
                         <li><button>#전체_구조를_보여줘요</button></li>
@@ -91,12 +104,12 @@
             <div class="info">
                 <div class="date">2020.02.27</div>
                 <div class="like">
-                    <button class="like_btn">
+                    <button class="like_btn"> <!--"likebtn"->"like_btn"-->
                         <i class="fas fa-heart" style="color:red;font-size: 30px;"></i>
                     </button>
-                    <div class="like_num">54</div>
+                    <div class="like_num">54</div> <!--"likepeople"->"like_num"-->
                 </div>
-                <div class="writer">작성자: 김작성</div>
+                <div class="writer">작성자: 김작성</div> <!--span->div 변경-->
             </div> 
         </div>
 
