@@ -2,9 +2,13 @@ import React, { useState, useEffect} from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Grid, Paper, Button } from '@material-ui/core';
+import { db } from './firebase';
 
+  var userNum = 1;
   const Login = () => {
     const [user, setUser] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [nickname, setNickname] = React.useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
@@ -51,21 +55,58 @@ import { Grid, Paper, Button } from '@material-ui/core';
               setPasswordError(err.message);
               break;
           }
-        });
+        });     
+        
+        db.collection("users").doc(userNum+"").set({
+          name: name,
+          nickname: nickname
+      })
+          .then(() => {
+          })
+          .catch((error) => {
+              alert(error.message);
+          });
+
+          setName("");
+      setNickname("");
     };
   
     const authListener = () => {
       firebase.auth().onAuthStateChanged(user => {
         if(user){
           setUser(user);
+          db.collection("users").doc(userNum+"").set({
+            uid: firebase.auth().currentUser.uid
+        }, {merge: true})
+            .then(() => {
+              userNum++;
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
         } else{
           setUser("");
         }
+      
+      
       })
     };
     
     useEffect(() => {authListener();}, []);
 
+    const keyHandleLogin = (e) => {
+      if(e.key == 'Enter')
+      {
+        handleLogin();
+      }
+    }
+
+    const keyHandleSignUp = (e) => {
+      if(e.key == 'Enter')
+      {
+        handleSignUp();
+      }
+    }
 
   // ui config
   const uiConfig = {
@@ -95,12 +136,16 @@ import { Grid, Paper, Button } from '@material-ui/core';
           <div className="btnContainer">
             {hasAccount? (
               <>
-              <button onClick={handleLogin}>로그인</button>
+              <button onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</button>
               <p>계정이 없으면 <Button onClick={()=>setHasAccount(!hasAccount)}>회원가입</Button></p>
               </>
             ):(
               <>
-              <button onClick={handleSignUp}>회원가입</button>
+              <label>이름</label>
+              <input type="text" required value={name} onChange={(e) => setName(e.target.value)}/>
+              <label>닉네임</label>
+              <input type="text" required value={nickname} onChange={(e) => setNickname(e.target.value)}/>
+              <button onClick={handleSignUp} onKeyPress={keyHandleSignUp}>회원가입</button>
               <p>계정이 있으면 <Button onClick={()=>setHasAccount(!hasAccount)}>로그인</Button></p>
               </>
             )}
