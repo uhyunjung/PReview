@@ -26,7 +26,7 @@ class Lecture_review_main extends React.Component {
                                             <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                                 <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                 <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                                <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                             </div>\
                                             <div class=\"like\">\
                                                 <span class=\"date\">"+ doc.data().date + "</span>\
