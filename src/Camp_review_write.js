@@ -146,7 +146,7 @@ const Listbox = styled('ul')`
 const today = new Date();
 
 // 게시글 작성
-const Lecture_review_write = () => {
+const Camp_review_write = () => {
     // 알림창
     const [open, setOpen] = React.useState(false);
 
@@ -196,11 +196,11 @@ const Lecture_review_write = () => {
         handleClose();
 
         // 빈칸 방지
-        if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (level == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
+        if ((lecture_name == "")){
             handleClickBar();
         }
         else {
-            db.collection("reviews").add({
+            db.collection("postings").add({
                 writer_id: firebase.auth().currentUser.uid,
                 lecture_id: lecture_id,
                 lecture_name: lecture_name,
@@ -426,7 +426,7 @@ const Lecture_review_write = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
-                                    <Button type="submit" onClick={handleSubmit} color="primary" autoFocus><Link to='/Lecture_review_detail'>확인</Link></Button>
+                                    <Link to='/Camp_review_detail'><Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button></Link>
                                 </DialogActions>
                             </Dialog>
                         </section>
@@ -449,4 +449,4 @@ const tagContent = [
     { title: '#실무적이에요' }
 ];
 
-export default Lecture_review_write;
+export default Camp_review_write;
