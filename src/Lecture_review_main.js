@@ -23,7 +23,7 @@ class Lecture_review_main extends React.Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+ doc.data().lecture_id + "</div></Link>\
+                                            <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                                 <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                 <div class=\"tag\">"+ doc.data().tags + "</div>\
                                                 <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
@@ -69,7 +69,7 @@ class Lecture_review_main extends React.Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+ doc.data().lecture_id + "</div></Link>\
+                                            <Link to='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></Link>\
                                                 <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                 <div class=\"tag\">"+ doc.data().tags + "</div>\
                                                 <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
