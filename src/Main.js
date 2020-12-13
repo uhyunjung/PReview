@@ -105,7 +105,7 @@ class Main extends Component {
                     </ul>
                 </div>
                 <div id='main_right_bottom'>
-                    <p id='small_title'>프로그래밍 강의 사이트</p>
+                    <p class="small_title">프로그래밍 강의 사이트</p>
                     <div id='main_algorithm'>
                         <input id='next' type="button" value="◀"></input>
                         <div id='site_box'>
@@ -124,7 +124,7 @@ class Main extends Component {
                             <a href="https://www.inflearn.com/">Inflearn</a></div>
                         <input id='next' type="button" value="▶"></input>
                     </div>
-                    <p id='small_title'>진행중인 캠프</p>
+                    <p class='small_title'>진행중인 캠프</p>
                     <div id='main_camp'>
                         <input id='next' type="button" value="◀"></input>
                         <div id='site_box'>
@@ -138,12 +138,12 @@ class Main extends Component {
                         <div id='site_box'>
                             <a href="https://class.likelion.net/">멋쟁이 사자처럼</a></div>
                         <div id='site_box'>
-                            <a href="https://woowacourse.github.io/">우아한 테크코스</a></div>
+                            <a href="https://spartacodingclub.kr/curriculum/web">스파르타 코딩클럽</a></div>
                         <div id='site_box'>
                             <a href="https://www.inflearn.com/">제주 코딩 베이스 캠프</a></div>
                         <input id='next' type="button" value="▶"></input>
                     </div>
-                    <p id='small_title'>채용중인 회사</p>
+                    <p class='small_title'>채용중인 회사</p>
                     <div id='main_career'>
                         <input id='next' type="button" value="◀"></input>
                         <div id='site_box'>
