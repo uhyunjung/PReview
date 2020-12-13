@@ -6,10 +6,10 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <div id='main_left'>
-                    <div id='schedule'>
-                        <article id="mainarticle">
-                            <p id='small_title_cal'>12월의 일정</p>
+                <div class='main_left'>
+                    <div class='schedule'>
+                        <article class="mainarticle">
+                            <p class='small_title_cal'>12월의 일정</p>
                             <table class="tg">
                                 <thead>
                                     <tr>
@@ -63,16 +63,17 @@ class Main extends Component {
                             </table>
                         </article>
                     </div>
-
-                    <div id='schedule2'>
-                        <h4 style={{ color: "green", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>대회 </h4>
-                        <h4 style={{ color: "#purple", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>캠프 </h4>
-                        <h4 style={{ color: "#orange", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>채용 </h4>
+                    <br></br>
+                    <div class='schedule2'>
+                        <h4 style={{ color: "green", display: "inline-block" }}>●</h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 대회 </h4>&nbsp;
+                        <h4 style={{ color: "#purple", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 캠프 </h4>&nbsp;
+                        <h4 style={{ color: "#orange", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 채용 </h4>&nbsp;
                     </div>
-                    <div id='schedule3'>
+                    <br></br>
+                    <div class='schedule3'>
                         <p> ◦ 1일 2020 E-PEER</p>
                         <p> ◦ 5일 Google 코딩 부트 캠프</p>
                         <p> ◦ 11일 2020 하반기 삼성전자 공채</p>
@@ -83,7 +84,7 @@ class Main extends Component {
 
 
                 <div id='main_right_top'>
-                    <p id='small_title'>인기 게시물</p>
+                    <p class='small_title'>인기 게시물</p>
                     <nav id='nav2'>
                         <ul>
                             <li id='nav_item2' style={{ borderLeft: "none" }}><a href="">강의 리뷰</a></li>
@@ -104,7 +105,63 @@ class Main extends Component {
                     </ul>
                 </div>
                 <div id='main_right_bottom'>
-                    <p id='small_title'>프로그래밍 강의 사이트</p>
+                    <p class="small_title">프로그래밍 강의 사이트</p>
+                    <div id='main_algorithm'>
+                        <input id='next' type="button" value="◀"></input>
+                        <div id='site_box'>
+                            <a href="https://www.acmicpc.net/">백준</a></div>
+                        <div id='site_box'>
+                            <a href="https://leetcode.com/">Leet code</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.edwith.org/">Edwith</a></div>
+                        <div id='site_box'>
+                            <a href="https://opentutorials.org/course/1">생활 코딩</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.udemy.com/">Udemy</a></div>
+                        <div id='site_box'>
+                            <a href="https://programmers.co.kr/">프로그래머스</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.inflearn.com/">Inflearn</a></div>
+                        <input id='next' type="button" value="▶"></input>
+                    </div>
+                    <p class='small_title'>진행중인 캠프</p>
+                    <div id='main_camp'>
+                        <input id='next' type="button" value="◀"></input>
+                        <div id='site_box'>
+                            <a href="https://woowacourse.github.io/">우아한 테크코스</a></div>
+                        <div id='site_box'>
+                            <a href="https://codestates.com/">코드 스테이츠 부트캠프</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.vanillacoding.co/">바닐라 코딩</a></div>
+                        <div id='site_box'>
+                            <a href="https://wecode.co.kr/">위코드</a></div>
+                        <div id='site_box'>
+                            <a href="https://class.likelion.net/">멋쟁이 사자처럼</a></div>
+                        <div id='site_box'>
+                            <a href="https://spartacodingclub.kr/curriculum/web">스파르타 코딩클럽</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.inflearn.com/">제주 코딩 베이스 캠프</a></div>
+                        <input id='next' type="button" value="▶"></input>
+                    </div>
+                    <p class='small_title'>채용중인 회사</p>
+                    <div id='main_career'>
+                        <input id='next' type="button" value="◀"></input>
+                        <div id='site_box'>
+                            <a href="https://careers.google.com/c/">Google</a></div>
+                        <div id='site_box'>
+                            <a href="https://careers.kakao.com/index">kakao</a></div>
+                        <div id='site_box'>
+                            <a href="https://www.samsungcareers.com/main.html">삼성전자</a></div>
+                        <div id='site_box'>
+                            <a href="https://careers.sktelecom.com/skRecruitAnnounce/doing">SKT</a></div>
+                        <div id='site_box'>
+                            <a href=""></a></div>
+                        <div id='site_box'>
+                            <a href=""></a></div>
+                        <div id='site_box'>
+                            <a href=""></a></div>
+                        <input id='next' type="button" value="▶"></input>
+                    </div>
                 </div>
             </div>
         )
