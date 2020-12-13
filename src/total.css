@@ -53,9 +53,8 @@ a:visited{
   width:35%;
   height:5%;
   border-radius:50px;
-  border-color:#BDBDBD;
-  box-shadow: none;
-  font-size: 20px;
+  border:2px solid #BDBDBD;
+  font-size: 15px;
 }
 
 
@@ -67,11 +66,11 @@ a:visited{
   width: 100%;
   padding-left: 10%;
  }
- 
+
 #nav_item{
   display:inline;
    font-family: 'IBM Plex Mono';
-   font-size: 1.3vw;
+   font-size: 1vw;
    margin-left: 10%;
    line-height:55px;
    color:#585858;
@@ -99,8 +98,8 @@ a:visited{
 }
 #in_nav_item {
   color:#585858;
-  font-size: small;
-  font-weight: lighter;
+  font-size: 0.77vw;
+  margin-left: 10%
 }
 #in_nav_item:hover > a{
 
@@ -114,22 +113,38 @@ aside {
   width: 16%;
   float: left;
   height: flex;
-  border: 2px solid #999999;
+  border: 2px solid #BDBDBD;
   padding: 15px;
 }
 
 /* 리뷰 리스트, 작성 */
 .article {
   margin-left: 1%;
+  margin-top: 0.5%;
   height:100%;
   width:55%;
   display: inline-block;
+  border:2px solid #BDBDBD;
+
 }
-.category {
+.category_camp, .category_lecture {
   margin-left: 10%;
   margin-bottom: 10%;
   width:100%;
   display: inline-block;
+  font-color:#585858;
+
+}
+.category_lecture > li{
+  color: #585858;
+  font-size: small;
+  margin:1vh auto;
+}
+.category_camp > li{
+  color: #585858;
+  margin:1.5vh auto;
+  font-size: 15px;
+
 }
 .lecture_review_main {
   width:100%;
@@ -141,9 +156,10 @@ aside {
 }
 .schedule3{
   margin-left:15px;
-  font-size:1vw;
+  font-size:0.9vw;
   color:#585858;
-  font-weight: bold;
+  padding-bottom: 3vh;
+
 }
 
 
@@ -164,6 +180,7 @@ aside {
  margin-bottom: 10px;
  border: 1px solid #BDBDBD;
  border-width: 2px;
+
  }
  #main_right_top{
    height:30vh;
@@ -172,19 +189,21 @@ aside {
    border: 1px solid #BDBDBD;
    border-width: 2px;
    margin-bottom:0.5%;
+   padding:1vw 1vw;
  }
  #line{
-  width:54.5vw;
+  width:52.4vw;
   color:gray;
   height:2px;
   margin-top:2vh;
 }
  #main_right_bottom{
    height:47.5vh;
-   width:55%;
+   width:55vw;
    float:left;
    border: 1px solid #BDBDBD;
    border-width: 2px;
+   padding: 1vw 1vw;
  }
  .schedule{
    height:60%;
@@ -192,6 +211,7 @@ aside {
    margin: 6px 6px 3px 6px;
    border: 1px solid #BDBDBD;
    border-width: 2px;
+   padding-bottom: 3vh
  }
  .tg  {width:90%;height:80%;margin-left:5%;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
  .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
@@ -204,42 +224,42 @@ aside {
  .tg .sunday{border-color:inherit;color:#fe0000;font-weight:bold;font-family:Arial, Helvetica, sans-serif !important;;text-align:left;
    vertical-align:top}
  .tg .day{border-color:inherit;text-align:left;vertical-align:top}
- 
+
 
  .small_title{
   font-family: 'IBM Plex Mono';
    color:#585858;
    font-size:1vw;
    font-weight:bold;
-   margin-left: 15px;
  }
  .small_title_cal{
   color:#585858;
-  font-size:15px;
+  font-size:1vw;
   font-weight:bold;
   margin-top:3%;
   margin-left:5%;
   margin-bottom:3%;
 }
 
- 
+
  #nav2{
    height:15px;
+   margin-top:7px;
  }
 
- 
+
 #nav_item2{
   display:inline;
   border-left: 1px solid gray;
   padding:0px 10px 0px 10px;
   color:gray;
-  font-size:1vw;
+  font-size:13px;
   font-weight: bold;
 }
 #main_post_item{
    color:gray;
    font-size: x-small;
-   margin-top:2px;
+   margin-top:4px;
  }
 
  #next{
@@ -250,8 +270,8 @@ aside {
  }
  #main_algorithm,#main_camp,#main_career{
    float:left;
-   width:600px;
-   height:100px;
+   width:100%;
+   height:28%;
    text-align: center;
  }
  #site_box{
@@ -264,8 +284,9 @@ aside {
    font-size: x-small;
    font-weight: bold;
    color:#585858;
-   margin-left:3px;
-   margin-right:3px;
+   margin-top:4px;
+   margin-left:2%;
+   margin-right:2%;
  }
 
 
@@ -294,39 +315,72 @@ aside {
 }
 /* 항목 이름 */
 .review-entry {
-    width: 150px;
+    width:200px;
     text-align: center;
+    color:gray;
+    font-weight:bold;
+    font-size: 20px;
+    padding-left: 2vw;
+    margin-right: 1vw;
+
 }
 
 .entry-name {
     display: block;
-    width: 80px;
-    border: 2px solid #999999;
+    width: 70px;
+    border: 1.5px solid #BDBDBD;
     border-radius: 2em;
+    color:gray;
+    font-size:12px;
+    font-weight: bold;
     margin: 0px auto;
+    padding:5px;
 }
 /* 항목별 내용 */
 .review-content {
     width: 100%;
     text-align: left;
+    color:gray;
+    font-weight: bold;
+    font-size:14px;
+
 }
 
+
 .short-text {
-    width: 100%;
+    width: 90%;
+    height: 5vh;
+    border: 1px solid #BDBDBD;
+    border-radius: 20px;
+    padding-right: 1vw;
+
 }
 
 .long-text {
     width: 100%;
     height: 140px;
+    border-radius: 10px;
+    border:1px solid #BDBDBD
 }
 
+#period, #cost{
+  border-radius: 10px;
+  border: 1.5px solid #BDBDBD;
+  height:3vh;
+}
+
+
+/*마지막 글작성 버튼*/
 #submit-button {
     text-align: right;
     padding: 5px 0px 20px 0px;
+    margin-right: 1vw;
 }
+
 /* 강의명, 내용, 제출버튼 구역 */
 .writing-block {
-    border-bottom: 2px solid #999999;
+    margin:auto 1.5vw;
+    border-bottom: 1px solid #999999;
     padding: 5px 0px;
 }
 
@@ -351,8 +405,38 @@ aside {
   p {
     padding-left: 10px;
   }
-  
 
+/*글작성 버튼*/
+#write_btn{
+  color:gray;
+  font-weight: bold;
+  width:5vw;
+  height:4vh;
+  background-color: white;
+  border: 2px solid #BDBDBD;
+  border-radius: 20px;
+  margin-top:1vh;
+  margin-left:1.5vw;
+}
+
+/*검색 창*/
+.keyword{
+  border:2px solid #BDBDBD;
+  border-radius:20px;
+  height: 4vh;
+}
+/*작성날짜,조회수, 좋아요 버튼*/
+.btn > button {
+  width:4vw;
+  height: 3vh;
+  background-color: white;
+  border: 1.5px solid #BDBDBD;
+  margin:auto 2px;
+  border-radius:5px;
+  color:gray;
+  font-size: 2px;
+  padding:1px 1px;
+}
 
   .item {
     display: flex;
@@ -360,6 +444,7 @@ aside {
   .review_search {
     display: flex;
     margin: 10px;
+    padding:2vh 4vh;
   }
   .info {
     margin: 10px;
@@ -368,12 +453,20 @@ aside {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid #BDBDBD;
     margin-top: 20px;
+    margin-left: 3vw;
+    margin-right: 2vw;
     padding: 10px;
+    font-size:13px;
+    color:gray;
+    font-weight: bold;
   }
   .category_name {
     padding: 10px;
+    color:gray;
+    font-weight: bold;
+    font-size:1em;
   }
   .search {
     padding: 10px;
@@ -381,11 +474,21 @@ aside {
   .review_search {
     display: flex;
   }
+
   .review {
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid #BDBDBD;
     padding-bottom: 10px;
+    margin-left: 3vw;
+    margin-right: 2vw;
   }
-  
+  .like, .date, .writer{
+    font-size:12px;
+    color:gray;
+  }
+  .fas fa-heartBtn {
+    color:red;
+  }
+
   .lecturename {
     margin: 10px;
     padding: 10px;
@@ -424,7 +527,7 @@ aside {
     display: flex;
     justify-content: space-between;
   }
-  
+
 
   #tagstyle {
   width: 95%;
@@ -436,7 +539,7 @@ aside {
   flex-wrap: wrap;
   }
 
-  
+
   #no {
     display: inline-block;
     width: 50px;
