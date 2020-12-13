@@ -74,7 +74,7 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-  
+
   #x {
       font-size:25px;
   }
@@ -282,35 +282,27 @@ const Camp_review_write = () => {
                 </Snackbar>
             </div>
             <div className="sidebarclass">
-                <aside class="sidebar">
-                    <p>언어</p>
-                    <ul class="category">
-                        <li><a href="#">C / C++</a></li>
-                        <li><a href="#">C#</a></li>
-                        <li><a href="#">Java</a></li>
-                        <li><a href="#">Python</a></li>
-                        <li><a href="#">Javascript</a></li>
-                    </ul>
-                    <br></br>
-                    <p>분야</p>
-                    <ul class="category">
-                        <li><a href="#">Algorithm</a></li>
-                        <li><a href="#">HTML/CSS/Javascript</a></li>
-                        <li><a href="#">Server</a></li>
-                        <li><a href="#">Full Stack</a></li>
-                        <li><a href="#">ML/DL</a></li>
-                    </ul>
-                </aside>
+            <aside class="sidebar" >
+                <ul class="category_camp">
+                    <li><a href="#">알고리즘</a></li>
+                    <li><a href="#">웹프로그래밍</a></li>
+                    <li><a href="#">데이터분석</a></li>
+                    <li><a href="#">AI</a></li>
+                </ul>
+              </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                    <header>Full Stack</header>
+                <div class="category_name">
+                    <span style={{fontSize:"16px"}}>알고리즘</span>
+                </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div class="item">
                                 <div class="review-entry">
                                     <span>강좌 이름 :</span>
                                 </div>
+
                                 <div class="review-content">
                                     <input type="text" id="name" class="short-text" list="lecture-list" value={lecture_name} onChange={(e) => setLectureName(e.target.value)}></input>
                                     <datalist id="lecture-list">
