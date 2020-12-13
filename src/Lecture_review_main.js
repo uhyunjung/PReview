@@ -49,12 +49,12 @@ class Lecture_review_main extends React.Component {
                     {
                         this.myRef.appendChild(reviewDiv);
                     }
-                    
+
                 })
             })
         }
     }
-    
+
     // 렌더링 후 완료
     componentDidUpdate = () => {
         {
@@ -95,7 +95,7 @@ class Lecture_review_main extends React.Component {
                     {
                         this.myRef.appendChild(reviewDiv);
                     }
-                    
+
                 })
             })
         }
@@ -122,21 +122,20 @@ class Lecture_review_main extends React.Component {
             <div className="Lecture_review_main">
                 <div className="sidebar">
                     <aside class="sidebar">
-                        <p>언어</p>
-                        <ul class="category">
+                        <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
+                        <ul class="category_lecture">
                             <li><a href="#">C / C++</a></li>
                             <li><a href="#">C#</a></li>
                             <li><a href="#">Java</a></li>
                             <li><a href="#">Python</a></li>
                             <li><a href="#">Javascript</a></li>
                         </ul>
-                        <p>분야</p>
-                        <ul class="category">
+                        <p style={{fontWeight:"bold" , color:"#585858"}}>분야</p>
+                        <ul class="category_lecture">
                             <li><a href="#">Algorithm</a></li>
                             <li><a href="#">HTML/CSS/Javascript</a></li>
                             <li><a href="#">Server</a></li>
-                            <li><a href="#">Full Stack</a></li>
-                            <li><a href="#">ML/DL</a></li>
+                            <li><a href="#">MySQL</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -144,17 +143,14 @@ class Lecture_review_main extends React.Component {
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
-                                <span>Full Stack</span>
+                                <span>C/C++</span>
                             </div>
                             <div>
                                 <form class="search">
-                                    <button>
-                                        <i class="fas fa-search"></i>
-                                    </button>
                                     <input class="keyword" type="text" name="search" size="80"></input>
                                 </form>
                             </div>
-                            <Link to='/lecture_review_write'><Button variant="contained" type="submit">글 작성</Button></Link>
+                            <Link to='/lecture_review_write'><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
                         </div>
                         <div class="header">
                             <span>링크</span>
