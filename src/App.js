@@ -51,7 +51,7 @@ class App extends Component {
             this.setState({ isSignedIn: !!user })
             { this.state.isSignedIn ? (this.setState({ value: "로그아웃" })) : (this.setState({ value: "로그인" })) }
         })
-    }
+    } 
 
     // 렌더링
     render() {
