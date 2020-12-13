@@ -6,15 +6,21 @@ import { db } from './firebase.js';
 
 class Camp_review_main extends Component {
     plusHeart(){
-        
+
     }
 
     // 렌더링
     render() {
         return (
             <div className="Lecture_review_main">
-                <div className="sidebar">
-                <div class='main_left'>
+            <div className="sidebar">
+                <aside class="sidebar" style={{width:"25%"}}>
+                    <ul class="category_camp">
+                        <li><a href="#">알고리즘</a></li>
+                        <li><a href="#">웹프로그래밍</a></li>
+                        <li><a href="#">데이터분석</a></li>
+                        <li><a href="#">AI</a></li>
+                    </ul>
                     <div class='schedule'>
                         <article class="mainarticle">
                             <p class='small_title_cal'>12월의 일정</p>
@@ -71,15 +77,16 @@ class Camp_review_main extends Component {
                             </table>
                         </article>
                     </div>
-
+                    <br></br>
                     <div class='schedule2'>
-                        <h4 style={{ color: "green", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>대회 </h4>
-                        <h4 style={{ color: "#purple", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>캠프 </h4>
-                        <h4 style={{ color: "#orange", display: "inline-block" }}>● </h4>
-                        <h4 style={{ color: "#585858", display: "inline-block" }}>채용 </h4>
+                        <h4 style={{ color: "green", display: "inline-block" }}>●</h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 대회 </h4>&nbsp;
+                        <h4 style={{ color: "#purple", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 캠프 </h4>&nbsp;
+                        <h4 style={{ color: "#orange", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 채용 </h4>&nbsp;
                     </div>
+                    <br></br>
                     <div class='schedule3'>
                         <p> ◦ 1일 2020 E-PEER</p>
                         <p> ◦ 5일 Google 코딩 부트 캠프</p>
@@ -87,24 +94,23 @@ class Camp_review_main extends Component {
                         <p> ◦ 13일 Google CodeJam</p>
                         <p> ◦ 19일 Sk c&c 딥러닝 R&D</p>
                     </div>
-                </div>
-                </div>
+                </aside>
+            </div>
+
                 <article class="article">
                 <Paper classname="paper" elevation={2}>
                     <div class="review_search">
                         <div class="category_name">
-                            <span>Full Stack</span>
+                            <span>알고리즘</span>
                         </div>
                         <div>
                             <form class="search">
-                                <button>
-                                    <i class="fas fa-search"></i>
-                                </button>
                                 <input class="keyword" type="text" name="search" size="80"></input>
                             </form>
                         </div>
-                        <Link to='/Camp_review_write'><Button variant="contained" type="submit">글 작성</Button></Link>
+                        <Link to='/Camp_review_write'><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
                     </div>
+
                     <div class="header">
                         <span>링크</span>
                         <span>내용</span>
@@ -113,7 +119,6 @@ class Camp_review_main extends Component {
                             <button>조회수△</button>
                             <button>좋아요</button>
                         </div>
-
                     </div>
                     <div id="posting">
                         {db.collection("postings")
