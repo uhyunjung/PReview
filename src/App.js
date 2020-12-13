@@ -62,7 +62,9 @@ class App extends Component {
                     <div className='Menu'>
                         <header id="top">
                             <Link to='/'><h3><a id='PReview_logo' target="_self">PReview</a></h3></Link>
-                            <input id="search" type="text" placeholder="통합검색" ></input>
+
+                            <input id="search" type="text" placeholder="통합검색" >
+                            </input>
                             {this.state.isSignedIn ? (
                                 <div id="loginbar">
                                     <Button id="login" onClick={this.handleClickOpen}>{this.state.value}</Button>
@@ -96,22 +98,22 @@ class App extends Component {
                         </header>
                         <nav id='nav'>
                             <ul id='ulmenu' >
-                            <li id='nav_item'><Link to='/Lecture_review_main'>강의 리뷰</Link>
+                            <li id='nav_item'><Link to="/Lecture_review_main">강의 리뷰</Link>
                                     <ul id='in_nav'>
-                                        <li id='in_nav_item'>언어</li>
+                                        <li id='in_nav_item' style={{fontSize:"1vw"}}>언어</li>
                                         <li id='in_nav_item'><a href="">  C/C++</a></li>
                                         <li id='in_nav_item'><a href="">  C#</a></li>
                                         <li id='in_nav_item'><a href="">  Java</a></li>
                                         <li id='in_nav_item'><a href="">  Python</a></li>
                                         <li id='in_nav_item'><a href="">  Javascript</a></li>
-                                        <li id='in_nav_item'>분야</li>
+                                        <li id='in_nav_item' style={{fontSize:"1vw"}}>분야</li>
                                         <li id='in_nav_item'><a href="">  Algorithm</a></li>
                                         <li id='in_nav_item'><a href="">  HTML/CSS/Javascript</a></li>
                                         <li id='in_nav_item'><a href="">  Server</a></li>
                                         <li id='in_nav_item'><a href="">  MySQL</a></li>
                                     </ul>
                                     </li>
-                                <li id='nav_item'><Link to='/Camp_review_main'>코딩 캠프 리뷰</Link>
+                                <li id='nav_item'><Link to="/Camp_review_main">코딩 캠프 리뷰</Link>
                                     <ul id='in_nav'>
                                         <li id='in_nav_item'><a href="">  알고리즘</a></li>
                                         <li id='in_nav_item'><a href="">  웹프로그래밍</a></li>
@@ -120,7 +122,14 @@ class App extends Component {
                                     </ul>
                                 </li>
                                 <li id='nav_item'><Link to='/Solution'>솔루션 공유</Link></li>
-                                <li id='nav_item'><Link to='/Community_view_main'>커뮤니티</Link></li>
+                                <li id='nav_item'><Link to="/Community_view_main">커뮤니티</Link>
+                                <ul id='in_nav'>
+                                  <li id='in_nav_item'><a href="community_view_free.html">  자유게시판</a></li>
+                                  <li id='in_nav_item'><a href="community_view_qna.html">  질문게시판</a></li>
+                                  <li id='in_nav_item'><a href="community_view_crewgether.html">  강의 수강원 모집</a></li>
+                                  <li id='in_nav_item'><a href="community_view_projectgether.html">  프로젝트 참가자 모집</a></li>
+                                </ul>
+                                </li>
                             </ul>
                         </nav>
                     </div>
