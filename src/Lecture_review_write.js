@@ -74,7 +74,7 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-  
+
   #x {
       font-size:25px;
   }
@@ -282,29 +282,29 @@ const Lecture_review_write = () => {
                 </Snackbar>
             </div>
             <div className="sidebarclass">
-                <aside class="sidebar">
-                    <p>언어</p>
-                    <ul class="category">
-                        <li><a href="#">C / C++</a></li>
-                        <li><a href="#">C#</a></li>
-                        <li><a href="#">Java</a></li>
-                        <li><a href="#">Python</a></li>
-                        <li><a href="#">Javascript</a></li>
-                    </ul>
-                    <br></br>
-                    <p>분야</p>
-                    <ul class="category">
-                        <li><a href="#">Algorithm</a></li>
-                        <li><a href="#">HTML/CSS/Javascript</a></li>
-                        <li><a href="#">Server</a></li>
-                        <li><a href="#">Full Stack</a></li>
-                        <li><a href="#">ML/DL</a></li>
-                    </ul>
-                </aside>
+              <aside class="sidebar">
+                  <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
+                  <ul class="category_lecture">
+                      <li><a href="#">C / C++</a></li>
+                      <li><a href="#">C#</a></li>
+                      <li><a href="#">Java</a></li>
+                      <li><a href="#">Python</a></li>
+                      <li><a href="#">Javascript</a></li>
+                  </ul>
+                  <p style={{fontWeight:"bold" , color:"#585858"}}>분야</p>
+                  <ul class="category_lecture">
+                      <li><a href="#">Algorithm</a></li>
+                      <li><a href="#">HTML/CSS/Javascript</a></li>
+                      <li><a href="#">Server</a></li>
+                      <li><a href="#">MySQL</a></li>
+                  </ul>
+              </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                    <header>Full Stack</header>
+                <div class="category_name">
+                    <span style={{fontSize:"16px"}}>C/C++</span>
+                </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div class="item">
