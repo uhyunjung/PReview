@@ -9,6 +9,17 @@ class Camp_review_main extends Component {
 
     }
 
+    printStar(star) {
+        let ret = "";
+
+        for (let i = 0; i < 5; i++) {
+            if (i < star) ret += "★";
+            else ret += "☆";
+        }
+
+        return ret;
+    }
+
     // 렌더링
     render() {
         return (

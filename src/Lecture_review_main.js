@@ -3,14 +3,76 @@ import { Link } from 'react-router-dom';
 import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db } from './firebase.js';
+import { ContactsOutlined } from '@material-ui/icons';
 
 class Lecture_review_main extends React.Component {
     Constructor(props) {
         this.myRef = React.createRef();
 
     }
+
+    getUrlParams() {
+        let params = {};
+        let exist = false;
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; exist = true;});
+        params["exist"] = exist;
+        return params;
+    }
+
     // 렌더링 후 완료
     componentDidMount = () => {
+        {
+            let params = this.getUrlParams();
+            let search;
+            if(params.exist) {
+                search = params.search.toLowerCase();
+            }
+
+            db.collection("reviews")
+            .onSnapshot(snaps => {
+                snaps.forEach(doc => {
+                    let lec_name = doc.data().lecture_name.toLowerCase();
+                    if ( !params.exist || (params.exist && lec_name.indexOf(search) != -1)){
+                        const reviewDiv = document.createElement("div");
+
+                        const htmlContent =
+                            "<div class=\"review\">\
+                                                <ul>\
+                                            <li class=\"item\">\
+                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                                <div class=\"info\">\
+                                                <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                                    <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
+                                                    <div class=\"tag\">"+ doc.data().tags + "</div>\
+                                                    <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                                </div>\
+                                                <div class=\"like\">\
+                                                    <span class=\"date\">"+ doc.data().date + "</span>\
+                                                    <div class=\"likebtn\">\
+                                                        <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
+                                                            <i class=\"fas fa-heart\">♥</i>\
+                                                        </button>\
+                                                    <div class=\"likepeople\">"+ doc.data().like + "</div>\
+                                                    </div>\
+                                                <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
+                                                </div>\
+                                            </li>\
+                                        </ul>\
+                                    </div>";
+
+                        reviewDiv.innerHTML = htmlContent;
+                        if(this.myRef!=null)
+                        {
+                            this.myRef.appendChild(reviewDiv);
+                        }
+                    }
+                })
+            })
+        }
+    }
+    
+    // 렌더링 후 완료
+    /*componentDidUpdate = () => {
         {
             db.collection("reviews")
             .onSnapshot(snaps => {
@@ -23,7 +85,7 @@ class Lecture_review_main extends React.Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                            <Link to='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></Link>\
                                                 <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                 <div class=\"tag\">"+ doc.data().tags + "</div>\
                                                 <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
@@ -42,64 +104,16 @@ class Lecture_review_main extends React.Component {
                                     </ul>\
                                 </div>";
 
-                    console.log(htmlContent);
-
                     reviewDiv.innerHTML = htmlContent;
                     if(this.myRef!=null)
                     {
                         this.myRef.appendChild(reviewDiv);
                     }
-
+                    
                 })
             })
         }
-    }
-
-    // 렌더링 후 완료
-    componentDidUpdate = () => {
-        {
-            db.collection("reviews")
-            .onSnapshot(snaps => {
-                snaps.forEach(doc => {
-                    const reviewDiv = document.createElement("div");
-
-                    const htmlContent =
-                        "<div class=\"review\">\
-                                            <ul>\
-                                        <li class=\"item\">\
-                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></Link>\
-                                                <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
-                                                <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
-                                            </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">"+ doc.data().date + "</span>\
-                                                <div class=\"likebtn\">\
-                                                    <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    </button>\
-                                                <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                </div>\
-                                            <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
-                                            </div>\
-                                        </li>\
-                                    </ul>\
-                                </div>";
-
-                    console.log(htmlContent);
-
-                    reviewDiv.innerHTML = htmlContent;
-                    if(this.myRef!=null)
-                    {
-                        this.myRef.appendChild(reviewDiv);
-                    }
-
-                })
-            })
-        }
-    }
+    }*/
 
     printStar(star) {
         let ret = "";
@@ -122,20 +136,21 @@ class Lecture_review_main extends React.Component {
             <div className="Lecture_review_main">
                 <div className="sidebar">
                     <aside class="sidebar">
-                        <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
-                        <ul class="category_lecture">
+                        <p>언어</p>
+                        <ul class="category">
                             <li><a href="#">C / C++</a></li>
                             <li><a href="#">C#</a></li>
                             <li><a href="#">Java</a></li>
                             <li><a href="#">Python</a></li>
                             <li><a href="#">Javascript</a></li>
                         </ul>
-                        <p style={{fontWeight:"bold" , color:"#585858"}}>분야</p>
-                        <ul class="category_lecture">
+                        <p>분야</p>
+                        <ul class="category">
                             <li><a href="#">Algorithm</a></li>
                             <li><a href="#">HTML/CSS/Javascript</a></li>
                             <li><a href="#">Server</a></li>
-                            <li><a href="#">MySQL</a></li>
+                            <li><a href="#">Full Stack</a></li>
+                            <li><a href="#">ML/DL</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -143,14 +158,17 @@ class Lecture_review_main extends React.Component {
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
-                                <span>C/C++</span>
+                                <span>Full Stack</span>
                             </div>
                             <div>
                                 <form class="search">
+                                    <button>
+                                        <i class="fas fa-search"></i>
+                                    </button>
                                     <input class="keyword" type="text" name="search" size="80"></input>
                                 </form>
                             </div>
-                            <Link to='/lecture_review_write'><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
+                            <Link to='/lecture_review_write'><Button variant="contained" type="submit">글 작성</Button></Link>
                         </div>
                         <div class="header">
                             <span>링크</span>
