@@ -8,8 +8,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { SentimentSatisfied } from '@material-ui/icons';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -215,7 +216,8 @@ const Lecture_review_write = () => {
                 date: today.toLocaleString(),
                 like: 0
             })
-                .then(() => {
+                .then((docRef) => {
+                    console.log(docRef.id);
                 })
                 .catch((error) => {
                     alert(error.message);
@@ -426,7 +428,7 @@ const Lecture_review_write = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
-                                    <Button type="submit" onClick={handleSubmit} color="primary" autoFocus><Link to='/Lecture_review_detail'>확인</Link></Button>
+                                    <Button type="submit" onClick={handleSubmit} color="primary" autoFocus><Link to='/Lecture_review_detail?id=ewVpPUTqECQmHkeAe0mg'>확인</Link></Button>
                                 </DialogActions>
                             </Dialog>
                         </section>
