@@ -25,7 +25,8 @@ class Lecture_review_main extends React.Component {
             let params = this.getUrlParams();
             let search;
             if(params.exist) {
-                search = params.search.toLowerCase();
+                search = decodeURI(params.search).toLowerCase();
+                console.log(search);
             }
 
             db.collection("reviews")
