@@ -5,7 +5,8 @@ import './total.css';
 import { db } from './firebase.js';
 
 class Camp_review_main extends Component {
-    plusHeart(){
+    Constructor(props) {
+        this.myRef = React.createRef();
 
     }
 
