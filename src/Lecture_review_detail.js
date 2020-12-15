@@ -79,7 +79,9 @@ class Lecture_review_detail extends Component {
 
     render() {
         let item = this.state.items;
+
         let params = this.getUrlParams();
+        let board = decodeURI(params.board);
 
         // 렌더링
         return (
@@ -108,8 +110,10 @@ class Lecture_review_detail extends Component {
                     <Paper classname="paper" elevation={3}>
                         <div id="detail">
                             <div class="lecturename">
-                                <div class="category_name">{params.board}</div>
+
+                                <div class="category_name">{board}</div>
                                 <span>{item.lecture_name}</span>
+
                                 <div class="writer_info">
                                     <span class="writer">{item.writer_id}</span><br></br>
                                     <span class="date">{item.date}</span>
