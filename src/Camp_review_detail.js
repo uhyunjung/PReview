@@ -1,99 +1,106 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db, auth } from './firebase';
 
+class Camp_review_detail extends Component {
 // Paper 태그 스타일
-const styles = ({ spacing: { unit } }) => ({
-    paper: {
-        margin: `${unit * 3}px auto`,
-        padding: unit * 2,
-        maxWidth: 400
-    }
-})
+    styles = ({ spacing: { unit } }) => ({
+        paper: {
+            margin: `${unit * 3}px auto`,
+            padding: unit * 2,
+            maxWidth: 400
+        }
+    })
 
-const Camp_review_detail = () => {
-    // 렌더링
-    return (
-        <div className="Lecture_review_detail">
-            <div className="sidebar">
-                <aside class="sidebar">
-                    <p>언어</p>
-                    <ul class="category">
-                        <li><a href="#">C / C++</a></li>
-                        <li><a href="#">C#</a></li>
-                        <li><a href="#">Java</a></li>
-                        <li><a href="#">Python</a></li>
-                        <li><a href="#">Javascript</a></li>
-                    </ul>
-                    <p>분야</p>
-                    <ul class="category">
-                        <li><a href="#">Algorithm</a></li>
-                        <li><a href="#">HTML/CSS/Javascript</a></li>
-                        <li><a href="#">Server</a></li>
-                        <li><a href="#">Full Stack</a></li>
-                        <li><a href="#">ML/DL</a></li>
-                    </ul>
-                </aside>
-            </div>
-            <article>
-                <Paper classname="paper" elevation={3}>
-                    <div class="lecturename">
-                        <div class="category_name">Full Stack</div>
-                        <span>[풀스택] 유튜브 클론코딩(유튜브 백엔드 + 프론트엔드 + 배포)</span>
-                        <div class="writer_info">
-                            <span class="writer">김작성</span><br></br>
-                            <span class="date">2020.01.27</span>
-                        </div>
-                    </div>
-                    <div class="reviewdetail">
-                        <div class="star">
-                            <span>별점</span>
-                            <span>★★★★☆</span>
-                        </div>
-                        <div class="tags">
-                            <span>태그</span>
-                            <span>#쉬워요 #효과적이에요 #전체_구조를_보여줘요 #실무적이에요</span>
-                        </div>
-                        <div class="lecture_info">
-                            <span>수강 정보</span>
-                            <span class="period">수강 기간: 6개월</span>
-                            <span class="cost">수강 비용 : 월 60,000원</span>
-                        </div>
-                        <div class="pros">
-                            <span>장점</span>
-                            <span>단계별로 차근차근 알려주셔서 따라가기 쉬웠고 꼭 들어보세요. 너무 좋아요.</span>
-                        </div>
-                        <div class="cons">
-                            <span>단점</span>
-                            <span>저는 가격이 약간 부담이었어요. 근데 커뮤니티에서 같이 수강할 사람 구하시면 부담 없이 들을 수 있지 않을까요.</span>
-                        </div>
-                        <button class="go">강의 바로가기</button>
-                    </div>
-                    <div class="comment">
-                        <div class="comment_header">
-                            <span>댓글</span>
-                            <div>
-                                <i class="fas fa-heart"></i>
-                                <span>54</span>
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            items: []
+        };
+    }
+
+    getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+        return params;
+    }
+
+    componentWillMount() {
+        let params = this.getUrlParams();
+        let review = db.collection("camp_postings").doc(params.id);
+
+        review.get().then(res => {
+            this.setState({items: res.data()});
+        });
+    }
+
+    render() {
+        let item = this.state.items;
+
+        let params = this.getUrlParams();
+        let board = decodeURI(params.board);
+
+        // 렌더링
+        return (
+            <div className="Camp_review_detail">
+                <div className="sidebar">
+                    <aside class="sidebar">
+                        <ul class="category_camp">
+                            <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                            <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                            <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                            <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <article>
+                    <Paper classname="paper" elevation={3}>
+                        <div id="review_header">
+                            <div id="review_title">{item.title}</div>
+                            <div id="writer_info">
+                                <span id="writer">{item.writer_id}</span>
+                                <span id="date">{item.date}</span>
                             </div>
                         </div>
-                        <div>
-                            <form class="comment_write">
-                                <input class="keyword" type="text" name="search" size="100"></input>
-                                <button>작성</button>
+                        <hr id="line" />
+                        <div id="review_content">
+                            {item.content}
+                        </div>
+                        <hr id="line" />
+                        <div id="comment_header">
+                            <div id="comment_title">댓글</div>
+                            <button id="like"><i class="far fa-heart"></i></button>
+                            <span id="like_num">{item.like}</span>
+                            <button id="modify">글 수정</button>
+                        </div>
+                        <div id="comment">
+                            <form>
+                                <input id="input" type="text"></input>
+                                <button id="write">작성</button>
                             </form>
                         </div>
-                        <div class="comment_show">
-                            <span class="comment_id">닉네임1</span>
-                            <span class="comment_content">와 정말 유익한 후기!</span>
-                            <span class="comment_date">2020/11/7 17:35:55</span>
+                        <div id="comment_content">
+                            <div class="item">
+                                <div class="comment_nickname">닉네임 1</div>
+                                <div class="comment_content">와 정말 유익한 후기!</div>
+                                <div class="comment_date">2020/11/7</div>
+                                <div class="comment_time">17:35:55</div>
+                            </div>
+
+                            <div class="item">
+                                <div class="comment_nickname">닉네임 2</div>
+                                <div class="comment_content">저도 들어봐야겠어요!</div>
+                                <div class="comment_date">2020/11/7</div>
+                                <div class="comment_time">17:50:43</div>
+                            </div>
                         </div>
-                    </div>
-                </Paper>
-            </article>
-        </div>
-    );
+                    </Paper>
+                </article>
+            </div>
+        );
+    }
 }
 
 export default Camp_review_detail;

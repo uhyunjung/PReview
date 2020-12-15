@@ -30,8 +30,9 @@ class Lecture_review_main extends React.Component {
                 search = decodeURI(params.search).toLowerCase();
                 console.log(search);
             }
-
-            let board = decodeURI(params.board).toLowerCase();
+            console.log(params.board);
+            let board = decodeURI(params.board);
+            console.log(board);
 
             db.collection("reviews")
             .onSnapshot(snaps => {
@@ -47,10 +48,10 @@ class Lecture_review_main extends React.Component {
                                             <li class=\"item\">\
                                                 <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                                 <div class=\"info\">\
-                                                <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                                <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                                     <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                     <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                    <Button onClick=\"location.href='/Lecture_review_main?board="+{board}+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                                    <Button onClick=\"location.href='/Lecture_review_main?board="+board+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                                 </div>\
                                                 <div class=\"like\">\
                                                     <span class=\"date\">"+ doc.data().date + "</span>\
