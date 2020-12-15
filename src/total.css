@@ -96,10 +96,15 @@ a:visited{
   display: none;
 
 }
+#in_nav_category {
+  color:#585858;
+  font-size: 16px;
+  margin-left: 10%;
+}
 #in_nav_item {
   color:#585858;
-  font-size: 0.77vw;
-  margin-left: 10%
+  font-size: 14px;
+  margin-left: 15%;
 }
 #in_nav_item:hover > a{
 
@@ -167,7 +172,7 @@ aside {
 
 /* 수정 중 */
 .main_body {
-  margin: 15px 18% 0;
+  margin: 15px calc(calc(100vw - 1130px)/2) 0;
 }
 
 .mainarticle {
@@ -185,7 +190,7 @@ aside {
 
  }
  .main_right{
-  width:calc(100% - 305px);
+  width:800px;
   float: left;
  }
  #main_right_top{
@@ -277,7 +282,7 @@ aside {
    float:left;
  }
  #main_algorithm,#main_camp,#main_career{
-   margin-left: 15px;
+   margin-left: 10px;
    float:left;
    width:100%;
    height:115px;
@@ -292,7 +297,7 @@ aside {
    font-size: 14px;
    font-weight: bold;
    color:#585858;
-   margin:4px 15px 0 15px;
+   margin:4px 10px 0 10px;
    padding-top: 28px;
  }
 
