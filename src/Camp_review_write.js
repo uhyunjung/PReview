@@ -179,7 +179,7 @@ const Camp_review_write = () => {
 
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
-    const [board, setBoard] = useState("");
+    const [board, setBoard] = useState(params.board);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
@@ -187,10 +187,6 @@ const Camp_review_write = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleClose();
-
-        let params = {};
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-        setBoard(params.board);
 
         // 빈칸 방지
         if ((title == "" || content == "")){
@@ -250,7 +246,7 @@ const Camp_review_write = () => {
             <article class="article">
                 <Paper classname="paper" elevation={3}>
                 <div class="category_name">
-                    <span style={{fontSize:"16px"}}>{params.board}</span>
+                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
                 </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
