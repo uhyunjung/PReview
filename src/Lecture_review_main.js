@@ -59,9 +59,7 @@ class Lecture_review_main extends React.Component {
                                         <div class=\"like\">\
                                             <span class=\"date\">"+ doc.data().date + "</span>\
                                             <div class=\"likebtn\">\
-                                                <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
-                                                    <i class=\"fas fa-heart\">♥</i>\
-                                                </button>\
+                                                <i class=\"fas fa-heart\">♥</i>\
                                             <div class=\"likepeople\">"+ doc.data().like + "</div>\
                                             </div>\
                                         <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\

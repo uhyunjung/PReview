@@ -21,6 +21,18 @@ class Camp_review_detail extends Component {
         };
     }
 
+    likeUpdate() {
+        let params = this.getUrlParams();
+        let edit = this.state.items.like;
+        console.log(edit);
+
+        db.collection("postings").doc(params.id).update({
+            'like': edit+1
+        }).then(() => {
+            window.location.reload(false);
+        })
+    }
+
     getUrlParams() {
         var params = {};
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
@@ -69,6 +81,14 @@ class Camp_review_detail extends Component {
                             {item.content}
                         </div>
                         <hr id="line" />
+
+                        <div class="comment_header">
+                                <div class="comment_title">댓글</div>
+                                <div>
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
+                                    <span class="likepeople">{item.like}</span>
+                                </div>
+                            </div>
                         
                         <div class="comment_content">
                                 <div id="comment">
