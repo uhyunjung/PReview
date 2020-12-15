@@ -146,19 +146,19 @@ class Main extends Component {
                         <p class='small_title'>진행중인 캠프</p>
                         <div id='main_camp'>
                             <input id='next' type="button" value="◀"></input>
-                            <div id='site_box' style={{paddingTop: "20px"}}>
+                            <div id='site_box' style={{paddingTop: "18px"}}>
                                 <a href="https://woowacourse.github.io/">우아한 테크코스</a></div>
-                            <div id='site_box' style={{paddingTop: "20px"}}>
-                                <a href="https://codestates.com/">코드 스테이츠 부트캠프</a></div>
+                            <div id='site_box' style={{paddingTop: "18px"}}>
+                                <a href="https://codestates.com/">코드스테이츠 부트캠프</a></div>
                             <div id='site_box'>
                                 <a href="https://www.vanillacoding.co/">바닐라 코딩</a></div>
                             <div id='site_box'>
                                 <a href="https://wecode.co.kr/">위코드</a></div>
-                            <div id='site_box' style={{paddingTop: "20px"}}>
-                                <a href="https://class.likelion.net/">멋쟁이 사자처럼</a></div>
-                            <div id='site_box' style={{paddingTop: "20px"}}>
-                                <a href="https://spartacodingclub.kr/curriculum/web">스파르타 코딩클럽</a></div>
-                            <div id='site_box' style={{paddingTop: "20px"}}>
+                            <div id='site_box' style={{paddingTop: "18px"}}>
+                                <a href="https://class.likelion.net/">멋쟁이<br></br>사자처럼</a></div>
+                            <div id='site_box' style={{paddingTop: "18px"}}>
+                                <a href="https://spartacodingclub.kr/curriculum/web">스파르타<br></br>코딩클럽</a></div>
+                            <div id='site_box' style={{paddingTop: "18px"}}>
                                 <a href="https://www.inflearn.com/">제주 코딩 베이스 캠프</a></div>
                             <input id='next' type="button" value="▶"></input>
                         </div>
