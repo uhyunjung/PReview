@@ -77,51 +77,7 @@ class Lecture_review_main extends React.Component {
             })
         }
     }
-    
-    // 렌더링 후 완료
-    /*componentDidUpdate = () => {
-        {
-            db.collection("reviews")
-            .onSnapshot(snaps => {
-                snaps.forEach(doc => {
-                    const reviewDiv = document.createElement("div");
-
-                    const htmlContent =
-                        "<div class=\"review\">\
-                                            <ul>\
-                                        <li class=\"item\">\
-                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></Link>\
-                                                <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
-                                                <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
-                                            </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">"+ doc.data().date + "</span>\
-                                                <div class=\"likebtn\">\
-                                                    <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    </button>\
-                                                <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                </div>\
-                                            <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
-                                            </div>\
-                                        </li>\
-                                    </ul>\
-                                </div>";
-
-                    reviewDiv.innerHTML = htmlContent;
-                    if(this.myRef!=null)
-                    {
-                        this.myRef.appendChild(reviewDiv);
-                    }
-                    
-                })
-            })
-        }
-    }*/
-
+   
     printStar(star) {
         let ret = "";
 
@@ -131,10 +87,6 @@ class Lecture_review_main extends React.Component {
         }
 
         return ret;
-    }
-
-    plusHeart() {
-
     }
 
     // 렌더링
