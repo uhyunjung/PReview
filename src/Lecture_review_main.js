@@ -51,7 +51,7 @@ class Lecture_review_main extends React.Component {
                                         <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                             <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                             <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                            <Button onClick=\"location.href='/Lecture_review_main?board="+board+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                            <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                         </div>\
                                         <div class=\"like\">\
                                             <span class=\"date\">"+ doc.data().date + "</span>\
@@ -140,7 +140,7 @@ class Lecture_review_main extends React.Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = decodeURI(params.board)
+        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
         return (
             <div className="Lecture_review_main">
                 <div className="sidebar">
