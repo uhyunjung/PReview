@@ -4,6 +4,9 @@ import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db } from './firebase.js';
 import { ContactsOutlined } from '@material-ui/icons';
+import CanvasJSReact from './canvasjs.react';
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Lecture_review_main extends React.Component {
     Constructor(props) {
@@ -38,7 +41,7 @@ class Lecture_review_main extends React.Component {
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
-                    console.log(lec_name);
+                    console.log(doc);
                     if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
                         const reviewDiv = document.createElement("div");
 
@@ -137,10 +140,47 @@ class Lecture_review_main extends React.Component {
 
     }
 
+    makeChartContent() {
+        let dataPoints = [];
+        let DP;
+
+        db.collection("lecture").orderBy("review_num", "desc")
+        .onSnapshot(snaps => {
+            snaps.forEach(doc => {
+                DP = {y: doc.data().star, label: doc.data().name};
+                dataPoints.push(DP);
+            })
+        })
+
+        console.log(dataPoints);
+
+        return dataPoints;
+    }
+
     // 렌더링
     render() {
         let params = this.getUrlParams();
         let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
+        let DP = this.makeChartContent()
+        const options = {
+            height: 260,
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            axisY: {
+                title: "Star",
+                minimum: 0,
+                maximum: 5,
+                interval: 1
+            },
+            data: [{        
+                type: "column",  
+                showInLegend: true, 
+                legendMarkerColor: "grey",
+                legendText: "MMbbl = one million barrels",
+                dataPoints: DP
+            }]
+        }
+        
         return (
             <div className="Lecture_review_main">
                 <div className="sidebar">
@@ -179,6 +219,9 @@ class Lecture_review_main extends React.Component {
                             </div>
                             <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit">글 작성</Button></Link>
                         </div>
+                        <div class="chart">
+                            <CanvasJSChart options = {options} />
+                        </div>
                         <div class="header">
                             <span>링크</span>
                             <span>내용</span>
@@ -189,13 +232,13 @@ class Lecture_review_main extends React.Component {
 
                         </div>
                         <div id="reviews" ref={(DOMNodeRef) => {
-                 this.myRef=DOMNodeRef;
-                }}>
-
+                            this.myRef=DOMNodeRef;
+                        }}>
                         </div>
                     </Paper>
                 </article>
             </div>
+            
         )
     };
 }
