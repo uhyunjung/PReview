@@ -198,10 +198,6 @@ const Lecture_review_write = () => {
         e.preventDefault();
         handleClose();
 
-        let params = {};
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-        setBoard(params.board);
-
         // 빈칸 방지
         if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (level == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
             handleClickBar();
@@ -311,7 +307,7 @@ const Lecture_review_write = () => {
             <article class="article">
                 <Paper classname="paper" elevation={3}>
                 <div class="category_name">
-                    <span style={{fontSize:"16px"}}>{params.board}</span>
+                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
                 </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
