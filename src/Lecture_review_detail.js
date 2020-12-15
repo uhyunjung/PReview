@@ -94,33 +94,38 @@ class Lecture_review_detail extends Component {
                         if (posting == this.state.posting_id) {
                             const commentDiv = document.createElement("div");
 
+                            let htmlContent;
+
                             db.collection("users").doc(doc.data().commentWriter_id).get()
-                                .then(doc => {
-                                    this.setState({ commentName: doc.data().nickname });
-                                    console.log(this.state.commentName);
-                                    console.log(doc.data().nickname);
-                                })
+                            .then(ret => {
+                                this.setState({ commentName: ret.data().nickname });
+                                //console.log(ret.data().nickname);
+                                htmlContent = this.MakeHTMLContent(ret.data().nickname, doc.data().content, doc.data().date);
 
-
-                            const htmlContent =
-                                "<div class=\"review\">\
-                                <ul>\
-                                    <li class=\"item\">\
-                                        <div class=\"comment_nickname\">"+ this.state.commentName + "</div>\
-                                        <div class=\"comment_content\">"+ doc.data().content + "</div>\
-                                        <div class=\"comment_date\">"+ doc.data().date + "</div>\
-                                    </li>\
-                                </ul>\
-                            </div>";
-
-                            commentDiv.innerHTML = htmlContent;
-                            if (this.myRef != null) {
+                                commentDiv.innerHTML = htmlContent;
+                                if (this.myRef != null) {
                                 this.myRef.appendChild(commentDiv);
                             }
+                            })
                         }
                     })
                 })
         }
+    }
+
+    MakeHTMLContent(name, content, date) {
+        let htmlContent =
+            "<div class=\"review\">\
+            <ul>\
+                <li class=\"item\">\
+                    <div class=\"comment_nickname\">"+ name + "</div>\
+                    <div class=\"comment_content\">"+ content + "</div>\
+                    <div class=\"comment_date\">"+ date + "</div>\
+                </li>\
+            </ul>\
+        </div>";
+
+        return htmlContent
     }
 
     // 데이터 저장
