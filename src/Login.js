@@ -4,7 +4,6 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { db } from './firebase';
 
-var userNum = 1;
 const Login = () => {
   const [user, setUser] = React.useState("");
   const [name, setName] = React.useState("");
@@ -57,19 +56,15 @@ const Login = () => {
         }
       });
 
-      db.collection("users").doc(userNum + "").set({
-        name: name,
-        nickname: nickname
-      }, { merge: true })
-        .then(() => {
-          userNum++;
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-
-      setName("");
-      setNickname("");
+    db.collection("users").doc(0 + "").set({
+      name: name,
+      nickname: nickname
+    }, { merge: true })
+      .then(() => {
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   const authListener = () => {
@@ -79,28 +74,46 @@ const Login = () => {
 
         firebase.auth().currentUser.providerData.forEach(function (profile) {
           if (profile.displayName != null) {
-            db.collection("users").doc(userNum + "").set({
-              uid: firebase.auth().currentUser.uid,
+            db.collection("users").doc(firebase.auth().currentUser.uid).set({
               name: profile.displayName,
               nickname: profile.displayName
             }, { merge: true })
               .then(() => {
-                userNum++;
+              })
+              .catch((error) => {
+                alert(error.message);
+              });
+          }
+          else if (profile.providerId == "github.com") {
+            db.collection("users").doc(firebase.auth().currentUser.uid).set({
+              name: firebase.auth().currentUser.uid,
+              nickname: firebase.auth().currentUser.uid
+            }, { merge: true })
+              .then(() => {
               })
               .catch((error) => {
                 alert(error.message);
               });
           }
           else {
-            db.collection("users").doc(userNum + "").set({
-              uid: firebase.auth().currentUser.uid,
-            }, { merge: true })
-              .then(() => {
-                userNum++;
-              })
-              .catch((error) => {
-                alert(error.message);
-              });
+            var docRef = db.collection("users").doc(0+"");
+
+            docRef.get().then(function (doc) {
+              db.collection("users").doc(firebase.auth().currentUser.uid).set({
+                name: doc.data().name,
+                nickname: doc.data().nickname
+              }, { merge: true })
+                .then(() => {
+                })
+                .catch((error) => {
+                  alert(error.message);
+                });
+
+            }).catch(function (error) {
+              console.log("Error getting document:", error);
+            });
+
+            
           }
 
         });
@@ -150,7 +163,7 @@ const Login = () => {
           <label>비밀번호</label>
           <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           <p className="errorMsg">{passwordError}</p>
-          <div className="btnContainer">
+          <div className="btnContainer" onKeyPress={keyHandleSignUp}>
             {hasAccount ? (
               <>
                 <button onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</button>
@@ -162,7 +175,7 @@ const Login = () => {
                   <input type="text" required value={name} onChange={(e) => setName(e.target.value)} />
                   <label>닉네임</label>
                   <input type="text" required value={nickname} onChange={(e) => setNickname(e.target.value)} />
-                  <button onClick={handleSignUp} onKeyPress={keyHandleSignUp}>회원가입</button>
+                  <button onClick={handleSignUp}>회원가입</button>
                   <p>계정이 있으면 <Button onClick={() => setHasAccount(!hasAccount)}>로그인</Button></p>
                 </>
               )}

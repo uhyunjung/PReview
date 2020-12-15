@@ -18,12 +18,15 @@ class Lecture_review_detail extends Component {
     constructor(props) {
         super(props);
 
+        this.myRef = React.createRef();
+
         this.state = {
             items: [],
             content: "",
             commentWriter_id: "",
             posting_id: "",
-            date: new Date()
+            date: new Date(),
+            commentName: ""
         };
     }
 
@@ -59,11 +62,52 @@ class Lecture_review_detail extends Component {
     componentWillMount() {
         let params = this.getUrlParams();
         let review = db.collection("reviews").doc(params.id);
+        this.setState({ posting_id: review.id });
 
         review.get().then(res => {
             this.setState({ items: res.data() });
         });
     }
+
+
+    // 렌더링 후 완료
+    componentDidMount = () => {
+        {
+            db.collection("comments")
+                .onSnapshot(snaps => {
+                    snaps.forEach(doc => {
+                        let posting = doc.data().posting_id;
+                        if (posting == this.state.posting_id) {
+                            const commentDiv = document.createElement("div");
+                            db.collection("users").doc(doc.data().commentWriter_id).get()
+                            .then(doc => {
+                                    this.setState({commentName : doc.data().nickname});
+                                    console.log(this.state.commentName);
+                                    console.log(doc.data().nickname);
+                                })
+                            
+
+                            const htmlContent =
+                                "<div class=\"review\">\
+                                <ul>\
+                                    <li class=\"item\">\
+                                        <div class=\"comment_nickname\">"+ this.state.commentName + "</div>\
+                                        <div class=\"comment_content\">"+ doc.data().content + "</div>\
+                                        <div class=\"comment_date\">"+ doc.data().date + "</div>\
+                                    </li>\
+                                </ul>\
+                            </div>";
+                            
+                            commentDiv.innerHTML = htmlContent;
+                            if (this.myRef != null) {
+                                this.myRef.appendChild(commentDiv);
+                            }
+                        }
+                    })
+                })
+        }
+    }
+
     // 데이터 저장
     handleSubmitComment = (e) => {
         e.preventDefault();
@@ -167,23 +211,15 @@ class Lecture_review_detail extends Component {
                             <div class="comment_content">
                                 <div id="comment">
                                     <form className="form" onSubmit={this.handleSubmitComment}>
-                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value, posting_id: item.writer_id })}></input>
+                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
                                         <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
                                     </form>
                                 </div>
-                                <div class="item">
-                                    <div class="comment_nickname">닉네임 1</div>
-                                    <div class="comment_content">와 정말 유익한 후기!</div>
-                                    <div class="comment_date">2020/11/7</div>
-                                    <div class="comment_time">17:35:55</div>
-                                </div>
 
-                                <div class="item">
-                                    <div class="comment_nickname">닉네임 2</div>
-                                    <div class="comment_content">저도 들어봐야겠어요!</div>
-                                    <div class="comment_date">2020/11/7</div>
-                                    <div class="comment_time">17:50:43</div>
-                                </div>
+                                <div class="item" ref={(DOMNodeRef) => {
+                                    this.myRef = DOMNodeRef;
+                                }}></div>
+
                             </div>
                         </div>
                     </Paper>
