@@ -30,10 +30,63 @@ class Camp_review_main extends Component {
         return params;
     }
 
+    componentDidMount = () => {
+        {   
+            let params = this.getUrlParams();
+            let search;
+            if(params.search_exist) {
+                search = decodeURI(params.search).toLowerCase();
+                console.log(search);
+            }
+            console.log(params.board);
+            let board = decodeURI(params.board);
+            console.log(board);
+
+            db.collection("postings")
+                .onSnapshot(snaps => {
+                    snaps.forEach(doc => {
+                        let title = doc.data().title.toLowerCase();
+                        console.log(title);
+                        if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
+                            const reviewDiv = document.createElement("div");
+
+                            const htmlContent =
+                                "<div class=\"review\">\
+                                    <ul>\
+                                        <li class=\"item\">\
+                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                            <div class=\"info\">\
+                                            <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                            </div>\
+                                            <div class=\"like\">\
+                                                <span class=\"date\">"+doc.data().date+"</span>\
+                                                <div class=\"likebtn\">\
+                                                    <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
+                                                        <i class=\"fas fa-heart\">♥</i>\
+                                                    </button>\
+                                                <div class=\"likepeople\">"+doc.data().like+"</div>\
+                                                </div>\
+                                            <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
+                                            </div>\
+                                        </li>\
+                                    </ul>\
+                                </div>";
+
+                            reviewDiv.innerHTML = htmlContent;
+                            if(this.myRef!=null)
+                        {
+                            this.myRef.appendChild(reviewDiv);
+                        }
+                    }
+                })
+            })
+        }
+    }
+
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = decodeURI(params.board)
+        let board = decodeURI(params.board);
         return (
             <div className="Lecture_review_main">
             <div className="sidebar">
@@ -131,7 +184,7 @@ class Camp_review_main extends Component {
                                 <input class="keyword" type="text" name="search" size="80"></input>
                             </form>
                         </div>
-                        <Link to='/Camp_review_write'><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
+                        <Link to={'/Camp_review_write?board='+board}><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
                     </div>
 
                     <div class="header">
@@ -143,40 +196,9 @@ class Camp_review_main extends Component {
                             <button>좋아요</button>
                         </div>
                     </div>
-                    <div id="posting">
-                        {db.collection("postings")
-                        .onSnapshot(snaps => {
-                            document.getElementById("posting").innerHTML='';
-                            snaps.forEach(doc => {
-                                const reviewDiv = document.createElement("div");
-
-                                const htmlContent =
-                                "<div class=\"review\">\
-                                    <ul>\
-                                        <li class=\"item\">\
-                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
-                                            <Link to='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></Link>\
-                                            </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">"+doc.data().date+"</span>\
-                                                <div class=\"likebtn\">\
-                                                    <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    </button>\
-                                                <div class=\"likepeople\">"+doc.data().like+"</div>\
-                                                </div>\
-                                            <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
-                                            </div>\
-                                        </li>\
-                                    </ul>\
-                                </div>";
-
-                                reviewDiv.innerHTML = htmlContent;
-
-                                document.getElementById("posting").appendChild(reviewDiv);
-                            })
-                        })}
+                    <div id="posting" ref={(DOMNodeRef) => {
+                 this.myRef=DOMNodeRef;
+                }}>
                     </div>
                     </Paper>
                 </article>

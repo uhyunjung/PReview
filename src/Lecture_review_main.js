@@ -44,28 +44,28 @@ class Lecture_review_main extends React.Component {
 
                         const htmlContent =
                             "<div class=\"review\">\
-                                                <ul>\
-                                            <li class=\"item\">\
-                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                                <div class=\"info\">\
-                                                <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
-                                                    <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
-                                                    <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                    <Button onClick=\"location.href='/Lecture_review_main?board="+board+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
-                                                </div>\
-                                                <div class=\"like\">\
-                                                    <span class=\"date\">"+ doc.data().date + "</span>\
-                                                    <div class=\"likebtn\">\
-                                                        <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
-                                                            <i class=\"fas fa-heart\">♥</i>\
-                                                        </button>\
-                                                    <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                    </div>\
-                                                <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
+                                <ul>\
+                                    <li class=\"item\">\
+                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                        <div class=\"info\">\
+                                        <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                            <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
+                                            <div class=\"tag\">"+ doc.data().tags + "</div>\
+                                            <Button onClick=\"location.href='/Lecture_review_main?board="+board+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                        </div>\
+                                        <div class=\"like\">\
+                                            <span class=\"date\">"+ doc.data().date + "</span>\
+                                            <div class=\"likebtn\">\
+                                                <button id=\"fas fa-heartBtn\" onClick={plusHeart}>\
+                                                    <i class=\"fas fa-heart\">♥</i>\
+                                                </button>\
+                                            <div class=\"likepeople\">"+ doc.data().like + "</div>\
+                                            </div>\
+                                        <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
+                                        </div>\
+                                    </li>\
+                                </ul>\
+                            </div>";
 
                         reviewDiv.innerHTML = htmlContent;
                         if(this.myRef!=null)
