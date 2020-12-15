@@ -114,12 +114,12 @@ class App extends Component {
                                         <li id='in_nav_item'><a href="/Lecture_review_main?board=ML/DL">  ML/DL</a></li>
                                     </ul>
                                     </li>
-                                <li id='nav_item'><Link to="/Camp_review_main">코딩 캠프 리뷰</Link>
+                                <li id='nav_item'><Link to="/Camp_review_main?board=알고리즘">코딩 캠프 리뷰</Link>
                                     <ul id='in_nav'>
-                                        <li id='in_nav_item'><a href="">  알고리즘</a></li>
-                                        <li id='in_nav_item'><a href="">  웹프로그래밍</a></li>
-                                        <li id='in_nav_item'><a href="">  데이터 분석</a></li>
-                                        <li id='in_nav_item'><a href="">  AI</a></li>
+                                        <li id='in_nav_item'><a href="/Camp_review_main?board=알고리즘">  알고리즘</a></li>
+                                        <li id='in_nav_item'><a href="/Camp_review_main?board=웹프로그래밍">  웹프로그래밍</a></li>
+                                        <li id='in_nav_item'><a href="/Camp_review_main?board=데이터 분석">  데이터 분석</a></li>
+                                        <li id='in_nav_item'><a href="/Camp_review_main?board=AI">  AI</a></li>
                                     </ul>
                                 </li>
                                 <li id='nav_item'><Link to='/Solution'>솔루션 공유</Link></li>

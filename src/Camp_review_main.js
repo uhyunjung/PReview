@@ -20,17 +20,29 @@ class Camp_review_main extends Component {
         return ret;
     }
 
+    getUrlParams() {
+        let params = {};
+        params["search_exist"] = false;
+
+        let exist = false;
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
+
+        return params;
+    }
+
     // 렌더링
     render() {
+        let params = this.getUrlParams();
+        let board = decodeURI(params.board)
         return (
             <div className="Lecture_review_main">
             <div className="sidebar">
                 <aside class="sidebar" style={{width:"25%"}}>
                     <ul class="category_camp">
-                        <li><a href="#">알고리즘</a></li>
-                        <li><a href="#">웹프로그래밍</a></li>
-                        <li><a href="#">데이터분석</a></li>
-                        <li><a href="#">AI</a></li>
+                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
                     </ul>
                     <div class='schedule'>
                         <article class="mainarticle">
@@ -112,7 +124,7 @@ class Camp_review_main extends Component {
                 <Paper classname="paper" elevation={2}>
                     <div class="review_search">
                         <div class="category_name">
-                            <span>알고리즘</span>
+                            <span>{board}</span>
                         </div>
                         <div>
                             <form class="search">
@@ -144,7 +156,7 @@ class Camp_review_main extends Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+doc.data().lecture_id+"</div></Link>\
+                                            <Link to='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></Link>\
                                             </div>\
                                             <div class=\"like\">\
                                                 <span class=\"date\">"+doc.data().date+"</span>\
@@ -159,8 +171,6 @@ class Camp_review_main extends Component {
                                         </li>\
                                     </ul>\
                                 </div>";
-
-                                console.log(htmlContent);
 
                                 reviewDiv.innerHTML = htmlContent;
 
