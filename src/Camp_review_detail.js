@@ -29,7 +29,7 @@ class Camp_review_detail extends Component {
 
     componentWillMount() {
         let params = this.getUrlParams();
-        let review = db.collection("camp_postings").doc(params.id);
+        let review = db.collection("postings").doc(params.id);
 
         review.get().then(res => {
             this.setState({items: res.data()});
@@ -69,33 +69,28 @@ class Camp_review_detail extends Component {
                             {item.content}
                         </div>
                         <hr id="line" />
-                        <div id="comment_header">
-                            <div id="comment_title">댓글</div>
-                            <button id="like"><i class="far fa-heart"></i></button>
-                            <span id="like_num">{item.like}</span>
-                            <button id="modify">글 수정</button>
-                        </div>
-                        <div id="comment">
-                            <form>
-                                <input id="input" type="text"></input>
-                                <button id="write">작성</button>
-                            </form>
-                        </div>
-                        <div id="comment_content">
-                            <div class="item">
-                                <div class="comment_nickname">닉네임 1</div>
-                                <div class="comment_content">와 정말 유익한 후기!</div>
-                                <div class="comment_date">2020/11/7</div>
-                                <div class="comment_time">17:35:55</div>
-                            </div>
+                        
+                        <div class="comment_content">
+                                <div id="comment">
+                                    <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value, posting_id: item.writer_id })}></input>
+                                        <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
+                                </div>
+                                <div class="item">
+                                    <div class="comment_nickname">닉네임 1</div>
+                                    <div class="comment_content">와 정말 유익한 후기!</div>
+                                    <div class="comment_date">2020/11/7</div>
+                                    <div class="comment_time">17:35:55</div>
+                                </div>
 
-                            <div class="item">
-                                <div class="comment_nickname">닉네임 2</div>
-                                <div class="comment_content">저도 들어봐야겠어요!</div>
-                                <div class="comment_date">2020/11/7</div>
-                                <div class="comment_time">17:50:43</div>
+                                <div class="item">
+                                    <div class="comment_nickname">닉네임 2</div>
+                                    <div class="comment_content">저도 들어봐야겠어요!</div>
+                                    <div class="comment_date">2020/11/7</div>
+                                    <div class="comment_time">17:50:43</div>
+                                </div>
                             </div>
-                        </div>
                     </Paper>
                 </article>
             </div>
