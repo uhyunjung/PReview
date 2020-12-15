@@ -140,18 +140,18 @@ class App extends Component {
                         <Switch>
                             <Route exact path='/' component={Main} />
                             <Route path='/Login' component={this.state.isSignedIn ? (Main) : (Login)} />
-                            <Route path='/Lecture_review_main' component={this.state.isSignedIn ? (Lecture_review_main) : (Login)} />
+                            <Route path='/Lecture_review_main' component={Lecture_review_main} />
                             <Route path='/Lecture_review_write' component={this.state.isSignedIn ? (Lecture_review_write) : (Login)} />
-                            <Route path='/Lecture_review_detail' component={this.state.isSignedIn ? (Lecture_review_detail) : (Login)} />
-                            <Route path='/Camp_review_main' component={this.state.isSignedIn ? (Camp_review_main) : (Login)} />
+                            <Route path='/Lecture_review_detail' component={Lecture_review_detail} />
+                            <Route path='/Camp_review_main' component={Camp_review_main} />
                             <Route path='/Camp_review_write' component={this.state.isSignedIn ? (Camp_review_write) : (Login)} />
-                            <Route path='/Camp_review_detail' component={this.state.isSignedIn ? (Camp_review_detail) : (Login)} />
-                            <Route path='/Community_view_main' component={this.state.isSignedIn ? (Community_view_main) : (Login)} />
+                            <Route path='/Camp_review_detail' component={Camp_review_detail} />
+                            <Route path='/Community_view_main' component={Community_view_main} />
                             <Route path='/Community_view_write' component={this.state.isSignedIn ? (Community_view_write) : (Login)} />
-                            <Route path='/Community_view_detail' component={this.state.isSignedIn ? (Community_view_detail) : (Login)} />
-                            <Route path='/Solution_main' component={this.state.isSignedIn ? (Solution_main) : (Login)} />
+                            <Route path='/Community_view_detail' component={Community_view_detail} />
+                            <Route path='/Solution_main' component={Solution_main} />
                             <Route path='/Solution_write' component={this.state.isSignedIn ? (Solution_write) : (Login)} />
-                            <Route path='/Solution_detail' component={this.state.isSignedIn ? (Solution_detail) : (Login)} />
+                            <Route path='/Solution_detail' component={Solution_detail} />
                             <Route path='/Mypage' component={Mypage} />
                         </Switch>
                     </div>
