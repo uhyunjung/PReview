@@ -98,19 +98,20 @@ class App extends Component {
                         </header>
                         <nav id='nav'>
                             <ul id='ulmenu' >
-                            <li id='nav_item'><Link to="/Lecture_review_main">강의 리뷰</Link>
+                            <li id='nav_item'><Link to="/Lecture_review_main?board=C/C++">강의 리뷰</Link>
                                     <ul id='in_nav'>
                                         <li id='in_nav_item' style={{fontSize:"1vw"}}>언어</li>
-                                        <li id='in_nav_item'><a href="">  C/C++</a></li>
-                                        <li id='in_nav_item'><a href="">  C#</a></li>
-                                        <li id='in_nav_item'><a href="">  Java</a></li>
-                                        <li id='in_nav_item'><a href="">  Python</a></li>
-                                        <li id='in_nav_item'><a href="">  Javascript</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=C/C++">  C/C++</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=C#">  C#</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Java">  Java</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Python">  Python</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Javascript">  Javascript</a></li>
                                         <li id='in_nav_item' style={{fontSize:"1vw"}}>분야</li>
-                                        <li id='in_nav_item'><a href="">  Algorithm</a></li>
-                                        <li id='in_nav_item'><a href="">  HTML/CSS/Javascript</a></li>
-                                        <li id='in_nav_item'><a href="">  Server</a></li>
-                                        <li id='in_nav_item'><a href="">  MySQL</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Algorithm">  Algorithm</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=FrontEnd">  FrontEnd</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Server">  Server</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=Database">  Database</a></li>
+                                        <li id='in_nav_item'><a href="/Lecture_review_main?board=ML/DL">  ML/DL</a></li>
                                     </ul>
                                     </li>
                                 <li id='nav_item'><Link to="/Camp_review_main">코딩 캠프 리뷰</Link>

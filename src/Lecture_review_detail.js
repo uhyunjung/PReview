@@ -50,6 +50,7 @@ class Lecture_review_detail extends Component {
 
     render() {
         let item = this.state.items;
+        let params = this.getUrlParams();
 
         // 렌더링
         return (
@@ -58,19 +59,19 @@ class Lecture_review_detail extends Component {
                     <aside class="sidebar">
                         <p>언어</p>
                         <ul class="category">
-                            <li><a href="#">C / C++</a></li>
-                            <li><a href="#">C#</a></li>
-                            <li><a href="#">Java</a></li>
-                            <li><a href="#">Python</a></li>
-                            <li><a href="#">Javascript</a></li>
+                            <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                            <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                            <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                            <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                            <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
                         </ul>
                         <p>분야</p>
                         <ul class="category">
-                            <li><a href="#">Algorithm</a></li>
-                            <li><a href="#">HTML/CSS/Javascript</a></li>
-                            <li><a href="#">Server</a></li>
-                            <li><a href="#">Full Stack</a></li>
-                            <li><a href="#">ML/DL</a></li>
+                            <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                            <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                            <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                            <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                            <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -78,7 +79,7 @@ class Lecture_review_detail extends Component {
                     <Paper classname="paper" elevation={3}>
                         <div id="detail">
                             <div class="lecturename">
-                                <div class="category_name">Full Stack</div>
+                                <div class="category_name">{params.board}</div>
                                     <span>{item.lecture_name}</span>
                                 <div class="writer_info">
                                     <span class="writer">{item.writer_id}</span><br></br>
