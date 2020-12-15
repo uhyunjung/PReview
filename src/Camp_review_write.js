@@ -174,95 +174,57 @@ const Camp_review_write = () => {
         setOpenBar(false);
     };
 
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
-    const [lecture_id, setLectureId] = useState("");
-    const [lecture_name, setLectureName] = useState("");
-    const [category, setCategory] = useState("");
-    const [star, setStar] = useState("");
-    const [tags, setTags] = useState("");
-    const [level, setLevel] = useState("");
-    const [period, setPeriod] = useState("");
-    const [cost, setCost] = useState("");
-    const [pros, setPros] = useState("");
-    const [cons, setCons] = useState("");
-    const [link, setLink] = useState("");
+    const [board, setBoard] = useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
     const [date, setDate] = useState("");
     const [like, setLike] = useState("");
+    const [visit, setVisit] = useState("");
 
     // 데이터 저장
     const handleSubmit = (e) => {
         e.preventDefault();
         handleClose();
 
+        let params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+        setBoard(params.board);
+
         // 빈칸 방지
-        if ((lecture_name == "")){
+        if ((title == "" || content == "")){
             handleClickBar();
         }
         else {
             db.collection("postings").add({
                 writer_id: firebase.auth().currentUser.uid,
-                lecture_id: lecture_id,
-                lecture_name: lecture_name,
-                star: star,
-                tags: tags,
-                period: period,
-                cost: cost,
-                level: level,
-                pros: pros,
-                cons: cons,
-                link: link,
+                board : board,
+                title: title,
+                content: content,
                 date: today.toLocaleString(),
-                like: 0
+                like: 0,
+                visit: 0,
             })
-                .then(() => {
+                .then((docRef) => {
+                    window.location.href = "/Camp_review_detail?board="+params.board+"&id="+docRef.id;
                 })
                 .catch((error) => {
                     alert(error.message);
                 });
 
             setWriterId("");
-            setLectureId("");
-            setLectureName("");
-            setCategory("");
-            setStar("");
-            setTags("");
-            setPeriod("");
-            setCost("");
-            setLevel("");
-            setPros("");
-            setCons("");
-            setPeriod("");
-            setCost("");
-            setLevel("");
-            setLink("");
+            setBoard("");
+            setTitle("");
+            setContent(""); 
             setDate("");
             setLike("");
+            setVisit("");
         }
     };
-
-    // 태그 관련 변수
-    const {
-        getRootProps,
-        getInputProps,
-        getTagProps,
-        getListboxProps,
-        getOptionProps,
-        groupedOptions,
-        value,
-        focused,
-        setAnchorEl,
-    } = useAutocomplete({
-        id: 'customized-hook-demo',
-        multiple: true,
-        options: tagContent,
-        getOptionLabel: (option) => option.title,
-    });
-
-    // 태그 기능
-    const handleTag = (e) => {
-        setTags(state => ({ tags: [...state.tags, e.target.value] }));
-    }
 
     // 엔터키
     const keyHandleClickOpen = (e) => {
@@ -273,7 +235,7 @@ const Camp_review_write = () => {
 
     // 렌더링
     return (
-        <div className="Lecture_review_write">
+        <div className="Camp_review_write">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -284,121 +246,30 @@ const Camp_review_write = () => {
             <div className="sidebarclass">
             <aside class="sidebar" >
                 <ul class="category_camp">
-                    <li><a href="#">알고리즘</a></li>
-                    <li><a href="#">웹프로그래밍</a></li>
-                    <li><a href="#">데이터분석</a></li>
-                    <li><a href="#">AI</a></li>
-                </ul>
+                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                    </ul>
               </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
                 <div class="category_name">
-                    <span style={{fontSize:"16px"}}>알고리즘</span>
+                    <span style={{fontSize:"16px"}}>{params.board}</span>
                 </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
-                            <div class="item">
-                                <div class="review-entry">
-                                    <span>강좌 이름 :</span>
+                            <div id='review'>
+                                <div id="review_header">
+                                    <span id="title">제목 : </span>
+                                    <input id="title_input" type="text"/>
                                 </div>
-
-                                <div class="review-content">
-                                    <input type="text" id="name" class="short-text" list="lecture-list" value={lecture_name} onChange={(e) => setLectureName(e.target.value)}></input>
-                                    <datalist id="lecture-list">
-                                        <option value="유튜브 클론코딩"></option>
-                                        <option value="Amazing, awesome, incredible!"></option>
-                                    </datalist>
+                                <hr id="line"/>
+                                <div id="write_box">
+                                    <input id="input" type="text"/>
                                 </div>
-                            </div>
-                        </section>
-
-                        <section id="contants" class="writing-block">
-                            <div id="star" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">별점</span>
-                                </div>
-                                <div class="review-content">
-                                    <Select id="star-score" value={star} onChange={(e) => setStar(e.target.value)}>
-                                        <option value="5">★★★★★</option>
-                                        <option value="4">★★★★☆</option>
-                                        <option value="3">★★★☆☆</option>
-                                        <option value="2">★★☆☆☆</option>
-                                        <option value="1">★☆☆☆☆</option>
-                                    </Select>
-                                </div>
-                            </div>
-
-                            <div id="hashtags" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">태그</span>
-                                </div>
-                                <div class="review-content">
-                                    <ul class="tags">
-                                        <NoSsr>
-                                            <div>
-                                                <div {...getRootProps()}>
-                                                    <InputWrapper id="tagstyle" ref={setAnchorEl} className={focused ? 'focused' : ''} value={tags} onChange={(e) => setTags(e.target.value)}>
-                                                        {value.map((option, index) => (
-                                                            <Tag label={option.title} {...getTagProps({ index })} value={tags} onChange={handleTag} />
-                                                        ))}
-
-                                                        <input {...getInputProps()} />
-                                                    </InputWrapper>
-                                                </div>
-                                                {groupedOptions.length > 0 ? (
-                                                    <Listbox {...getListboxProps()}>
-                                                        {groupedOptions.map((option, index) => (
-                                                            <li {...getOptionProps({ option, index })}>
-                                                                <span>{option.title}</span>
-                                                                <CheckIcon fontSize="small" />
-                                                            </li>
-                                                        ))}
-                                                    </Listbox>
-                                                ) : null}
-                                            </div>
-                                        </NoSsr>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div id="lecture-info" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">수강 정보</span>
-                                </div>
-                                <div class="review-content">
-                                    <span>수강 기간 : </span>
-                                    <input type="text" id="period" value={period} onChange={(e) => setPeriod(e.target.value)}></input>
-                                    <span> / 수강 비용 : </span>
-                                    <input type="text" id="cost" value={cost} onChange={(e) => setCost(e.target.value)}></input>
-                                </div>
-                            </div>
-
-                            <div id="pros" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">장점</span>
-                                </div>
-                                <div class="review-content">
-                                    <input type="text" id="pros" class="long-text" value={pros} onChange={(e) => setPros(e.target.value)}></input>
-                                </div>
-                            </div>
-
-                            <div id="cons" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">단점</span>
-                                </div>
-                                <div class="review-content">
-                                    <input type="text" id="cons" class="long-text" value={cons} onChange={(e) => setCons(e.target.value)} />
-                                </div>
-                            </div>
-
-                            <div id="link" class="item">
-                                <div class="review-entry">
-                                    <span class="entry-name">강의 링크</span>
-                                </div>
-                                <div class="review-content">
-                                    <input type="text" id="link" class="short-text" value={link} onChange={(e) => setLink(e.target.value)}></input>
-                                </div>
+                                <hr id="line"/>
                             </div>
                         </section>
 
