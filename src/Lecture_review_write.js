@@ -435,7 +435,7 @@ const Lecture_review_write = () => {
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
                                     <Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button>
-                                </DialogActions>ㅊㅇ
+                                </DialogActions>
                             </Dialog>
                         </section>
                     </form>

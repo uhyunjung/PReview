@@ -182,9 +182,6 @@ const Camp_review_write = () => {
     const [board, setBoard] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [date, setDate] = useState("");
-    const [like, setLike] = useState("");
-    const [visit, setVisit] = useState("");
 
     // 데이터 저장
     const handleSubmit = (e) => {
@@ -220,9 +217,6 @@ const Camp_review_write = () => {
             setBoard("");
             setTitle("");
             setContent(""); 
-            setDate("");
-            setLike("");
-            setVisit("");
         }
     };
 
@@ -263,11 +257,11 @@ const Camp_review_write = () => {
                             <div id='review'>
                                 <div id="review_header">
                                     <span id="title">제목 : </span>
-                                    <input id="title_input" type="text"/>
+                                    <input id="title_input" type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                                 </div>
                                 <hr id="line"/>
                                 <div id="write_box">
-                                    <input id="input" type="text"/>
+                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)}/>
                                 </div>
                                 <hr id="line"/>
                             </div>
