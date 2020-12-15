@@ -180,9 +180,10 @@ const Lecture_review_write = () => {
 
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
+    const [name, setName] = useState("");
     const [lecture_name, setLectureName] = useState("");
     const [star, setStar] = useState("");
-    const [tags, setTags] = useState("");
+    const [tags, setTags] = useState([]);
     const [level, setLevel] = useState("");
     const [period, setPeriod] = useState("");
     const [cost, setCost] = useState("");
@@ -203,8 +204,14 @@ const Lecture_review_write = () => {
             handleClickBar();
         }
         else {
+            db.collection("users").doc(firebase.auth().currentUser.uid).get()
+                                .then(doc => {
+                                    setName(doc.data().nickname)
+                                })
+
+
             db.collection("reviews").add({
-                writer_id: firebase.auth().currentUser.uid,
+                writer_id: name,
                 lecture_name: lecture_name,
                 star: star,
                 tags: tags,
@@ -224,7 +231,7 @@ const Lecture_review_write = () => {
                 .catch((error) => {
                     alert(error.message);
                 });
-
+                
             setWriterId("");
             setLectureName("");
             setStar("");
@@ -241,6 +248,7 @@ const Lecture_review_write = () => {
             setDate("");
             setLike("");
             setBoard("");
+            setName("");
         }
     };
 
@@ -259,13 +267,19 @@ const Lecture_review_write = () => {
         id: 'customized-hook-demo',
         multiple: true,
         options: tagContent,
+        disableClearble: false,
         getOptionLabel: (option) => option.title,
-    });
+        onChange: (e, value) => {
+            let i=0;
+            let content="";
+            for(i=0; i<value.length; i++)
+            {
+                content+=value[i].title;
 
-    // 태그 기능
-    const handleTag = (e) => {
-        setTags(state => ({ tags: [...state.tags, e.target.value] }));
-    }
+            }
+            setTags(content);
+        }
+    });
 
     // 엔터키
     const keyHandleClickOpen = (e) => {
@@ -347,15 +361,14 @@ const Lecture_review_write = () => {
                                 </div>
                                 <div class="review-content">
                                     <ul class="tags">
-                                        <NoSsr>
+                                        
                                             <div>
                                                 <div {...getRootProps()}>
-                                                    <InputWrapper id="tagstyle" ref={setAnchorEl} className={focused ? 'focused' : ''} value={tags} onChange={(e) => setTags(e.target.value)}>
+                                                    <InputWrapper id="tagstyle" ref={setAnchorEl} className={focused ? 'focused' : ''}>
                                                         {value.map((option, index) => (
-                                                            <Tag label={option.title} {...getTagProps({ index })} value={tags} onChange={handleTag} />
+                                                            <Tag label={option.title} {...getTagProps({ index })} />
                                                         ))}
-
-                                                        <input {...getInputProps()} />
+                                                        <input type="text" id="tag"{...getInputProps()}></input>
                                                     </InputWrapper>
                                                 </div>
                                                 {groupedOptions.length > 0 ? (
@@ -369,7 +382,7 @@ const Lecture_review_write = () => {
                                                     </Listbox>
                                                 ) : null}
                                             </div>
-                                        </NoSsr>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -448,7 +461,7 @@ const tagContent = [
     { title: '#적당해요 ' },
     { title: '#어려워요 ' },
     { title: '#효과적이에요 ' },
-    { title: '#전체구조를보여줘요 ' },
+    { title: '#전체_구조를_보여줘요 ' },
     { title: '#실무적이에요' }
 ];
 

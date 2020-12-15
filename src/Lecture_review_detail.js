@@ -21,12 +21,14 @@ class Lecture_review_detail extends Component {
         this.myRef = React.createRef();
 
         this.state = {
+            isUid: false,
             items: [],
             content: "",
             commentWriter_id: "",
             posting_id: "",
             date: new Date(),
-            commentName: ""
+            commentName: "",
+            uid: ""
         };
     }
 
@@ -47,7 +49,7 @@ class Lecture_review_detail extends Component {
         console.log(edit);
 
         db.collection("reviews").doc(params.id).update({
-            'like': edit+1
+            'like': edit + 1
         }).then(() => {
             window.location.reload(false);
         })
@@ -68,24 +70,37 @@ class Lecture_review_detail extends Component {
             this.setState({ items: res.data() });
         });
     }
-
-
+    
     // 렌더링 후 완료
     componentDidMount = () => {
         {
+            if(firebase.auth().currentUser!=null){
+                {
+                    this.setState({ uid: firebase.auth().currentUser.uid });
+                    
+                    if (this.state.items.writer_id == this.state.uid) {
+                        this.setState({ isUid: true });
+                    }
+                    else {
+                        this.setState({ isUid: false });
+                    }
+                }
+            };
+            
             db.collection("comments")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
                         if (posting == this.state.posting_id) {
                             const commentDiv = document.createElement("div");
+
                             db.collection("users").doc(doc.data().commentWriter_id).get()
-                            .then(doc => {
-                                    this.setState({commentName : doc.data().nickname});
+                                .then(doc => {
+                                    this.setState({ commentName: doc.data().nickname });
                                     console.log(this.state.commentName);
                                     console.log(doc.data().nickname);
                                 })
-                            
+
 
                             const htmlContent =
                                 "<div class=\"review\">\
@@ -97,7 +112,7 @@ class Lecture_review_detail extends Component {
                                     </li>\
                                 </ul>\
                             </div>";
-                            
+
                             commentDiv.innerHTML = htmlContent;
                             if (this.myRef != null) {
                                 this.myRef.appendChild(commentDiv);
@@ -133,9 +148,22 @@ class Lecture_review_detail extends Component {
         this.setState({ content: "" });
     }
 
+    deleteReview = () => {
+        {
+            db.collection("reviews").doc(this.state.uid).delete()
+                .then(() => {
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+
+
+        };
+    }
+
     render() {
         let item = this.state.items;
-
+        
         let params = this.getUrlParams();
         let board = decodeURI(params.board);
 
@@ -182,7 +210,7 @@ class Lecture_review_detail extends Component {
                                 </div>
                                 <div class="tags">
                                     <span>태그</span>
-                                    <span>{item.tags_attribute}</span>
+                                    <span>{item.tags}</span>
                                 </div>
                                 <div class="lecture_info">
                                     <span>수강 정보</span>
@@ -197,6 +225,15 @@ class Lecture_review_detail extends Component {
                                     <span>단점</span>
                                     <span>{item.cons}</span>
                                 </div>
+                                <div>
+                                    {this.state.isUid ? (
+                                        <>
+                                            <Button variant="outlined" onClick={this.deleteReview}>삭제</Button>
+                                        </>) : (
+                                            <>
+                                            </>)}
+                                </div>
+
                                 <button class="go">강의 바로가기</button>
                             </div>
 

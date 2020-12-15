@@ -122,7 +122,7 @@ class App extends Component {
                                         <li id='in_nav_item'><a href="/Camp_review_main?board=AI">  AI</a></li>
                                     </ul>
                                 </li>
-                                <li id='nav_item'><Link to='/Solution'>솔루션 공유</Link></li>
+                                <li id='nav_item'><Link to='/Solution_main'>솔루션 공유</Link></li>
                                 <li id='nav_item'><Link to="/Community_view_main">커뮤니티</Link>
                                 <ul id='in_nav'>
                                   <li id='in_nav_item'><a href="community_view_free.html">  자유게시판</a></li>
