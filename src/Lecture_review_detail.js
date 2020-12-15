@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db, auth } from './firebase';
+import firebase from 'firebase';
 import { ControlPointDuplicateOutlined } from '@material-ui/icons';
 
 class Lecture_review_detail extends Component {
@@ -18,24 +19,28 @@ class Lecture_review_detail extends Component {
         super(props);
 
         this.state = {
-            items: []
+            items: [],
+            content: "",
+            commentWriter_id: "",
+            posting_id: "",
+            date: new Date()
         };
     }
 
     printStar(star) {
         let ret = "";
 
-        for(let i=0; i<5; i++){
-            if(i < star) ret += "★";
+        for (let i = 0; i < 5; i++) {
+            if (i < star) ret += "★";
             else ret += "☆";
         }
-        
+
         return ret;
     };
 
     getUrlParams() {
         var params = {};
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; });
         return params;
     }
 
@@ -44,8 +49,32 @@ class Lecture_review_detail extends Component {
         let review = db.collection("reviews").doc(params.id);
 
         review.get().then(res => {
-            this.setState({items: res.data()});
+            this.setState({ items: res.data() });
         });
+    }
+    // 데이터 저장
+    handleSubmitComment = (e) => {
+        e.preventDefault();
+
+        // 빈칸 방지
+        if (this.state.content == null) {
+            return;
+        }
+        else {
+            db.collection("comments").add({
+                commentWriter_id: firebase.auth().currentUser.uid,
+                content: this.state.content,
+                posting_id: this.state.posting_id,
+                date: this.state.date.toLocaleString()
+            })
+                .then(() => {
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        }
+
+        this.setState({ content: "" });
     }
 
     render() {
@@ -81,8 +110,10 @@ class Lecture_review_detail extends Component {
                     <Paper classname="paper" elevation={3}>
                         <div id="detail">
                             <div class="lecturename">
+
                                 <div class="category_name">{board}</div>
-                                    <span>{item.lecture_name}</span>
+                                <span>{item.lecture_name}</span>
+
                                 <div class="writer_info">
                                     <span class="writer">{item.writer_id}</span><br></br>
                                     <span class="date">{item.date}</span>
@@ -111,6 +142,36 @@ class Lecture_review_detail extends Component {
                                     <span>{item.cons}</span>
                                 </div>
                                 <button class="go">강의 바로가기</button>
+                            </div>
+
+                            <div class="comment_header">
+                                <div class="comment_title">댓글</div>
+                                <div>
+                                    <button class="like"><i class="far fa-heart">♥</i></button>
+                                    <span class="likepeople">{item.like}</span>
+                                </div>
+                            </div>
+
+                            <div class="comment_content">
+                                <div id="comment">
+                                    <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value, posting_id: item.writer_id })}></input>
+                                        <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
+                                </div>
+                                <div class="item">
+                                    <div class="comment_nickname">닉네임 1</div>
+                                    <div class="comment_content">와 정말 유익한 후기!</div>
+                                    <div class="comment_date">2020/11/7</div>
+                                    <div class="comment_time">17:35:55</div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="comment_nickname">닉네임 2</div>
+                                    <div class="comment_content">저도 들어봐야겠어요!</div>
+                                    <div class="comment_date">2020/11/7</div>
+                                    <div class="comment_time">17:50:43</div>
+                                </div>
                             </div>
                         </div>
                     </Paper>

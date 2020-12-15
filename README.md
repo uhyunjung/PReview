@@ -33,13 +33,17 @@ PReview
 │   └── index.html                                     - 메인 html 파일
 │
 ├── src/
-│   ├── index.js                                       - 첫 렌더링 파일
+│   ├── index.js                                       - 렌더링 파일
 │   ├── App.js                                         - 메뉴 페이지
 │   ├── firebase.js                                    - firebase config, firestore 접근(db)
 │   ├── Main.js                                        - 메인 페이지
 │   ├── Login.js                                       - 로그인 페이지
 │   ├── Mypage.js                                      - 마이페이지
 │   └── Lecture_review_main, detail, write.js          - 강의 리뷰 페이지
+│   ├── Camp_review_main, detail, write.js             - 캠프 리뷰 페이지
+│   ├── Solution_main, detail, write.js                - 솔루션 페이지
+│   ├── Community_view_main, detail, write.js          - 커뮤니티 페이지
+│   └── total.css                                      - css 파일
 │ 
 ├── .gitignore
 ├── .firebaserc                                        - firebase 설정 파일
@@ -51,6 +55,8 @@ PReview
 ```
 
 ## ⚙️ 언어 및 환경
+![image](https://user-images.githubusercontent.com/67186222/102082427-48d51b00-3e55-11eb-90a8-9f285b42512c.png)
+![image](https://user-images.githubusercontent.com/67186222/102082473-61453580-3e55-11eb-8029-9aac0d8fda16.png)
 
 
 ## 😀 개발 규칙
