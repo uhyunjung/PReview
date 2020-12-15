@@ -180,9 +180,7 @@ const Lecture_review_write = () => {
 
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
-    const [lecture_id, setLectureId] = useState("");
     const [lecture_name, setLectureName] = useState("");
-    const [category, setCategory] = useState("");
     const [star, setStar] = useState("");
     const [tags, setTags] = useState("");
     const [level, setLevel] = useState("");
@@ -211,7 +209,6 @@ const Lecture_review_write = () => {
         else {
             db.collection("reviews").add({
                 writer_id: firebase.auth().currentUser.uid,
-                lecture_id: lecture_id,
                 lecture_name: lecture_name,
                 star: star,
                 tags: tags,
@@ -233,9 +230,7 @@ const Lecture_review_write = () => {
                 });
 
             setWriterId("");
-            setLectureId("");
             setLectureName("");
-            setCategory("");
             setStar("");
             setTags("");
             setPeriod("");
