@@ -175,6 +175,9 @@ const Lecture_review_write = () => {
         setOpenBar(false);
     };
 
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
     const [lecture_id, setLectureId] = useState("");
@@ -190,11 +193,16 @@ const Lecture_review_write = () => {
     const [link, setLink] = useState("");
     const [date, setDate] = useState("");
     const [like, setLike] = useState("");
+    const [board, setBoard] = useState(params.board);
 
     // 데이터 저장
     const handleSubmit = (e) => {
         e.preventDefault();
         handleClose();
+
+        let params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+        setBoard(params.board);
 
         // 빈칸 방지
         if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (level == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
@@ -214,10 +222,11 @@ const Lecture_review_write = () => {
                 cons: cons,
                 link: link,
                 date: today.toLocaleString(),
-                like: 0
+                like: 0,
+                board: board
             })
                 .then((docRef) => {
-                    console.log(docRef.id);
+                    window.location.href = "/Lecture_review_detail?board="+params.board+"&id="+docRef.id;
                 })
                 .catch((error) => {
                     alert(error.message);
@@ -240,6 +249,7 @@ const Lecture_review_write = () => {
             setLink("");
             setDate("");
             setLike("");
+            setBoard("");
         }
     };
 
@@ -284,28 +294,29 @@ const Lecture_review_write = () => {
                 </Snackbar>
             </div>
             <div className="sidebarclass">
-              <aside class="sidebar">
-                  <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
-                  <ul class="category_lecture">
-                      <li><a href="#">C / C++</a></li>
-                      <li><a href="#">C#</a></li>
-                      <li><a href="#">Java</a></li>
-                      <li><a href="#">Python</a></li>
-                      <li><a href="#">Javascript</a></li>
-                  </ul>
-                  <p style={{fontWeight:"bold" , color:"#585858"}}>분야</p>
-                  <ul class="category_lecture">
-                      <li><a href="#">Algorithm</a></li>
-                      <li><a href="#">HTML/CSS/Javascript</a></li>
-                      <li><a href="#">Server</a></li>
-                      <li><a href="#">MySQL</a></li>
-                  </ul>
-              </aside>
+                <aside class="sidebar">
+                    <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                    </ul>
+                    <p>분야</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                    </ul>
+                </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
                 <div class="category_name">
-                    <span style={{fontSize:"16px"}}>C/C++</span>
+                    <span style={{fontSize:"16px"}}>{params.board}</span>
                 </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
@@ -428,8 +439,8 @@ const Lecture_review_write = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
-                                    <Button type="submit" onClick={handleSubmit} color="primary" autoFocus><Link to='/Lecture_review_detail?id=ewVpPUTqECQmHkeAe0mg'>확인</Link></Button>
-                                </DialogActions>
+                                    <Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button>
+                                </DialogActions>ㅊㅇ
                             </Dialog>
                         </section>
                     </form>
@@ -437,7 +448,6 @@ const Lecture_review_write = () => {
             </article>
         </div>
     );
-
 }
 
 

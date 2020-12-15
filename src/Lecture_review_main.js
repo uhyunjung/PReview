@@ -13,9 +13,11 @@ class Lecture_review_main extends React.Component {
 
     getUrlParams() {
         let params = {};
+        params["search_exist"] = false;
+
         let exist = false;
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; exist = true;});
-        params["exist"] = exist;
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
+
         return params;
     }
 
@@ -24,16 +26,19 @@ class Lecture_review_main extends React.Component {
         {
             let params = this.getUrlParams();
             let search;
-            if(params.exist) {
+            if(params.search_exist) {
                 search = decodeURI(params.search).toLowerCase();
                 console.log(search);
             }
+
+            let board = decodeURI(params.board).toLowerCase();
 
             db.collection("reviews")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
-                    if ( !params.exist || (params.exist && lec_name.indexOf(search) != -1)){
+                    console.log(lec_name);
+                    if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
                         const reviewDiv = document.createElement("div");
 
                         const htmlContent =
@@ -45,7 +50,7 @@ class Lecture_review_main extends React.Component {
                                                 <a href='/Lecture_review_detail?id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                                     <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                     <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                                    <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                                    <Button onClick=\"location.href='/Lecture_review_main?board="+{board}+"&search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                                 </div>\
                                                 <div class=\"like\">\
                                                     <span class=\"date\">"+ doc.data().date + "</span>\
@@ -133,25 +138,27 @@ class Lecture_review_main extends React.Component {
 
     // 렌더링
     render() {
+        let params = this.getUrlParams();
+        let board = decodeURI(params.board)
         return (
             <div className="Lecture_review_main">
                 <div className="sidebar">
                     <aside class="sidebar">
                         <p>언어</p>
                         <ul class="category">
-                            <li><a href="#">C / C++</a></li>
-                            <li><a href="#">C#</a></li>
-                            <li><a href="#">Java</a></li>
-                            <li><a href="#">Python</a></li>
-                            <li><a href="#">Javascript</a></li>
+                            <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                            <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                            <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                            <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                            <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
                         </ul>
                         <p>분야</p>
                         <ul class="category">
-                            <li><a href="#">Algorithm</a></li>
-                            <li><a href="#">HTML/CSS/Javascript</a></li>
-                            <li><a href="#">Server</a></li>
-                            <li><a href="#">Full Stack</a></li>
-                            <li><a href="#">ML/DL</a></li>
+                            <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                            <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                            <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                            <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                            <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
                         </ul>
                     </aside>
                 </div>
@@ -159,7 +166,7 @@ class Lecture_review_main extends React.Component {
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
-                                <span>Full Stack</span>
+                            <span>{board}</span>
                             </div>
                             <div>
                                 <form class="search">
@@ -169,7 +176,7 @@ class Lecture_review_main extends React.Component {
                                     <input class="keyword" type="text" name="search" size="80"></input>
                                 </form>
                             </div>
-                            <Link to='/lecture_review_write'><Button variant="contained" type="submit">글 작성</Button></Link>
+                            <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit">글 작성</Button></Link>
                         </div>
                         <div class="header">
                             <span>링크</span>
