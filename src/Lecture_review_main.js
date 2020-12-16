@@ -16,6 +16,7 @@ class Lecture_review_main extends React.Component {
     getUrlParams() {
         let params = {};
         params["search_exist"] = false;
+        params["order_by"] = "date";
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
@@ -42,7 +43,7 @@ class Lecture_review_main extends React.Component {
             console.log(board);
 
             db.collection("reviews")
-            .orderBy("date","desc")
+            .orderBy(params.order_by,"desc")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
@@ -173,7 +174,7 @@ class Lecture_review_main extends React.Component {
                                 <input class="keyword" type="text" name="search" size="80" placeholder="게시판에서 검색"></input>
                             </form>
                             <div class="write_button">
-                                <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글 작성</Button></Link>
+                                <Link to={'/Lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글 작성</Button></Link>
                             </div>
                         </div>
                         <div class="chart">
@@ -183,8 +184,8 @@ class Lecture_review_main extends React.Component {
                             <span>링크</span>
                             <span>내용</span>
                             <div class="btn">
-                                <button value="date" onClick={(e)=>this.order(e.target.value)}>작성날짜△</button>
-                                <button value="like" onClick={(e)=>this.order(e.target.value)}>좋아요</button>
+                            <button><a href={"/Lecture_review_main?board="+board}>작성날짜△</a></button>
+                            <button><a href={"/Lecture_review_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                             </div>
                         </div>
                         <div id="reviews" ref={(DOMNodeRef) => {

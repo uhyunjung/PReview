@@ -14,6 +14,7 @@ class Community_view_main extends Component {
     getUrlParams() {
         let params = {};
         params["search_exist"] = false;
+        params["order_by"] = "date";
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
@@ -34,35 +35,36 @@ class Community_view_main extends Component {
             console.log(board);
 
             db.collection("community")
-                .onSnapshot(snaps => {
-                    snaps.forEach(doc => {
-                        let title = doc.data().title.toLowerCase();
-                        console.log(title);
-                        if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
-                            const reviewDiv = document.createElement("div");
+            .orderBy(params.order_by,"desc")
+            .onSnapshot(snaps => {
+                snaps.forEach(doc => {
+                    let title = doc.data().title.toLowerCase();
+                    console.log(title);
+                    if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
+                        const reviewDiv = document.createElement("div");
 
-                            const htmlContent =
-                                "<div class=\"review\">\
-                                    <ul>\
-                                        <li class=\"item\">\
-                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
-                                            <a href='/Community_view_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                        const htmlContent =
+                            "<div class=\"review\">\
+                                <ul>\
+                                    <li class=\"item\">\
+                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                        <div class=\"info\">\
+                                        <a href='/Community_view_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                        </div>\
+                                        <div class=\"like\">\
+                                            <span class=\"date\">"+doc.data().date+"</span>\
+                                            <div class=\"likebtn\">\
+                                                <i class=\"fas fa-heart\">♥</i>\
+                                            <div class=\"likepeople\">"+doc.data().like+"</div>\
                                             </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">"+doc.data().date+"</span>\
-                                                <div class=\"likebtn\">\
-                                                    <i class=\"fas fa-heart\">♥</i>\
-                                                <div class=\"likepeople\">"+doc.data().like+"</div>\
-                                                </div>\
-                                            <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
-                                            </div>\
-                                        </li>\
-                                    </ul>\
-                                </div>";
+                                        <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
+                                        </div>\
+                                    </li>\
+                                </ul>\
+                            </div>";
 
-                            reviewDiv.innerHTML = htmlContent;
-                            if(this.myRef!=null)
+                        reviewDiv.innerHTML = htmlContent;
+                        if(this.myRef!=null)
                         {
                             this.myRef.appendChild(reviewDiv);
                         }
@@ -105,9 +107,8 @@ class Community_view_main extends Component {
                         <span>링크</span>
                         <span>내용</span>
                         <div class="btn">
-                            <button>작성날짜△</button>
-                            <button>조회수△</button>
-                            <button>좋아요</button>
+                            <button><a href={"/Community_view_main?board="+board}>작성날짜△</a></button>
+                            <button><a href={"/Community_view_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                         </div>
                     </div>
                     <div id="posting" ref={(DOMNodeRef) => {
