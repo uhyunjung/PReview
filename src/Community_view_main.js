@@ -23,7 +23,7 @@ class Community_view_main extends Component {
     }
 
     componentDidMount = () => {
-        {   
+        {
             let params = this.getUrlParams();
             let search;
             if(params.search_exist) {
@@ -98,8 +98,11 @@ class Community_view_main extends Component {
                                 <input class="keyword" type="text" name="search" size="80"></input>
                             </form>
                         </div>
+                        <div class="write_button">
                         <Link to={'/Community_view_write?board='+board}><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
+                      </div>
                     </div>
+
 
                     <div class="header">
                     <span>제목</span>
@@ -110,8 +113,6 @@ class Community_view_main extends Component {
                         <span>작성자</span>
                         <div class="btn">
                             <button><a href={"/Community_view_main?board="+board}>작성날짜△</a></button>
-                        </div>
-                        <div class="btn">
                             <button><a href={"/Community_view_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                         </div>
                     </div>
