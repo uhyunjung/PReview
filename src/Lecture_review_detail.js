@@ -30,7 +30,8 @@ class Lecture_review_detail extends Component {
             posting_id: "",
             date: new Date(),
             commentName: "",
-            uid: ""
+            uid: "",
+            new_comment: ""
         };
     }
 
@@ -109,8 +110,12 @@ class Lecture_review_detail extends Component {
 
                                     commentDiv.innerHTML = htmlContent;
 
-                                    if (this.myRef != null) {
+                                    console.log(this.state.new_comment);
+                                    console.log(doc.id);
+
+                                    if (this.myRef != null && this.state.new_comment == "" || this.state.new_comment == doc.id) {
                                         this.myRef.appendChild(commentDiv);
+                                        console.log("add!");
                                     }
                                 })
                         }
@@ -149,12 +154,12 @@ class Lecture_review_detail extends Component {
                 posting_id: this.state.posting_id,
                 date: this.state.date.toLocaleString()
             })
-                .then(() => {
-                    window.location.reload(false);
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+            .then((commentRef) => {
+                this.setState({ new_comment: commentRef.id });
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
         }
     }
 
@@ -317,7 +322,7 @@ class Lecture_review_detail extends Component {
                                 </form>
                             </div>
 
-                            <div class="item" ref={(DOMNodeRef) => {
+                            <div id="comment_list" class="item" ref={(DOMNodeRef) => {
                                 this.myRef = DOMNodeRef;
                             }}></div>
 
