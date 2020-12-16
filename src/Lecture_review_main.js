@@ -43,9 +43,10 @@ class Lecture_review_main extends React.Component {
                     let lec_name = doc.data().lecture_name.toLowerCase();
                     console.log(doc);
                     if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
+                        
                         const reviewDiv = document.createElement("div");
 
-                        const htmlContent =
+                        let htmlContent =
                             "<div class=\"review\">\
                                 <ul>\
                                     <li class=\"item\">\
@@ -62,7 +63,7 @@ class Lecture_review_main extends React.Component {
                                                 <i class=\"fas fa-heart\">♥</i>\
                                             <div class=\"likepeople\">"+ doc.data().like + "</div>\
                                             </div>\
-                                        <span class=\"writer\">작성자 : "+ doc.data().writer_id + "</span>\
+                                        <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
                                         </div>\
                                     </li>\
                                 </ul>\
@@ -73,6 +74,7 @@ class Lecture_review_main extends React.Component {
                         {
                             this.myRef.appendChild(reviewDiv);
                         }
+
                     }
                 })
             })

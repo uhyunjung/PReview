@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Paper, Button } from '@material-ui/core';
+import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import './total.css';
 import { db, auth } from './firebase';
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
 import { ControlPointDuplicateOutlined } from '@material-ui/icons';
 
 class Lecture_review_detail extends Component {
@@ -21,6 +22,7 @@ class Lecture_review_detail extends Component {
         this.myRef = React.createRef();
 
         this.state = {
+            open : false,
             isUid: false,
             items: [],
             content: "",
@@ -70,23 +72,29 @@ class Lecture_review_detail extends Component {
             this.setState({ items: res.data() });
         });
     }
-    
+
     // 렌더링 후 완료
     componentDidMount = () => {
         {
-            if(firebase.auth().currentUser!=null){
-                {
-                    this.setState({ uid: firebase.auth().currentUser.uid });
-                    
-                    if (this.state.items.writer_id == this.state.uid) {
-                        this.setState({ isUid: true });
+            let params = this.getUrlParams();
+            let review = db.collection("reviews").doc(params.id).get().then(doc => {
+                firebase.auth().onAuthStateChanged(function (user) {
+                    {
+                        this.setState({ uid: firebase.auth().currentUser.uid });
+
+                        if (doc.data().writer_id == this.state.uid) {
+                            this.setState({ isUid: true });
+                        }
+                        else {
+                            this.setState({ isUid: false });
+                        }
                     }
-                    else {
-                        this.setState({ isUid: false });
-                    }
-                }
-            };
-            
+                }.bind(this)).bind(this);
+            });
+
+
+
+
             db.collection("comments")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
@@ -97,16 +105,16 @@ class Lecture_review_detail extends Component {
                             let htmlContent;
 
                             db.collection("users").doc(doc.data().commentWriter_id).get()
-                            .then(ret => {
-                                this.setState({ commentName: ret.data().nickname });
-                                //console.log(ret.data().nickname);
-                                htmlContent = this.MakeHTMLContent(ret.data().nickname, doc.data().content, doc.data().date);
+                                .then(ret => {
+                                    this.setState({ commentName: ret.data().nickname });
+                                    //console.log(ret.data().nickname);
+                                    htmlContent = this.MakeHTMLContent(ret.data().nickname, doc.data().content, doc.data().date);
 
-                                commentDiv.innerHTML = htmlContent;
-                                if (this.myRef != null) {
-                                this.myRef.appendChild(commentDiv);
-                            }
-                            })
+                                    commentDiv.innerHTML = htmlContent;
+                                    if (this.myRef != null) {
+                                        this.myRef.appendChild(commentDiv);
+                                    }
+                                })
                         }
                     })
                 })
@@ -155,7 +163,10 @@ class Lecture_review_detail extends Component {
 
     deleteReview = () => {
         {
-            db.collection("reviews").doc(this.state.uid).delete()
+            let params = this.getUrlParams();
+            let review = db.collection("reviews").doc(params.id);
+
+            db.collection("reviews").doc(review.id).delete()
                 .then(() => {
                 })
                 .catch((error) => {
@@ -166,9 +177,17 @@ class Lecture_review_detail extends Component {
         };
     }
 
+    handleClickOpen = () => {
+        this.setState({open : true});
+    }
+
+    handleClose = () => {
+        this.setState({open : false});
+    }
+
     render() {
         let item = this.state.items;
-        
+
         let params = this.getUrlParams();
         let board = decodeURI(params.board);
 
@@ -204,7 +223,7 @@ class Lecture_review_detail extends Component {
                                 <span>{item.lecture_name}</span>
 
                                 <div class="writer_info">
-                                    <span class="writer">{item.writer_id}</span><br></br>
+                                    <span class="writer">{item.writer_name}</span><br></br>
                                     <span class="date">{item.date}</span>
                                 </div>
                             </div>
@@ -233,40 +252,59 @@ class Lecture_review_detail extends Component {
                                 <div>
                                     {this.state.isUid ? (
                                         <>
-                                            <Button variant="outlined" onClick={this.deleteReview}>삭제</Button>
+                                            <section id="submit-button">
+                                                <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
+                                                <Dialog
+                                                    open={this.state.open}
+                                                    onClose={this.handleClose}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <DialogTitle id="alert-dialog-title">{"리뷰 삭제"}</DialogTitle>
+                                                    <DialogContent>
+                                                        <DialogContentText id="alert-dialog-description">
+                                                            리뷰를 삭제하시겠습니까?
+                                                    </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <Button onClick={this.handleClose} color="primary">취소</Button>
+                                                        <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                    </DialogActions>
+                                                </Dialog>
+                                        </section>
                                         </>) : (
                                             <>
-                                            </>)}
+                                </>)}
                                 </div>
 
-                                <button class="go">강의 바로가기</button>
+                            <button class="go">강의 바로가기</button>
+                        </div>
+
+                        <div class="comment_header">
+                            <div class="comment_title">댓글</div>
+                            <div>
+                                <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
+                                <span class="likepeople">{item.like}</span>
+                            </div>
+                        </div>
+
+                        <div class="comment_content">
+                            <div id="comment">
+                                <form className="form" onSubmit={this.handleSubmitComment}>
+                                    <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                    <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                </form>
                             </div>
 
-                            <div class="comment_header">
-                                <div class="comment_title">댓글</div>
-                                <div>
-                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
-                                    <span class="likepeople">{item.like}</span>
-                                </div>
-                            </div>
+                            <div class="item" ref={(DOMNodeRef) => {
+                                this.myRef = DOMNodeRef;
+                            }}></div>
 
-                            <div class="comment_content">
-                                <div id="comment">
-                                    <form className="form" onSubmit={this.handleSubmitComment}>
-                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                        <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
-                                    </form>
-                                </div>
-
-                                <div class="item" ref={(DOMNodeRef) => {
-                                    this.myRef = DOMNodeRef;
-                                }}></div>
-
-                            </div>
+                        </div>
                         </div>
                     </Paper>
                 </article>
-            </div>
+            </div >
         );
     }
 }

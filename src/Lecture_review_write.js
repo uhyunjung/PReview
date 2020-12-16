@@ -176,15 +176,14 @@ const Lecture_review_write = () => {
     };
 
     let params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; });
 
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
-    const [name, setName] = useState("");
+    const [writer_name, setWriterName] = useState("");
     const [lecture_name, setLectureName] = useState("");
     const [star, setStar] = useState("");
     const [tags, setTags] = useState([]);
-    const [level, setLevel] = useState("");
     const [period, setPeriod] = useState("");
     const [cost, setCost] = useState("");
     const [pros, setPros] = useState("");
@@ -200,55 +199,51 @@ const Lecture_review_write = () => {
         handleClose();
 
         // 빈칸 방지
-        if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (level == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
+        if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
             handleClickBar();
         }
         else {
             db.collection("users").doc(firebase.auth().currentUser.uid).get()
-                                .then(doc => {
-                                    setName(doc.data().nickname)
-                                })
+                .then(doc => {
 
-
-            db.collection("reviews").add({
-                writer_id: name,
-                lecture_name: lecture_name,
-                star: star,
-                tags: tags,
-                period: period,
-                cost: cost,
-                level: level,
-                pros: pros,
-                cons: cons,
-                link: link,
-                date: today.toLocaleString(),
-                like: 0,
-                board: board
-            })
-                .then((docRef) => {
-                    window.location.href = "/Lecture_review_detail?board="+params.board+"&id="+docRef.id;
-                })
-                .catch((error) => {
-                    alert(error.message);
+                    db.collection("reviews").add({
+                        writer_id: firebase.auth().currentUser.uid,
+                        writer_name: doc.data().nickname,
+                        lecture_name: lecture_name,
+                        star: star,
+                        tags: tags,
+                        period: period,
+                        cost: cost,
+                        pros: pros,
+                        cons: cons,
+                        link: link,
+                        date: today.toLocaleString(),
+                        like: 0,
+                        board: board
+                    })
+                        .then((docRef) => {
+                            window.location.href = "/Lecture_review_detail?board=" + params.board + "&id=" + docRef.id;
+                        })
+                        .catch((error) => {
+                            alert(error.message);
+                        });
                 });
-                
+
             setWriterId("");
             setLectureName("");
             setStar("");
             setTags("");
             setPeriod("");
             setCost("");
-            setLevel("");
             setPros("");
             setCons("");
             setPeriod("");
             setCost("");
-            setLevel("");
             setLink("");
             setDate("");
             setLike("");
             setBoard("");
-            setName("");
+            setWriterName("");
         }
     };
 
@@ -270,11 +265,10 @@ const Lecture_review_write = () => {
         disableClearble: false,
         getOptionLabel: (option) => option.title,
         onChange: (e, value) => {
-            let i=0;
-            let content="";
-            for(i=0; i<value.length; i++)
-            {
-                content+=value[i].title;
+            let i = 0;
+            let content = "";
+            for (i = 0; i < value.length; i++) {
+                content += value[i].title;
 
             }
             setTags(content);
@@ -300,7 +294,7 @@ const Lecture_review_write = () => {
             </div>
             <div className="sidebarclass">
                 <aside class="sidebar">
-                    <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
+                    <p style={{ fontWeight: "bold", color: "#585858" }}>언어</p>
                     <ul class="category">
                         <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
                         <li><a href="/Lecture_review_main?board=C#">C#</a></li>
@@ -320,9 +314,9 @@ const Lecture_review_write = () => {
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                <div class="category_name">
-                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
-                </div>
+                    <div class="category_name">
+                        <span style={{ fontSize: "16px" }}>{decodeURI(params.board)}</span>
+                    </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div class="item">
@@ -361,28 +355,28 @@ const Lecture_review_write = () => {
                                 </div>
                                 <div class="review-content">
                                     <ul class="tags">
-                                        
-                                            <div>
-                                                <div {...getRootProps()}>
-                                                    <InputWrapper id="tagstyle" ref={setAnchorEl} className={focused ? 'focused' : ''}>
-                                                        {value.map((option, index) => (
-                                                            <Tag label={option.title} {...getTagProps({ index })} />
-                                                        ))}
-                                                        <input type="text" id="tag"{...getInputProps()}></input>
-                                                    </InputWrapper>
-                                                </div>
-                                                {groupedOptions.length > 0 ? (
-                                                    <Listbox {...getListboxProps()}>
-                                                        {groupedOptions.map((option, index) => (
-                                                            <li {...getOptionProps({ option, index })}>
-                                                                <span>{option.title}</span>
-                                                                <CheckIcon fontSize="small" />
-                                                            </li>
-                                                        ))}
-                                                    </Listbox>
-                                                ) : null}
+
+                                        <div>
+                                            <div {...getRootProps()}>
+                                                <InputWrapper id="tagstyle" ref={setAnchorEl} className={focused ? 'focused' : ''}>
+                                                    {value.map((option, index) => (
+                                                        <Tag label={option.title} {...getTagProps({ index })} />
+                                                    ))}
+                                                    <input type="text" id="tag"{...getInputProps()}></input>
+                                                </InputWrapper>
                                             </div>
-                                        
+                                            {groupedOptions.length > 0 ? (
+                                                <Listbox {...getListboxProps()}>
+                                                    {groupedOptions.map((option, index) => (
+                                                        <li {...getOptionProps({ option, index })}>
+                                                            <span>{option.title}</span>
+                                                            <CheckIcon fontSize="small" />
+                                                        </li>
+                                                    ))}
+                                                </Listbox>
+                                            ) : null}
+                                        </div>
+
                                     </ul>
                                 </div>
                             </div>
