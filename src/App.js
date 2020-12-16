@@ -62,9 +62,7 @@ class App extends Component {
                     <div className='Menu'>
                         <header id="top">
                             <Link to='/'><h3><a id='PReview_logo' target="_self">PReview</a></h3></Link>
-
-                            <input id="search" type="text" placeholder="통합검색" >
-                            </input>
+                            
                             {this.state.isSignedIn ? (
                                 <div id="loginbar">
                                     <Button id="login" onClick={this.handleClickOpen}>{this.state.value}</Button>
