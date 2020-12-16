@@ -45,13 +45,13 @@ a:visited{
 
 #search{
   text-align: left;
-  text-indent: 2em;
+  text-indent: 20px;
   background-repeat: no-repeat;
   background-position: 10px center;
   position:absolute;
   margin-left:30%;
-  width:35%;
-  height:4.7%;
+  width:40%;
+  height:40px;
   border-radius:50px;
   border:2px solid #BDBDBD;
   font-size: 15px;
@@ -97,7 +97,7 @@ a:visited{
 
 }
 #in_nav_category {
-  color:#585858;
+  color:#444444;
   font-size: 16px;
   margin-left: 10%;
 }
@@ -113,22 +113,33 @@ a:visited{
 
 /* 사이드바 */
 aside {
-  margin-top: 0.5%;
-  margin-left: 12%;
-  width: 16%;
+  margin-right: 5px;
+  width: 300px;
   float: left;
   height: flex;
   border: 2px solid #BDBDBD;
-  padding: 15px;
+  padding: 0 15px 10px;
+}
+aside p {
+  color:rgb(88, 88, 88);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 10px;
+}
+aside .category {
+  color:#585858;
+  font-size: 16px;
+  margin-left: 30px;
+}
+aside .category li {
+  margin-bottom: 5px;
 }
 
 /* 리뷰 리스트, 작성 */
 .article {
-  margin-left: 1%;
-  margin-top: 0.5%;
+  float: left;
   height:100%;
-  width:55%;
-  display: inline-block;
+  width:800px;
   border:2px solid #BDBDBD;
 
 }
@@ -170,7 +181,7 @@ aside {
 
 
 
-/* 수정 중 */
+/* 메인 페이지 */
 .main_body {
   margin: 15px calc(calc(100vw - 1130px)/2) 0;
 }
@@ -182,7 +193,6 @@ aside {
  height:755px;
  width:300px;
  float:left;
- /*margin-left:10%;*/
  margin-right:5px;
  margin-bottom: 10px;
  border: 1px solid #BDBDBD;
@@ -200,7 +210,7 @@ aside {
    border: 1px solid #BDBDBD;
    border-width: 2px;
    margin-bottom:5px;
-   padding:1vw 1vw;
+   padding:15px 15px;
  }
  #line{
   width:100%;
@@ -214,7 +224,7 @@ aside {
    float:left;
    border: 1px solid #BDBDBD;
    border-width: 2px;
-   padding: 1vw 1vw;
+   padding: 15px 15px;
  }
  .schedule{
    height:277px;
@@ -282,7 +292,7 @@ aside {
    float:left;
  }
  #main_algorithm,#main_camp,#main_career{
-   margin-left: 10px;
+   margin-left: 15px;
    float:left;
    width:100%;
    height:115px;
@@ -299,6 +309,7 @@ aside {
    color:#585858;
    margin:4px 10px 0 10px;
    padding-top: 28px;
+   text-align: center;
  }
 
 
@@ -323,6 +334,8 @@ aside {
 /* 리뷰내용 각 항목 */
 .item {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 7px 0px;
 }
 /* 항목 이름 */
@@ -385,7 +398,7 @@ aside {
 /*마지막 글작성 버튼*/
 #submit-button {
     text-align: right;
-    padding: 5px 0px 20px 0px;
+    padding: 20px 0px 20px 0px;
     margin-right: 1vw;
 }
 
@@ -420,15 +433,14 @@ aside {
 
 /*글작성 버튼*/
 #write_btn{
-  color:gray;
+  font-size: 13px;
   font-weight: bold;
-  width:5vw;
-  height:4vh;
+  width:77px;
+  height:30px;
   background-color: white;
   border: 2px solid #BDBDBD;
   border-radius: 20px;
-  margin-top:1vh;
-  margin-left:1.5vw;
+  box-shadow: none;
 }
 
 /*검색 창*/
@@ -450,16 +462,14 @@ aside {
   padding:1px 1px;
 }
 
-  .item {
-    display: flex;
-  }
   .review_search {
     display: flex;
-    margin: 10px;
-    padding:2vh 4vh;
+    align-items: center;
+    margin: 15px;
   }
   .info {
-    margin: 10px;
+    width: 60%;
+    height: 100%;
   }
   .header {
     display: flex;
@@ -475,25 +485,52 @@ aside {
     font-weight: bold;
   }
   .category_name {
-    padding: 10px;
-    color:gray;
+    color:#444444;
+    width: 200px;
+    height: 28px;
     font-weight: bold;
-    font-size:1em;
+    font-size:20px;
+    text-align: center;
+  }
+  .category_name_write_page {
+    width: 90px;
+    height:auto;
+    padding: 15px 0 0 15px;
   }
   .search {
-    padding: 10px;
-  }
-  .review_search {
     display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
   }
-
+  .search button{
+    display: none;
+    float: left;
+  }
+  .search input {
+    float: left;
+    width: 100%;
+    height: calc(100% - 4px);
+    text-indent: 15px;
+  }
+  .write_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
   .review {
     border-bottom: 2px solid #BDBDBD;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
     margin-left: 3vw;
     margin-right: 2vw;
   }
-  .like, .date, .writer{
+  .like{
+    width: 20%;
+    font-size:12px;
+    color:gray;
+  }
+  .date, .writer{
     font-size:12px;
     color:gray;
   }
@@ -541,7 +578,11 @@ aside {
   }
 
   .chart {
-
+    margin-top: 30px;
+  }
+  .chart div div{
+    display: flex;
+    justify-content: center;
   }
 
 

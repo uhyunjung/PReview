@@ -290,7 +290,7 @@ const Lecture_review_write = () => {
 
     // 렌더링
     return (
-        <div className="Lecture_review_write">
+        <div className="Lecture_review_write" class="main_body">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -300,9 +300,9 @@ const Lecture_review_write = () => {
             </div>
             <div className="sidebarclass">
                 <aside class="sidebar">
-                    <p style={{fontWeight:"bold" , color:"#585858"}}>언어</p>
+                    <p>언어</p>
                     <ul class="category">
-                        <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
                         <li><a href="/Lecture_review_main?board=C#">C#</a></li>
                         <li><a href="/Lecture_review_main?board=Java">Java</a></li>
                         <li><a href="/Lecture_review_main?board=Python">Python</a></li>
@@ -320,8 +320,8 @@ const Lecture_review_write = () => {
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                <div class="category_name">
-                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
+                <div class="category_name category_name_write_page">
+                    <span>{decodeURI(params.board)}</span>
                 </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
