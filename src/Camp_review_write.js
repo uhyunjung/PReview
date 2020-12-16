@@ -175,12 +175,10 @@ const Camp_review_write = () => {
     };
 
     let params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; });
-
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 
     // 데이터 변수
     const [writer_id, setWriterId] = useState("");
-    const [writer_name, setWriterName] = useState("");
     const [board, setBoard] = useState(params.board);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -191,36 +189,30 @@ const Camp_review_write = () => {
         handleClose();
 
         // 빈칸 방지
-        if ((title == "" || content == "")) {
+        if ((title == "" || content == "")){
             handleClickBar();
         }
         else {
-            db.collection("users").doc(firebase.auth().currentUser.uid).get()
-                .then(doc => {
-
-                    db.collection("postings").add({
-                        writer_id: firebase.auth().currentUser.uid,
-                        writer_name: doc.data().nickname,
-                        board: board,
-                        title: title,
-                        content: content,
-                        date: today.toLocaleString(),
-                        like: 0,
-                        visit: 0,
-                    })
-                        .then((docRef) => {
-                            window.location.href = "/Camp_review_detail?board=" + params.board + "&id=" + docRef.id;
-                        })
-                        .catch((error) => {
-                            alert(error.message);
-                        });
+            db.collection("postings").add({
+                writer_id: firebase.auth().currentUser.uid,
+                board : board,
+                title: title,
+                content: content,
+                date: today.toLocaleString(),
+                like: 0,
+                visit: 0,
+            })
+                .then((docRef) => {
+                    window.location.href = "/Camp_review_detail?board="+params.board+"&id="+docRef.id;
+                })
+                .catch((error) => {
+                    alert(error.message);
                 });
 
             setWriterId("");
             setBoard("");
             setTitle("");
             setContent("");
-            setWriterName("");
         }
     };
 
@@ -233,7 +225,103 @@ const Camp_review_write = () => {
 
     // 렌더링
     return (
-        <div className="Camp_review_write"  class="main_body">
+        <div className="Camp_review_write" class="main_body                                                             45rE  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;  font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -241,35 +329,41 @@ const Camp_review_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div class='main_left'>
+            <div className="sidebarclass">
+            <aside class="sidebar" >
                 <ul class="category_camp">
-                    <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                    <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                    <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                    <li><a href="/Camp_review_main?board=AI">AI</a></li>
-                </ul>
+                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                    </ul>
+              </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                    <div class="category_name category_name_write_page">
-                        <span>{decodeURI(params.board)}</span>
-                    </div>
+                <div class="category_name category_name_write_page">
+                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
+                </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div class="item">
                                 <div class="review-entry">
-                                    <span>제목 :</span>
+                                    <span> 캠프 제목 : </span>
                                 </div>
+
+
                                 <div class="review-content">
-                                    <input id="title_input" class="short-text" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                                    <input class="short-text" type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                                 </div>
-                            </div>
-                        </section>
-                        <section id="contants" class="writing-block">
-                            <div id="write_box" class="review-content">
-                                <input id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
-                            </div>
-                        </section>
+                              </div>
+                          </section>
+
+                                <section id = "constants" class="writing-block">
+                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)}/>
+                                </section>
+
+
+
 
                         <section id="submit-button">
                             <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 작성</Button>
@@ -287,7 +381,7 @@ const Camp_review_write = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
-                                    <Link to='/Community_review_detail'><Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button></Link>
+                                    <Link to='/Camp_review_detail'><Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button></Link>
                                 </DialogActions>
                             </Dialog>
                         </section>
