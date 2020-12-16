@@ -210,7 +210,7 @@ aside .category li {
   float: left;
  }
  #main_right_top{
-   height:260px;
+   height:280px;
    width: 100%;
    float:left;
    border: 1px solid #BDBDBD;
@@ -569,7 +569,6 @@ aside .category li {
     width:90%;
     padding-bottom: 3px;
     margin-top:1vh;
-    margin-left: 2vw;
     margin-right: 2vw;
   }
   #nav_item2:hover > a{

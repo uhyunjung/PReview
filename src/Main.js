@@ -32,7 +32,7 @@ class Main extends Component {
                         <ul>\
                             <li class=\"main_post_item\">\
                                 <div class=\"info\">\
-                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
+                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
                                 </div>\
                             </li>\
                         </ul>\
@@ -166,7 +166,10 @@ class Main extends Component {
                                 <li id='nav_item2'><Link to='/?board=community&title=title&post_location=Community_view_detail'>커뮤니티</Link></li>
                                 <div class="hot_post">
                                 </div>
-                                <div id="like_post">
+
+                                <div id="like_post" class="item" ref={(DOMNodeRef) => {
+                                    this.myRef = DOMNodeRef;
+                                }}>
                                 {
                                     db.collection(board)
                                     .orderBy("like", "desc").limit(5)
