@@ -11,7 +11,6 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Lecture_review_main extends React.Component {
     Constructor(props) {
         this.myRef = React.createRef();
-
     }
 
     getUrlParams() {
@@ -27,10 +26,15 @@ class Lecture_review_main extends React.Component {
     // 렌더링 후 완료
     componentDidMount = () => {
         {
+            console.log("bddd");
             let params = this.getUrlParams();
             let search;
             if(params.search_exist) {
                 search = decodeURI(params.search).toLowerCase();
+                if(search.indexOf(23))
+                {
+                    search = search.replace("%23", "#");
+                }
                 console.log(search);
             }
             console.log(params.board);
@@ -38,11 +42,13 @@ class Lecture_review_main extends React.Component {
             console.log(board);
 
             db.collection("reviews")
+            .orderBy("date","desc")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
+                    let tag_name = doc.data().tags;
                     console.log(doc);
-                    if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
+                    if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1) || (params.search_exist && tag_name.indexOf(search) != -1)){
                         
                         const reviewDiv = document.createElement("div");
 
@@ -112,7 +118,7 @@ class Lecture_review_main extends React.Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
+        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
         let DP = this.makeChartContent()
         const options = {
             height: 260,
@@ -178,8 +184,8 @@ class Lecture_review_main extends React.Component {
                             <span>링크</span>
                             <span>내용</span>
                             <div class="btn">
-                                <button>작성날짜△</button>
-                                <button>좋아요</button>
+                                <button value="date" onClick={(e)=>this.order(e.target.value)}>작성날짜△</button>
+                                <button value="like" onClick={(e)=>this.order(e.target.value)}>좋아요</button>
                             </div>
 
                         </div>
