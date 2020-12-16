@@ -27,12 +27,11 @@ class Lecture_review_main extends React.Component {
 
     editDate(date){
         let today = new Date();
-        let curr = today.toLocaleString();
-        let curr_date = curr.substring(0, 13);
+        let curr = today.toLocaleString().substring(0, 13);
 
         let ret;
-        if(date.indexOf(curr_date) != -1) ret = curr.substring(14, curr.length);
-        else ret = curr_date;
+        if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
+        else ret = date.substring(0, 14);
 
         console.log(ret);
 
