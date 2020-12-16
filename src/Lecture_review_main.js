@@ -124,7 +124,6 @@ class Lecture_review_main extends React.Component {
         let DP = this.makeChartContent()
         const options = {
             height: 260,
-            width: 600,
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             axisY: {
@@ -134,10 +133,7 @@ class Lecture_review_main extends React.Component {
                 interval: 1
             },
             data: [{        
-                type: "column",  
-                showInLegend: true, 
-                legendMarkerColor: "grey",
-                legendText: "MMbbl = one million barrels",
+                type: "column", 
                 dataPoints: DP
             }]
         }
@@ -164,7 +160,7 @@ class Lecture_review_main extends React.Component {
                         </ul>
                     </aside>
                 </div>
-                <article class="article">
+                <article class="article" style={{width: "43vw"}}>
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
