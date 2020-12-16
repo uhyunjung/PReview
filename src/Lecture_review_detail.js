@@ -45,6 +45,20 @@ class Lecture_review_detail extends Component {
         return ret;
     };
 
+    editDate(date){
+        let today = new Date();
+        let curr = today.toLocaleString();
+        let curr_date = curr.substring(0, 13);
+
+        let ret;
+        if(date.indexOf(curr_date) != -1) ret = curr.substring(14, curr.length);
+        else ret = curr_date;
+
+        console.log(ret);
+
+        return ret;
+    }
+
     likeUpdate() {
         let params = this.getUrlParams();
         let edit = this.state.items.like;
@@ -126,7 +140,7 @@ class Lecture_review_detail extends Component {
                 <li class=\"item\">\
                     <div class=\"comment_nickname\">"+ name + "</div>\
                     <div class=\"comment_content\">"+ content + "</div>\
-                    <div class=\"comment_date\">"+ date + "</div>\
+                    <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
                 </li>\
             </ul>\
         </div>";
@@ -217,13 +231,13 @@ class Lecture_review_detail extends Component {
                             <div class="category_name category_name_write_page">{board}</div>
                             <section id="lecture-name" class="lecturename writing-block">
                                 <div class="item"style={{width:"100%"}}>
-                                    <div class="review-entry" style={{fontSize:"1em", textAlign:"left", width:"100%" }}>
+                                    <div class="review-entry" style={{fontSize:"20px", textAlign:"left", width:"100%" }}>
                                         <span>{item.lecture_name}</span>
                                     </div>
 
                                     <div class="writer_info">
-                                        <span class="writer">{item.writer_name}</span><br></br>
-                                        <span class="date">{item.date}</span>
+                                        <span class="writer">{item.writer_name}</span>
+                                        <span class="date">{this.editDate(String(item.date))}</span>
                                     </div>
                                 </div>
                             </section>
@@ -271,10 +285,11 @@ class Lecture_review_detail extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    {this.state.isUid ? (
-                                        <>
+                                    
                                             <section id="submit-button">
-                                              <Button variant="outlined" id='go'>◀강의 바로가기▶ </Button>
+                                              <Button variant="outlined" id='go'><a href={item.link}>강의 바로가기▶</a></Button>
+                                              {this.state.isUid ? (
+                                        <>
                                               <Button variant="contained" id='delete_btn'onClick={this.handleClickOpen}>삭제</Button>
 
                                                 <Dialog
@@ -294,24 +309,25 @@ class Lecture_review_detail extends Component {
                                                         <Link to={'/Lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                     </DialogActions>
                                                 </Dialog>
-                                        </section>
-                                        </>) : (
+                                                </>) : (
                                             <>
                                 </>)}
+                                        </section>
+                                        
                                 </div>
                             </section>
 
                         <div class="comment_header">
                             <div class="comment_title">댓글</div>
-                            <div>
-                                <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
+                            <div class="like1">
+                                <button class="like" onClick={() => { this.likeUpdate() }}><i>♥</i>
                                 <span class="likepeople">{item.like}</span> </button>
                             </div>
                         </div>
 
                         <div class="comment_content">
                             <div id="comment">
-                                <form className="form" onSubmit={this.handleSubmitComment}>
+                                <form className="form" class="comment_form" onSubmit={this.handleSubmitComment}>
                                     <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
                                     <Button variant="outlined"  id="comment_btn"type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
                                 </form>

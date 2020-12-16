@@ -32,6 +32,20 @@ class Community_view_detail extends Component {
       };
   }
 
+  editDate(date){
+    let today = new Date();
+    let curr = today.toLocaleString();
+    let curr_date = curr.substring(0, 13);
+
+    let ret;
+    if(date.indexOf(curr_date) != -1) ret = curr.substring(14, curr.length);
+    else ret = curr_date;
+
+    console.log(ret);
+
+    return ret;
+    }
+
   likeUpdate() {
       let params = this.getUrlParams();
       let edit = this.state.items.like;
@@ -118,7 +132,7 @@ class Community_view_detail extends Component {
               <li class=\"item\">\
                   <div class=\"comment_nickname\">"+ name + "</div>\
                   <div class=\"comment_content\">"+ content + "</div>\
-                  <div class=\"comment_date\">"+ date + "</div>\
+                  <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
               </li>\
           </ul>\
       </div>";
@@ -201,14 +215,14 @@ class Community_view_detail extends Component {
                       <div id="detail">
                           <div class="category_name category_name_write_page">{board}</div>
                           <section id="lecture-name" class="lecturename writing-block">
-                              <div class="item">
-                                  <div class="review_title">
+                          <div class="item" style={{width:"100%"}}>
+                                    <div class="review-entry" style={{fontSize:"1em", textAlign:"left", width:"100%" }}>
                                       <span>{item.title}</span>
                                   </div>
 
                                   <div class="writer_info">
-                                      <span class="writer">{item.writer_name}</span><br></br>
-                                      <span class="date">{item.date}</span>
+                                      <span class="writer">{item.writer_name}</span>
+                                      <span class="date">{this.editDate(String(item.date))}</span>
                                   </div>
                               </div>
                           </section>
@@ -247,7 +261,7 @@ class Community_view_detail extends Component {
                               </section>
                           <div class="comment_header">
                               <div class="comment_title">댓글</div>
-                              <div>
+                              <div class="like1">
                                   <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
                                   <span class="likepeople">{item.like}</span>
                               </div>
@@ -255,10 +269,10 @@ class Community_view_detail extends Component {
 
                           <div class="comment_content">
                               <div id="comment">
-                                  <form className="form" onSubmit={this.handleSubmitComment}>
-                                      <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                      <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
-                                  </form>
+                                <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                        <Button variant="outlined" type="submit" id="comment_btn" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
                               </div>
 
                               <div class="item" ref={(DOMNodeRef) => {

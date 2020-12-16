@@ -31,6 +31,20 @@ class Camp_review_detail extends Component {
         };
     }
 
+    editDate(date){
+        let today = new Date();
+        let curr = today.toLocaleString();
+        let curr_date = curr.substring(0, 13);
+
+        let ret;
+        if(date.indexOf(curr_date) != -1) ret = curr.substring(14, curr.length);
+        else ret = curr_date;
+
+        console.log(ret);
+
+        return ret;
+    }
+
     likeUpdate() {
         let params = this.getUrlParams();
         let edit = this.state.items.like;
@@ -117,7 +131,7 @@ class Camp_review_detail extends Component {
                 <li class=\"item\">\
                     <div class=\"comment_nickname\">"+ name + "</div>\
                     <div class=\"comment_content\">"+ content + "</div>\
-                    <div class=\"comment_date\">"+ date + "</div>\
+                    <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
                 </li>\
             </ul>\
         </div>";
@@ -210,8 +224,8 @@ class Camp_review_detail extends Component {
                                     </div>
 
                                     <div class="writer_info">
-                                        <span class="writer">{item.writer_name}</span><br></br>
-                                        <span class="date">{item.date}</span>
+                                        <span class="writer">{item.writer_name}</span>
+                                        <span class="date">{this.editDate(String(item.date))}</span>
                                     </div>
                                 </div>
                             </section>
@@ -252,9 +266,9 @@ class Camp_review_detail extends Component {
                             </section>
                             <div class="comment_header">
                                 <div class="comment_title">댓글</div>
-                                <div>
-                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
-                                    <span class="likepeople">{item.like}</span> </button>
+                                <div class="like1">
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
+                                    <span class="likepeople">{item.like}</span>
                                 </div>
                             </div>
 
