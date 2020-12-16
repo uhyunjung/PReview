@@ -187,21 +187,25 @@ class Camp_review_detail extends Component {
         // 렌더링
         return (
             <div className="Camp_review_detail" class="main_body">
-                <div class='main_left'>
-                    <ul class="category_camp">
-                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
-                    </ul>
-                </div>
+
+          <div className="sidebarclass">
+          <aside class="sidebar" >
+              <ul class="category_camp">
+                      <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                      <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                      <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                      <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                  </ul>
+            </aside>
+          </div>
+
                 <article class="article">
                     <Paper classname="paper" elevation={3}>
                         <div id="detail">
                             <div class="category_name category_name_write_page">{board}</div>
                             <section id="lecture-name" class="lecturename writing-block">
-                                <div class="item">
-                                    <div class="review_title">
+                                <div class="item" style={{width:"100%"}}>
+                                    <div class="review-entry" style={{fontSize:"1em", textAlign:"left", width:"100%" }}>
                                         <span>{item.title}</span>
                                     </div>
 
@@ -220,7 +224,7 @@ class Camp_review_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
-                                                <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
+                                                <Button variant="outlined" id="delete_btn" onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}
                                                     onClose={this.handleClose}
@@ -242,21 +246,23 @@ class Camp_review_detail extends Component {
                                         </>) : (
                                             <>
                                             </>)}
+
                                 </div>
+
                             </section>
                             <div class="comment_header">
                                 <div class="comment_title">댓글</div>
                                 <div>
-                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
-                                    <span class="likepeople">{item.like}</span>
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
+                                    <span class="likepeople">{item.like}</span> </button>
                                 </div>
                             </div>
 
                             <div class="comment_content">
                                 <div id="comment">
                                     <form className="form" onSubmit={this.handleSubmitComment}>
-                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                        <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                        <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                        <Button variant="outlined" type="submit" id="comment_btn" onClick={this.handleSubmitComment}>댓글 작성</Button>
                                     </form>
                                 </div>
 
