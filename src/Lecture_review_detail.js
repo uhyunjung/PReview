@@ -294,6 +294,7 @@ class Lecture_review_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
+                                                <Button variant="outlined"><Link to={"/Lecture_review_edit?board="+item.board+"&id="+params.id}>수정</Link></Button>
                                                 <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}
@@ -309,10 +310,11 @@ class Lecture_review_detail extends Component {
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button onClick={this.handleClose} color="primary">취소</Button>
-                                                        <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                        <Link to={'/Lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                     </DialogActions>
                                                 </Dialog>
                                             </section>
+                                                
                                         </>) : (
                                             <>
                                             </>)}
