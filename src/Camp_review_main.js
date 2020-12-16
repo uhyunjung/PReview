@@ -188,8 +188,7 @@ class Camp_review_main extends Component {
                     </div>
 
                     <div class="header">
-                        <span>링크</span>
-                        <span>내용</span>
+                        <span>제목</span>
                         <div class="btn">
                             <button>작성날짜△</button>
                             <button>조회수△</button>

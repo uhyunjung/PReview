@@ -96,7 +96,7 @@ class Lecture_review_detail extends Component {
                     }
                 }.bind(this)).bind(this);
             });
-            
+
             db.collection("comments")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
@@ -113,6 +113,7 @@ class Lecture_review_detail extends Component {
                                     htmlContent = this.MakeHTMLContent(ret.data().nickname, doc.data().content, doc.data().date);
 
                                     commentDiv.innerHTML = htmlContent;
+
                                     if (this.myRef != null) {
                                         this.myRef.appendChild(commentDiv);
                                     }
@@ -147,7 +148,6 @@ class Lecture_review_detail extends Component {
             return;
         }
         else {
-            
                     db.collection("comments").add({
                         commentWriter_id: firebase.auth().currentUser.uid,
                         content: this.state.content,
@@ -155,6 +155,7 @@ class Lecture_review_detail extends Component {
                         date: this.state.date.toLocaleString()
                     })
                         .then(() => {
+                            window.location.reload(false);
                         })
                         .catch((error) => {
                             alert(error.message);
@@ -163,6 +164,7 @@ class Lecture_review_detail extends Component {
                     this.setState({ content: "" });
                 
             }
+
     }
 
     deleteReview = () => {
@@ -197,7 +199,7 @@ class Lecture_review_detail extends Component {
 
         // 렌더링
         return (
-            <div className="Lecture_review_detail">
+            <div className="Lecture_review_detail" class="main_body">
                 <div className="sidebar">
                     <aside class="sidebar">
                         <p>언어</p>
@@ -218,40 +220,64 @@ class Lecture_review_detail extends Component {
                         </ul>
                     </aside>
                 </div>
-                <article>
+                <article class="article">
                     <Paper classname="paper" elevation={3}>
                         <div id="detail">
-                            <div class="lecturename">
+                            <div class="category_name category_name_write_page">{board}</div>
+                            <section id="lecture-name" class="lecturename writing-block">
+                                <div class="item">
+                                    <div class="review-entry">
+                                        <span>{item.lecture_name}</span>
+                                    </div>
 
-                                <div class="category_name">{board}</div>
-                                <span>{item.lecture_name}</span>
+                                    <div class="writer_info">
+                                        <span class="writer">{item.writer_name}</span><br></br>
+                                        <span class="date">{item.date}</span>
+                                    </div>
+                                </div>
+                            </section>
 
-                                <div class="writer_info">
-                                    <span class="writer">{item.writer_name}</span><br></br>
-                                    <span class="date">{item.date}</span>
+                            <section id="contants" class="writing-block">
+                                <div class="star" class ="item">
+                                    <div class="review-entry">
+                                        <span class="entry-name">별점</span>
+                                    </div>
+                                    <div class="review-content">
+                                        <span>{this.printStar(item.star)}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="reviewdetail">
-                                <div class="star">
-                                    <span>별점</span>
-                                    <span>{this.printStar(item.star)}</span>
+                                <div id="hashtags" class="item">
+                                    <div class="review-entry">
+                                        <span class="entry-name">태그</span>
+                                    </div>
+                                    <div class="review-content">
+                                        <span>{item.tags}</span>
+                                    </div>
                                 </div>
-                                <div class="tags">
-                                    <span>태그</span>
-                                    <span>{item.tags}</span>
+                                <div id="lecture-info" class="item">
+                                    <div class="review-entry">
+                                        <span class="entry-name">수강 정보</span>
+                                    </div>
+                                    <div class="review-content">
+                                        <span>수강 기간 : {item.period}</span>
+                                        <span> / 수강 비용 : 월 {item.cost}원</span>
+                                    </div>
                                 </div>
-                                <div class="lecture_info">
-                                    <span>수강 정보</span>
-                                    <span class="period">수강 기간: {item.period}</span>
-                                    <span class="cost">수강 비용 : 월 {item.cost}원</span>
+                                <div id="pros" class="item">
+                                    <div class="review-entry">
+                                        <span class="entry-name">장점</span>
+                                    </div>
+                                    <div class="review-content-normal">
+                                        <span>{item.pros}</span>
+                                    </div>
                                 </div>
-                                <div class="pros">
-                                    <span>장점</span>
-                                    <span>{item.pros}</span>
-                                </div>
-                                <div class="cons">
-                                    <span>단점</span>
-                                    <span>{item.cons}</span>
+                                <div id="cons" class="item">
+                                    <div class="review-entry">
+                                        <span class="entry-name">단점</span>
+                                    </div>
+                                    <div class="review-content-normal">
+                                        <span>{item.cons}</span>
+                                    </div>
                                 </div>
                                 <div>
                                     {this.state.isUid ? (
@@ -282,6 +308,8 @@ class Lecture_review_detail extends Component {
                                 </div>
 
                                 <button class="go">강의 바로가기</button>
+
+
                             </div>
 
                             <div class="comment_header">
