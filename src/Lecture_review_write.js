@@ -37,12 +37,10 @@ const InputWrapper = styled('div')`
 &:hover {
     border-color: #40a9ff;
   }
-
   &.focused {
     border-color: #40a9ff;
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
   }
-
   & input {
     font-size: 14px;
     height: 30px;
@@ -75,22 +73,18 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-
   #x {
       font-size:25px;
   }
-
   &:focus {
     border-color: #40a9ff;
     background-color: #e6f7ff;
   }
-
   & span {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-
   & svg {
     font-size: 12px;
     cursor: pointer;
@@ -110,33 +104,26 @@ const Listbox = styled('ul')`
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1;
-
   & li {
     padding: 5px 12px;
     display: flex;
-
     & span {
       flex-grow: 1;
     }
-
     & svg {
       color: transparent;
     }
   }
-
   & li[aria-selected='true'] {
     background-color: #fafafa;
     font-weight: 600;
-
     & svg {
       color: #1890ff;
     }
   }
-
   & li[data-focus='true'] {
     background-color: #e6f7ff;
     cursor: pointer;
-
     & svg {
       color: #000;
     }
@@ -292,23 +279,25 @@ const Lecture_review_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div class='main_left'>
-                <p>언어</p>
-                <ul class="category_camp">
-                    <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
-                    <li><a href="/Lecture_review_main?board=C#">C#</a></li>
-                    <li><a href="/Lecture_review_main?board=Java">Java</a></li>
-                    <li><a href="/Lecture_review_main?board=Python">Python</a></li>
-                    <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
-                </ul>
-                <p>분야</p>
-                <ul class="category_camp">
-                    <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
-                    <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
-                    <li><a href="/Lecture_review_main?board=Server">Server</a></li>
-                    <li><a href="/Lecture_review_main?board=Database">Database</a></li>
-                    <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
-                </ul>
+            <div className="sidebarclass">
+                <aside class="sidebar">
+                    <p>언어</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                    </ul>
+                    <p>분야</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                    </ul>
+                </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
@@ -420,7 +409,7 @@ const Lecture_review_write = () => {
                         </section>
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글작성</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
