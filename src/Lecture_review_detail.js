@@ -150,7 +150,7 @@ class Lecture_review_detail extends Component {
                 date: this.state.date.toLocaleString()
             })
                 .then(() => {
-                    //window.location.reload(false);
+                    window.location.reload(false);
                 })
                 .catch((error) => {
                     alert(error.message);

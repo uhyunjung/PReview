@@ -19,46 +19,43 @@ class Mypage extends Component {
       };
     }
 
+    printStar(star) {
+        let ret = "";
+
+        for (let i = 0; i < 5; i++) {
+            if (i < star) ret += "★";
+            else ret += "☆";
+        }
+
+        return ret;
+    }
+
     // 렌더링
     render() {
         return (
-            <div className="Lecture_review_main">
+            <div className="Lecture_review_main" class="main_body">
                 <div className="sidebar">
                     <aside class="sidebar">
-                        <p>언어</p>
+                        <div class="p"><a href="/Mypage">내가 작성한 글</a></div>
+                        <div class="p"><a>계정 정보</a></div>
                         <ul class="category">
-                            <li><a href="#">C / C++</a></li>
-                            <li><a href="#">C#</a></li>
-                            <li><a href="#">Java</a></li>
-                            <li><a href="#">Python</a></li>
-                            <li><a href="#">Javascript</a></li>
-                        </ul>
-                        <p>분야</p>
-                        <ul class="category">
-                            <li><a href="#">Algorithm</a></li>
-                            <li><a href="#">HTML/CSS/Javascript</a></li>
-                            <li><a href="#">Server</a></li>
-                            <li><a href="#">Full Stack</a></li>
-                            <li><a href="#">ML/DL</a></li>
+                            <li><a href="#">개인 정보 수정</a></li>
+                            <li><a href="#">회원 탈퇴</a></li>
                         </ul>
                     </aside>
                 </div>
 
-                <article id="article">
+                <article class="article">
                 <Paper classname="paper" elevation={2}>
                     <div class="review_search">
-                        <div class="category_name">
-                            <span>Full Stack</span>
+                        <div class="mypage_category">
+                            <span>내가 작성한 글</span>
                         </div>
-                        <div>
-                            <form class="search">
-                                <button>
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <input class="keyword" type="text" name="search" size="80"></input>
-                            </form>
+                    </div>
+                    <div class="review_search_small">
+                        <div class="mypage_category_small">
+                            <span>강의 리뷰</span>
                         </div>
-                        <Link to='/lecture_review_write'><Button variant="contained" type="submit">글 작성</Button></Link>
                     </div>
                     <div class="header">
                         <span>링크</span>
@@ -72,40 +69,96 @@ class Mypage extends Component {
                     <div id="reviews">
                         {db.collection("reviews")
                         .onSnapshot((snaps) => {
+                            document.getElementById("reviews").innerHTML = "";
                             snaps.forEach((doc) => {
-                                const reviewDiv = document.createElement("div");
+                                console.log(firebase.auth().currentUser.uid);
+                                console.log(doc.data().writer_id)
+                                if(doc.data().writer_id == firebase.auth().currentUser.uid){
 
-                                const htmlContent =
-                                "<div class=\"review\">\
-                                    <ul>\
-                                        <li class=\"item\">\
-                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
-                                            <Link to='/Lecture_review_detail'><div class=\"title\">"+doc.data().lecture_id+"</div></Link>\
-                                                <div class=\"rank\">imsi</div>\
-                                                <div class=\"tag\">"+doc.data().tags_attribute+"</div>\
-                                                <Button variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
-                                            </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">imsi</span>\
-                                                <div class=\"likebtn\">\
-                                                    <button>\
-                                                        <i class=\"fas fa-heart\"></i>\
-                                                    </button>\
-                                                <div class=\"likepeople\">imsi</div>\
+                                    const reviewDiv = document.createElement("div");
+
+                                    const htmlContent =
+                                    "<div class=\"review\">\
+                                        <ul>\
+                                            <li class=\"item\">\
+                                                <div id='site_box'>\
+                                                    <a href=\"https://www.acmicpc.net/\">백준</a>\
                                                 </div>\
-                                            <span class=\"writer\">작성자 : imsi</span>\
-                                            </div>\
-                                        </li>\
-                                    </ul>\
-                                </div>";
+                                                <div class=\"info\">\
+                                                    <a href='/Lecture_review_detail?baord="+doc.data().board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                                    <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
+                                                    <div class=\"tag\">"+ doc.data().tags + "</div>\
+                                                    <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                                </div>\
+                                                <div class=\"like\">\
+                                                    <span class=\"date\">"+ doc.data().date + "</span>\
+                                                    <div class=\"likebtn\">\
+                                                        <i class=\"fas fa-heart\">♥</i>\
+                                                        <div class=\"likepeople\">"+ doc.data().like + "</div>\
+                                                    </div>\
+                                                    <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
+                                                </div>\
+                                            </li>\
+                                        </ul>\
+                                    </div>";
 
-                                reviewDiv.innerHTML = htmlContent;
+                                    reviewDiv.innerHTML = htmlContent;
 
-                                document.getElementById("reviews").appendChild(reviewDiv);
+                                    document.getElementById("reviews").appendChild(reviewDiv);
+                                }
                             })
                         })}
-                        <Button variant="outlined">삭제</Button>
+                    </div>
+
+                    <div class="review_search_small">
+                        <div class="mypage_category_small">
+                            <span>다른 게시판</span>
+                        </div>
+                    </div>
+                    <div class="header">
+                        <span>제목</span>
+                        <div class="btn">
+                            <button>작성날짜△</button>
+                            <button>조회수△</button>
+                            <button>좋아요</button>
+                        </div>
+                    </div>
+                    <div id="postings">
+                        {db.collection("postings")
+                        .onSnapshot((snaps) => {
+                            document.getElementById("postings").innerHTML = "";
+                            snaps.forEach((doc) => {
+                                console.log(firebase.auth().currentUser.uid);
+                                console.log(doc.data().writer_id)
+                                if(doc.data().writer_id == firebase.auth().currentUser.uid){
+
+                                    const postingDiv = document.createElement("div");
+
+                                    const htmlContent =
+                                    "<div class=\"review\">\
+                                        <ul>\
+                                            <li class=\"item\">\
+                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                                <div class=\"info\">\
+                                                <a href='/Camp_review_detail?board="+doc.data().board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                                </div>\
+                                                <div class=\"like\">\
+                                                    <span class=\"date\">"+doc.data().date+"</span>\
+                                                    <div class=\"likebtn\">\
+                                                        <i class=\"fas fa-heart\">♥</i>\
+                                                    <div class=\"likepeople\">"+doc.data().like+"</div>\
+                                                    </div>\
+                                                <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
+                                                </div>\
+                                            </li>\
+                                        </ul>\
+                                    </div>";
+                                    postingDiv.innerHTML = htmlContent;
+
+                                    document.getElementById("postings").appendChild(postingDiv);
+                                }
+                            })
+                        })}
                     </div>
                     </Paper>
                 </article>

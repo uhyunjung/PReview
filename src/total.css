@@ -126,6 +126,12 @@ aside p {
   font-weight: bold;
   margin: 10px 0 10px;
 }
+aside .p{
+  color:rgb(88, 88, 88);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
 aside .category {
   color:#585858;
   font-size: 16px;
@@ -472,6 +478,11 @@ aside .category li {
     align-items: center;
     padding: 15px;
   }
+  .review_search_small{
+    display: flex;
+    align-items: center;
+    padding: 15px 0 0 15px;
+  }
   .info {
     width: 60%;
     height: 100%;
@@ -481,7 +492,7 @@ aside .category li {
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 2px solid #BDBDBD;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 3vw;
     margin-right: 2vw;
     padding: 10px;
@@ -501,6 +512,23 @@ aside .category li {
     width: 90px;
     height:auto;
     padding: 15px 0 0 15px;
+  }
+  .mypage_category {
+    color:#444444;
+    width: 150px;
+    height: 28px;
+    font-weight: bold;
+    font-size:20px;
+    text-align: left;
+  }
+  .mypage_category_small {
+    color:#444444;
+    width: 150px;
+    height: 28px;
+    font-weight: bold;
+    font-size:18px;
+    text-align: left;
+    margin-left: 10px;
   }
   .search {
     display: flex;
