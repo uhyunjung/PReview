@@ -83,6 +83,7 @@ class Solution_detail extends Component {
             });
 
             db.collection("comments")
+                .orderBy("date", "desc")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
@@ -132,21 +133,24 @@ class Solution_detail extends Component {
             return;
         }
         else {
-
-            db.collection("comments").add({
-                commentWriter_id: firebase.auth().currentUser.uid,
-                content: this.state.content,
-                posting_id: this.state.posting_id,
-                date: this.state.date.toLocaleString()
-            })
-                .then(() => {
+            if (firebase.auth().currentUser) {
+                db.collection("comments").add({
+                    commentWriter_id: firebase.auth().currentUser.uid,
+                    content: this.state.content,
+                    posting_id: this.state.posting_id,
+                    date: this.state.date.toLocaleString()
                 })
-                .catch((error) => {
-                    alert(error.message);
-                });
+                    .then(() => {
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
 
-            this.setState({ content: "" });
-
+                this.setState({ content: "" });
+            }
+            else {
+                alert("로그인을 먼저 해주세요");
+            }
         }
     }
 
@@ -252,7 +256,7 @@ class Solution_detail extends Component {
                             <div class="item" ref={(DOMNodeRef) => {
                                 this.myRef = DOMNodeRef;
                             }}></div>
-                        </div>           
+                        </div>
                     </Paper>
                 </article>
             </div>
