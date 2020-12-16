@@ -113,7 +113,7 @@ const Login = () => {
               console.log("Error getting document:", error);
             });
 
-            
+
           }
 
         });
@@ -159,31 +159,31 @@ const Login = () => {
         <Paper className='Paper'>
           <div class="def">
           <br></br>
-          <TextField label="사용자 이메일" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <TextField label="사용자 이메일" style={{paddingLeft:"3vw"}} autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
           <p className="errorMsg">{emailError}</p>
-          
-          <TextField label="비밀번호" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+
+          <TextField label="비밀번호"  style={{paddingLeft:"3vw"}} type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           <p className="errorMsg">{passwordError}</p>
           <div className="btnContainer" onKeyPress={keyHandleSignUp}>
             {hasAccount ? (
               <>
                 <p class="abc"></p>
                 <Button variant="outlined" label="Outlined" onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</Button>
-                
+
                 <p>계정이 없으면 <Button onClick={() => setHasAccount(!hasAccount)}>회원가입</Button></p>
               </>
             ) : (
                 <>
-                  
-                  <TextField label="이름" type="text" required value={name} onChange={(e) => setName(e.target.value)} />
+
+                  <TextField label="이름" type="text" style={{paddingLeft:"3vw"}} required value={name} onChange={(e) => setName(e.target.value)} />
                   <p></p>
-                  <TextField label="닉네임" type="text" required value={nickname} onChange={(e) => setNickname(e.target.value)} />
+                  <TextField label="닉네임" type="text" style={{paddingLeft:"3vw" ,paddingBottom:"2vw"}}required value={nickname} onChange={(e) => setNickname(e.target.value)} />
                   <p class="abc"></p>
                   <Button variant="outlined" label="Outlined" onClick={handleSignUp}>회원가입</Button>
                   <p>계정이 있으면 <Button onClick={() => setHasAccount(!hasAccount)}>로그인</Button></p>
                 </>
               )}
-              
+
           </div>
           </div>
           <hr></hr>
