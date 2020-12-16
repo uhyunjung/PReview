@@ -11,6 +11,7 @@ import Login from './Login';
 import Lecture_review_main from './Lecture_review_main';
 import Lecture_review_write from './Lecture_review_write';
 import Lecture_review_detail from './Lecture_review_detail';
+import Lecture_review_edit from './Lecture_review_edit';
 import Camp_review_main from './Camp_review_main';
 import Camp_review_write from './Camp_review_write';
 import Camp_review_detail from './Camp_review_detail';
@@ -141,6 +142,7 @@ class App extends Component {
                             <Route path='/Lecture_review_main' component={Lecture_review_main} />
                             <Route path='/Lecture_review_write' component={this.state.isSignedIn ? (Lecture_review_write) : (Login)} />
                             <Route path='/Lecture_review_detail' component={Lecture_review_detail} />
+                            <Route path='/Lecture_review_edit' component={this.state.isSignedIn ? (Lecture_review_edit) : (Login)} />
                             <Route path='/Camp_review_main' component={Camp_review_main} />
                             <Route path='/Camp_review_write' component={this.state.isSignedIn ? (Camp_review_write) : (Login)} />
                             <Route path='/Camp_review_detail' component={Camp_review_detail} />

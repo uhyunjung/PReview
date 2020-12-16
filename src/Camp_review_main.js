@@ -61,12 +61,12 @@ class Camp_review_main extends Component {
                                         <div class=\"info\">\
                                             <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                         </div>\
-                                        <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
+                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
                                         <span class=\"date\">"+doc.data().date+"</span>\
                                         <div class=\"likebtn\">\
-                                            <i class=\"fas fa-heart\">♥</i>\
+                                            <i class=\"date\">♥</i>\
+                                            <div class=\"date\">"+doc.data().like+"</div>\
                                         </div>\
-                                        <div class=\"likepeople\">"+doc.data().like+"</div>\
                                     </li>\
                                 </ul>\
                             </div>";
