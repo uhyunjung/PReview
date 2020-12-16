@@ -28,7 +28,7 @@ class Main extends Component {
                     const reviewDiv = document.createElement("div");
 
                     let htmlContent =
-                        "<div class=\"main_info\">\
+                    "<div class=\"main_info\">\
                         <ul>\
                             <li class=\"main_post_item\">\
                                 <div class=\"main_info\">\
@@ -184,8 +184,8 @@ class Main extends Component {
                                             "<div class=\"main_info\">\
                                                 <ul>\
                                                     <li class=\"main_post_item\">\
-                                                        <div class=\"info\">\
-                                                            <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + title + "</div></a>\
+                                                        <div class=\"main_info\">\
+                                                            <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"hot_title\">" +"• "+ title + "</div></a>\
                                                         </div>\
                                                     </li>\
                                                 </ul>\
