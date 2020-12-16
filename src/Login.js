@@ -156,7 +156,7 @@ const Login = () => {
   return (
     <div className="Login">
       <Grid container justify="center" wrap="wrap">
-        <Paper className='Paper'>
+        <Paper className='Paper2'>
           <div class="def">
           <br></br>
           <TextField label="사용자 이메일" style={{paddingLeft:"3vw"}} autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -168,7 +168,7 @@ const Login = () => {
             {hasAccount ? (
               <>
                 <p class="abc"></p>
-                <Button variant="outlined" label="Outlined" onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</Button>
+                <Button variant="outlined" label="Outlined" style={{marginLeft : "5vw", marginBottom:"0.5vh"}} onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</Button>
 
                 <p>계정이 없으면 <Button onClick={() => setHasAccount(!hasAccount)}>회원가입</Button></p>
               </>
@@ -177,9 +177,9 @@ const Login = () => {
 
                   <TextField label="이름" type="text" style={{paddingLeft:"3vw"}} required value={name} onChange={(e) => setName(e.target.value)} />
                   <p></p>
-                  <TextField label="닉네임" type="text" style={{paddingLeft:"3vw" ,paddingBottom:"2vw"}}required value={nickname} onChange={(e) => setNickname(e.target.value)} />
+                  <TextField label="닉네임" type="text" style={{paddingLeft:"3vw" ,paddingBottom: "0.5vh"}}required value={nickname} onChange={(e) => setNickname(e.target.value)} />
                   <p class="abc"></p>
-                  <Button variant="outlined" label="Outlined" onClick={handleSignUp}>회원가입</Button>
+                  <Button variant="outlined" style={{marginLeft : "5vw", marginBottom:"0.5vh"}} label="Outlined" onClick={handleSignUp}>회원가입</Button>
                   <p>계정이 있으면 <Button onClick={() => setHasAccount(!hasAccount)}>로그인</Button></p>
                 </>
               )}

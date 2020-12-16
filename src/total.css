@@ -151,7 +151,7 @@ aside .category li {
   margin-bottom: 10%;
   width:100%;
   display: inline-block;
-  font-color:#585858;
+  color:#585858;
 
 }
 .category_lecture > li{
@@ -668,11 +668,7 @@ aside .category li {
     padding:5px auto;
     border:2px solid #BDBDBD;
   }
-  .
-   {
-    margin: 10px;
-    height: 100px;
-  }
+ 
   .comment_header,
   .comment_write,
   .comment_show,
@@ -778,4 +774,26 @@ aside .category li {
     font-size: 15px;
     padding:5px 2px;
     
+  }
+
+
+  .btnContainer {
+    float: center;
+    width: 100%;
+  }
+  
+  .abc {
+    margin-top:2vh;
+  }
+  
+  .Paper2 {
+    width:25%;
+  }
+  
+  .def {
+    margin-left:18%;
+  }
+  
+  .Login {
+    margin-top:3vh;
   }
