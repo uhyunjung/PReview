@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './total.css';
+import firebase from "firebase";
+import { db } from "./firebase.js";
 
 class Main extends Component {
+    getUrlParams() {
+        let params = {};
+        params["post"] = false;
+        params["title"] = false;
+
+        let exist = false;
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; params[key + "_exist"] = true; });
+
+        return params;
+    }
+
     // 렌더링
     render() {
+        let params = this.getUrlParams();
+        let board = params.post ? "좋아요 게시물" : decodeURI(params.board)
+        let title = params.post ? "좋아요 게시물" : decodeURI(params.title)
+        console.log(board);
+
         return (
             <div className="Main" class="main_body">
                 <div class='main_left'>
@@ -105,24 +123,46 @@ class Main extends Component {
                     <div id='main_right_top'>
                         <p class='small_title'>인기 게시물</p>
                         <nav id='nav2'>
-                            <ul>
-                                <li id='nav_item2' style={{ borderLeft: "none" }}><Link to="/Lecture_review_main?board=C/C++">강의 리뷰</Link></li>
-                                <li id='nav_item2'><Link to="/Camp_review_main?board=알고리즘">코딩 캠프 리뷰</Link></li>
-                                <li id='nav_item2'><Link to='/Solution_main?board=솔루션'>솔루션 공유</Link></li>
-                                <li id='nav_item2'><Link to='/Community_view_main?board=프로젝트 참가자 모집'>커뮤니티</Link></li>
+                            <ul class='main_posting'>
+                                <li id='nav_item2' style={{ borderLeft: "none" }}><Link to="/?board=reviews&title=lecture_name">강의 리뷰</Link></li>
+                                <li id='nav_item2'><Link to="/?board=postings&title=title">코딩 캠프 리뷰</Link></li>
+                                <li id='nav_item2'><Link to='/?board=solution&title=title'>솔루션 공유</Link></li>
+                                <li id='nav_item2'><Link to='/?board=community&title=title'>커뮤니티</Link></li>
+                                <div class="hot_post">
+                                    <p style={{ textAlign: "right", color: "gray", fontSize: "12px", marginRight: "10px" }}>더보기</p>
+                                    </div>
+                                    <div id="like_post">
+                                        {
+                                            db.collection(board)
+                                                .orderBy("like", "desc").limit(5)
+                                                .onSnapshot((snaps) => {
+                                                    document.getElementById("like_post").innerHTML = "";
+                                                    snaps.forEach((doc) => {
+                                                        const reviewDiv = document.createElement("div");
+                                                        console.log(title);
+                                                        const htmlContent =
+                                                            "<div class=\"review\">\
+                                        <ul>\
+                                            <li class=\"main_post_item\">\
+                                                <div class=\"info\">\
+                                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
+                                                </div>\
+                                            </li>\
+                                        </ul>\
+                                    </div>";
+
+                                                        reviewDiv.innerHTML = htmlContent;
+
+                                                        if ((reviewDiv != null) && (document.getElementById("like_post") != null)) {
+                                                            document.getElementById("like_post").appendChild(reviewDiv);
+                                                        }
+                                                    })
+                                                })}
+                                  
+                                </div>
                             </ul>
                         </nav>
                         <hr id="line"></hr>
-                        <div class="hot_post">
-                            <p style={{ textAlign: "right", color: "gray", fontSize: "12px", marginRight: "10px" }}>더보기</p>
-                            <ul>
-                                <li id='main_post_item' ><a href="">[백준 알고리즘]알고리즘 공부를 한다면 한번쯤은 꼭! 코딩계의 정석 너낌!?!?</a></li>
-                                <li id='main_post_item' ><a href="">[모두를 위한 딥러닝]기초 다지기에 조아요! 근데 들어도 뭔소린지 모르겟는 ㅎㅎ</a></li>
-                                <li id='main_post_item' ><a href="">[초보자도 만들 수 있는 애픒 스크롤]요즘 트렌디한 웹디자인 꿀팁들 많아용! 초급자들은 어려울듯 ㅠㅜ</a></li>
-                                <li id='main_post_item' ><a href="">[파이썬 딥러닝 영상처리]결과가 나올때만 재밌어요ㅎㅎ OpenCV 차근차근 잘 설명해주는 편이에요</a></li>
-                                <li id='main_post_item' ><a href="">[블록체인 DAAP 이더리움]블록체인 관련 강의들은 뜬구름 잡는 느낌이었는데 이 강의 듣고 개념 정리 싹 됏어용!</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <div id='main_right_bottom'>
                         <p class="small_title">프로그래밍 강의 사이트</p>
@@ -147,19 +187,19 @@ class Main extends Component {
                         <p class='small_title'>진행중인 캠프</p>
                         <div id='main_camp'>
                             <input id='next' type="button" value="◀"></input>
-                            <div id='site_box' style={{paddingTop: "18px"}}>
+                            <div id='site_box' style={{ paddingTop: "18px" }}>
                                 <a href="https://woowacourse.github.io/">우아한 테크코스</a></div>
-                            <div id='site_box' style={{paddingTop: "18px"}}>
+                            <div id='site_box' style={{ paddingTop: "18px" }}>
                                 <a href="https://codestates.com/">코드스테이츠 부트캠프</a></div>
                             <div id='site_box'>
                                 <a href="https://www.vanillacoding.co/">바닐라 코딩</a></div>
                             <div id='site_box'>
                                 <a href="https://wecode.co.kr/">위코드</a></div>
-                            <div id='site_box' style={{paddingTop: "18px"}}>
+                            <div id='site_box' style={{ paddingTop: "18px" }}>
                                 <a href="https://class.likelion.net/">멋쟁이<br></br>사자처럼</a></div>
-                            <div id='site_box' style={{paddingTop: "18px"}}>
+                            <div id='site_box' style={{ paddingTop: "18px" }}>
                                 <a href="https://spartacodingclub.kr/curriculum/web">스파르타<br></br>코딩클럽</a></div>
-                            <div id='site_box' style={{paddingTop: "18px"}}>
+                            <div id='site_box' style={{ paddingTop: "18px" }}>
                                 <a href="https://www.inflearn.com/">제주 코딩 베이스 캠프</a></div>
                             <input id='next' type="button" value="▶"></input>
                         </div>
