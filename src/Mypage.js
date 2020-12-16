@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Snackbar, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@material-ui/core';
 import { db } from './firebase.js';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import './total.css';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
+}));
+
 class Mypage extends Component {
+
     Constructor() {
         this.myRef = React.createRef();
 
         this.state = {
-            uid: ""
+            uid: "",
+            new_name: "",
+            new_nick: "",
+            open: false
         };
+
+        this.handleUpdate = this.handleUpdate.bind();
     }
 
     getUrlParams() {
         let params = {};
         params["sign_out"] = false;
+        params["user_update"] = false;
 
         let exist = false;
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; params[key + "_exist"] = true; });
 
         return params;
     }
@@ -32,7 +54,6 @@ class Mypage extends Component {
                 this.setState({ uid: firebase.auth().currentUser.uid });
             }
         }.bind(this)).bind(this);
-
     }
 
     printStar(star) {
@@ -46,29 +67,28 @@ class Mypage extends Component {
         return ret;
     }
 
-
     deleteUser = () => {
         {
-            try{
-            var user = firebase.auth().currentUser;
-            
-            db.collection("users").doc(user).delete()
-                .then(() => {
-                    window.location.reload(false);
-                })
-                .catch((error) => {
+            try {
+                var user = firebase.auth().currentUser;
+
+                db.collection("users").doc(user).delete()
+                    .then(() => {
+                        window.location.reload(false);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+
+                user.delete().then(function () {
+
+                }).catch(function (error) {
                     alert(error.message);
                 });
-
-            user.delete().then(function () {
-                
-            }).catch(function (error) {
-                alert(error.message);
-            });
-        }
-        catch (error) {
-            window.location.href = './';
-        }   
+            }
+            catch (error) {
+                window.location.href = './';
+            }
         };
     }
 
@@ -84,55 +104,130 @@ class Mypage extends Component {
 
     }
 
+    handleClickBar = () => {
+        this.setState({ open: true });
+    };
+    
+    handleCloseBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({ open: false });
+    };
+
+    handleUpdate = () => {
+        // 빈칸 방지
+        if ((this.state.new_name) || (this.state.new_nick) || (this.state.new_name == "") || (this.state.new_nick == "")) {
+            this.handleClickBar();
+        }
+
+        db.collection("users").doc(firebase.auth().currentUser.uid).set(
+            {
+                name: this.state.new_name,
+                nickname: this.state.new_nick
+            }
+        )
+            .then(doc => {
+
+            });
+
+        console.log(firebase.auth().currentUser.uid);
+        console.log(this.state.new_name);
+        console.log(this.state.new_nick);
+    }
+
     // 렌더링
     render() {
         let params = this.getUrlParams();
         let board = params.sign_out ? "마이페이지" : decodeURI(params.board)
-        console.log(board);
-        if(board=="sign_out")
-        {
-            params.sign_out=true;
+
+        if (board == "sign_out") {
+            params.sign_out = true;
         }
         else {
-            params.sign_out=false;
+            params.sign_out = false;
         }
+
+        if (board == "user_update") {
+            params.user_update = true;
+        }
+        else {
+            params.user_update = false;
+        }
+  
+        let classes = useStyles;
 
         return (
             <div className="Lecture_review_main" class="main_body">
+                <div className={classes.root}>
+                    <Snackbar open={false} autoHideDuration={6000} onClose={this.handleCloseBar}>
+                        <Alert onClose={this.handleCloseBar} severity="error">
+                            빈칸 없이 입력해주세요
+                    </Alert>
+                    </Snackbar>
+                </div>
                 <div className="sidebar">
                     <aside class="sidebar">
                         <div class="p"><a href="/Mypage">내가 작성한 글</a></div>
                         <div class="p"><a>계정 정보</a></div>
                         <ul class="category">
 
-                            <li>개인 정보 수정</li>
-                            <a href={"/Mypage?board=sign_out"}><li onClick={this.handleClickOpen}>회원탈퇴</li></a>
-                            </ul>
+                            <a href={"/Mypage?board=user_update"}><li>개인 정보 수정</li></a>
+                            <a href={"/Mypage?board=sign_out"}><li>회원탈퇴</li></a>
+                        </ul>
                     </aside>
-                            {params.sign_out? (
-                                <section id="submit-button">
-                                    <Dialog
-                                        open={params.sign_out}
-                                        onClose={this.handleClose}
-                                        aria-labelledby="alert-dialog-title"
-                                        aria-describedby="alert-dialog-description"
-                                    >
-                                        <DialogTitle id="alert-dialog-title">{"탈퇴"}</DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText id="alert-dialog-description">
-                                                탈퇴하시겠습니까?
+                    {params.user_update ? (
+                        <section id="submit-button">
+                            <Dialog
+                                open={params.user_update}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">{"개인 정보 수정"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        개인 정보를 수정하시겠습니까?
                                                     </DialogContentText>
-                                        </DialogContent>
-                                        <DialogActions>
-                                            <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
-                                            <Link to={'/Login'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
-                                        </DialogActions>
-                                    </Dialog>
-                                </section>
-                                ) :(
-                                    <>
-                                    </>
-                                )}
+                                </DialogContent>
+                                <DialogActions>
+                                    <TextField label="이름" onChange={(e) => this.setState({ new_name: e.target.value })}></TextField>
+                                    <br></br>
+                                    <TextField label="닉네임" onChange={(e) => this.setState({ new_nick: e.target.value })}></TextField>
+                                    <br></br>
+                                    <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
+                                    <Link to={'/Mypage'}><Button type="submit" onClick={this.handleUpdate} color="primary" autoFocus>확인</Button></Link>
+                                </DialogActions>
+                            </Dialog>
+                        </section>
+                    ) : (
+                            <>
+                            </>
+                        )}
+                    {params.sign_out ? (
+                        <section id="submit-button">
+                            <Dialog
+                                open={params.sign_out}
+                                onClose={this.handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">{"탈퇴"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        탈퇴하시겠습니까?
+                                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
+                                    <Link to={'/Login'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
+                                </DialogActions>
+                            </Dialog>
+                        </section>
+                    ) : (
+                            <>
+                            </>
+                        )}
                 </div>
 
                 <article class="article">
@@ -220,7 +315,7 @@ class Mypage extends Component {
                                     .onSnapshot((snaps) => {
                                         document.getElementById("postings").innerHTML = "";
                                         snaps.forEach((doc) => {
-                                            
+
                                             if (doc.data().writer_id == firebase.auth().currentUser.uid) {
 
                                                 const postingDiv = document.createElement("div");
@@ -272,7 +367,7 @@ class Mypage extends Component {
                                     .onSnapshot((snaps) => {
                                         document.getElementById("solution").innerHTML = "";
                                         snaps.forEach((doc) => {
-                                            
+
                                             if (doc.data().writer_id == firebase.auth().currentUser.uid) {
 
                                                 const postingDiv = document.createElement("div");
@@ -324,7 +419,7 @@ class Mypage extends Component {
                                     .onSnapshot((snaps) => {
                                         document.getElementById("community").innerHTML = "";
                                         snaps.forEach((doc) => {
-                                            
+
                                             if (doc.data().writer_id == firebase.auth().currentUser.uid) {
 
                                                 const postingDiv = document.createElement("div");
