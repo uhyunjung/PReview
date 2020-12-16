@@ -5,6 +5,11 @@ import './total.css';
 import { db } from './firebase.js';
 
 class Community_view_main extends Component {
+    Constructor(props) {
+        this.myRef = React.createRef();
+
+    }
+
     // 렌더링 후 완료
     getUrlParams() {
         let params = {};
@@ -31,7 +36,7 @@ class Community_view_main extends Component {
             db.collection("community")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
-                        let title = doc.data().title//.toLowerCase();
+                        let title = doc.data().title.toLowerCase();
                         console.log(title);
                         if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
                             const reviewDiv = document.createElement("div");
@@ -42,7 +47,7 @@ class Community_view_main extends Component {
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                             <div class=\"info\">\
-                                            <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                            <a href='/Community_view_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                             </div>\
                                             <div class=\"like\">\
                                                 <span class=\"date\">"+doc.data().date+"</span>\
@@ -50,7 +55,7 @@ class Community_view_main extends Component {
                                                     <i class=\"fas fa-heart\">♥</i>\
                                                 <div class=\"likepeople\">"+doc.data().like+"</div>\
                                                 </div>\
-                                            <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
+                                            <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
                                             </div>\
                                         </li>\
                                     </ul>\
@@ -76,13 +81,10 @@ class Community_view_main extends Component {
             <div className="Lecture_review_main">
                 <div className="sidebar">
                     <aside class="sidebar">
-                        <Link to='/Community_view_main'><p>자유게시판</p></Link>
-                        <br></br>
-                        <Link to='/Community_view_main'><p>질문게시판</p></Link>
-                        <br></br>
-                        <Link to='/Community_view_main'><p>강의 수강원 모집</p></Link>
-                        <br></br>
-                        <Link to='/Community_view_main'><p>프로젝트 참가자 모집</p></Link>
+                        <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
+                        <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
+                        <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
+                        <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
                     </aside>
                 </div>
                 <article class="article">
@@ -96,7 +98,7 @@ class Community_view_main extends Component {
                                 <input class="keyword" type="text" name="search" size="80"></input>
                             </form>
                         </div>
-                        <Link to={'/Community_review_write?board='+board}><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
+                        <Link to={'/Community_view_write?board='+board}><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
                     </div>
 
                     <div class="header">
