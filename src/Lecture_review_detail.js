@@ -99,6 +99,7 @@ class Lecture_review_detail extends Component {
             });
 
             db.collection("comments")
+                .orderBy("date", "desc")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
@@ -153,18 +154,26 @@ class Lecture_review_detail extends Component {
             return;
         }
         else {
-            db.collection("comments").add({
-                commentWriter_id: firebase.auth().currentUser.uid,
-                content: this.state.content,
-                posting_id: this.state.posting_id,
-                date: this.state.date.toLocaleString()
-            })
-            .then((commentRef) => {
-                this.setState({ new_comment: commentRef.id });
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
+            if (firebase.auth().currentUser) {
+                db.collection("comments").add({
+                    commentWriter_id: firebase.auth().currentUser.uid,
+                    content: this.state.content,
+                    posting_id: this.state.posting_id,
+                    date: this.state.date.toLocaleString()
+                })
+                    .then(() => {
+                        window.location.reload(false);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+
+                this.setState({ content: "" });
+            }
+            else {
+                alert("로그인을 먼저 해주세요");
+            }
+
         }
 
     }

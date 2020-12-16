@@ -84,6 +84,7 @@ class Community_view_detail extends Component {
             });
 
             db.collection("comments")
+                .orderBy("date", "desc")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
@@ -133,21 +134,24 @@ class Community_view_detail extends Component {
             return;
         }
         else {
-
-            db.collection("comments").add({
-                commentWriter_id: firebase.auth().currentUser.uid,
-                content: this.state.content,
-                posting_id: this.state.posting_id,
-                date: this.state.date.toLocaleString()
-            })
-                .then(() => {
+            if (firebase.auth().currentUser) {
+                db.collection("comments").add({
+                    commentWriter_id: firebase.auth().currentUser.uid,
+                    content: this.state.content,
+                    posting_id: this.state.posting_id,
+                    date: this.state.date.toLocaleString()
                 })
-                .catch((error) => {
-                    alert(error.message);
-                });
+                    .then(() => {
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
 
-            this.setState({ content: "" });
-
+                this.setState({ content: "" });
+            }
+            else {
+                alert("로그인을 먼저 해주세요");
+            }
         }
     }
 
@@ -184,14 +188,14 @@ class Community_view_detail extends Component {
         return (
             <div className="Camp_review_detail">
                 <div className="sidebar">
-                <aside class="sidebar" >
-                <ul class="category_camp">
-                        <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
-                        <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
-                        <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
-                        <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
-                    </ul>
-              </aside>
+                    <aside class="sidebar" >
+                        <ul class="category_camp">
+                            <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
+                            <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
+                            <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
+                            <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
+                        </ul>
+                    </aside>
                 </div>
                 <article>
                     <Paper classname="paper" elevation={3}>
@@ -256,7 +260,7 @@ class Community_view_detail extends Component {
                             <div class="item" ref={(DOMNodeRef) => {
                                 this.myRef = DOMNodeRef;
                             }}></div>
-                        </div>           
+                        </div>
                     </Paper>
                 </article>
             </div>
