@@ -148,22 +148,22 @@ class Lecture_review_detail extends Component {
             return;
         }
         else {
-                    db.collection("comments").add({
-                        commentWriter_id: firebase.auth().currentUser.uid,
-                        content: this.state.content,
-                        posting_id: this.state.posting_id,
-                        date: this.state.date.toLocaleString()
-                    })
-                        .then(() => {
-                            window.location.reload(false);
-                        })
-                        .catch((error) => {
-                            alert(error.message);
-                        });
+            db.collection("comments").add({
+                commentWriter_id: firebase.auth().currentUser.uid,
+                content: this.state.content,
+                posting_id: this.state.posting_id,
+                date: this.state.date.toLocaleString()
+            })
+                .then(() => {
+                    window.location.reload(false);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
 
-                    this.setState({ content: "" });
-                
-            }
+            this.setState({ content: "" });
+
+        }
 
     }
 
@@ -238,7 +238,7 @@ class Lecture_review_detail extends Component {
                             </section>
 
                             <section id="contants" class="writing-block">
-                                <div class="star" class ="item">
+                                <div class="star" class="item">
                                     <div class="review-entry">
                                         <span class="entry-name">별점</span>
                                     </div>
@@ -308,10 +308,7 @@ class Lecture_review_detail extends Component {
                                 </div>
 
                                 <button class="go">강의 바로가기</button>
-
-
-                            </div>
-
+                            </section>
                             <div class="comment_header">
                                 <div class="comment_title">댓글</div>
                                 <div>
@@ -331,7 +328,6 @@ class Lecture_review_detail extends Component {
                                 <div class="item" ref={(DOMNodeRef) => {
                                     this.myRef = DOMNodeRef;
                                 }}></div>
-
                             </div>
                         </div>
                     </Paper>

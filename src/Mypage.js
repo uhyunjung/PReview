@@ -108,6 +108,7 @@ class Mypage extends Component {
 
     handleClose = () => {
         this.setState({open : false});
+    }
 
     printStar(star) {
         let ret = "";
