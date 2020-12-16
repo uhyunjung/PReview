@@ -343,6 +343,7 @@ aside .category li {
     justify-content: space-between;
     align-items: center;
     padding: 7px 0px;
+    width: 100%;
 }
 /* 항목 이름 */
 .review-entry {
@@ -355,7 +356,14 @@ aside .category li {
     margin-right: 1vw;
 
 }
-
+.review_title {
+    width:100%;
+    text-align: center;
+    color:gray;
+    font-weight:bold;
+    font-size: 20px;
+    margin-right: 1vw;
+}
 .entry-name {
     display: block;
     width: 70px;

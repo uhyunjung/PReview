@@ -59,16 +59,14 @@ class Camp_review_main extends Component {
                                     <li class=\"item\">\
                                         <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                         <div class=\"info\">\
-                                        <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                            <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                         </div>\
-                                        <div class=\"like\">\
-                                            <span class=\"date\">"+doc.data().date+"</span>\
-                                            <div class=\"likebtn\">\
-                                                <i class=\"fas fa-heart\">♥</i>\
-                                            <div class=\"likepeople\">"+doc.data().like+"</div>\
-                                            </div>\
                                         <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
+                                        <span class=\"date\">"+doc.data().date+"</span>\
+                                        <div class=\"likebtn\">\
+                                            <i class=\"fas fa-heart\">♥</i>\
                                         </div>\
+                                        <div class=\"likepeople\">"+doc.data().like+"</div>\
                                     </li>\
                                 </ul>\
                             </div>";
@@ -90,14 +88,13 @@ class Camp_review_main extends Component {
         let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
         
         return (
-            <div className="Lecture_review_main">
-            <div className="sidebar">
-                <aside class="sidebar" style={{width:"25%"}}>
+            <div className="Lecture_review_main" class="main_body">
+                <div class='main_left'>
                     <ul class="category_camp">
-                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                            <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                            <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                            <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                            <li><a href="/Camp_review_main?board=AI">AI</a></li>
                     </ul>
                     <div class='schedule'>
                         <article class="mainarticle">
@@ -116,21 +113,12 @@ class Camp_review_main extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="day" style={{ color: "green" }}>●</td>
                                         <td class="day"></td>
                                         <td class="day"></td>
                                         <td class="day"></td>
-                                        <td class="day" style={{ color: "purple" }}>●</td>
                                         <td class="day"></td>
                                         <td class="day"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="day"></td>
-                                        <td class="day" style={{ color: "purple" }}>●</td>
-                                        <td class="day"></td>
-                                        <td class="day" style={{ color: "orange" }}>●</td>
-                                        <td class="day"></td>
-                                        <td class="day" style={{ color: "green" }}>●</td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
                                         <td class="day"></td>
                                     </tr>
                                     <tr>
@@ -138,42 +126,51 @@ class Camp_review_main extends Component {
                                         <td class="day"></td>
                                         <td class="day"></td>
                                         <td class="day"></td>
-                                        <td class="day" style={{ color: "orange" }}>●</td>
+                                        <td class="day" style={{ color: "#725ef1" }}>●</td>
                                         <td class="day"></td>
-                                        <td class="day">●</td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style={{ color: "#725ef1" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
                                     </tr>
                                     <tr>
                                         <td class="day"></td>
-                                        <td class="day" style={{ color: "purple" }}>●</td>
                                         <td class="day"></td>
                                         <td class="day"></td>
                                         <td class="day"></td>
-                                        <td class="day" style={{ color: "green" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#725ef1" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
                                         <td class="day"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </article>
                     </div>
-                    <br></br>
                     <div class='schedule2'>
-                        <h4 style={{ color: "green", display: "inline-block" }}>●</h4>&nbsp;
-                        <h4 style={{ color: "#585858", display: "inline-block" }}> 대회 </h4>&nbsp;
-                        <h4 style={{ color: "#purple", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#725ef1", display: "inline-block" }}>● </h4>&nbsp;
                         <h4 style={{ color: "#585858", display: "inline-block" }}> 캠프 </h4>&nbsp;
-                        <h4 style={{ color: "#orange", display: "inline-block" }}>● </h4>&nbsp;
-                        <h4 style={{ color: "#585858", display: "inline-block" }}> 채용 </h4>&nbsp;
                     </div>
-                    <br></br>
                     <div class='schedule3'>
-                        <p> ◦ 1일 2020 E-PEER</p>
-                        <p> ◦ 5일 Google 코딩 부트 캠프</p>
-                        <p> ◦ 11일 2020 하반기 삼성전자 공채</p>
-                        <p> ◦ 13일 Google CodeJam</p>
-                        <p> ◦ 19일 Sk c&c 딥러닝 R&D</p>
+                        <p> ◦ 7일 SSAFY 지원 마감</p>
+                        <p> ◦ 11일 Naver 부스트캠프 지원 시작</p>
+                        <p> ◦ 25일 우아한테크캠프 최종 발표</p>
                     </div>
-                </aside>
-            </div>
+                </div>
 
                 <article class="article">
                 <Paper classname="paper" elevation={2}>
@@ -191,8 +188,15 @@ class Camp_review_main extends Component {
 
                     <div class="header">
                         <span>제목</span>
+                        <span> </span>
+                        <span> </span>
+                        <span> </span>
+                        <span> </span>
+                        <span>작성자</span>
                         <div class="btn">
                             <button><a href={"/Camp_review_main?board="+board}>작성날짜△</a></button>
+                        </div>
+                        <div class="btn">
                             <button><a href={"/Camp_review_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                         </div>
                     </div>

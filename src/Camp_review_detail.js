@@ -186,7 +186,7 @@ class Camp_review_detail extends Component {
 
         // 렌더링
         return (
-            <div className="Camp_review_detail">
+            <div className="Camp_review_detail" class="main_body">
                 <div className="sidebar">
                     <aside class="sidebar">
                         <ul class="category_camp">
@@ -197,7 +197,7 @@ class Camp_review_detail extends Component {
                         </ul>
                     </aside>
                 </div>
-                <article>
+                <article class="article">
                     <Paper classname="paper" elevation={3}>
                         <div id="review_header">
                             <div id="review_title">{item.title}</div>

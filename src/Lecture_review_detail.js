@@ -237,7 +237,7 @@ class Lecture_review_detail extends Component {
                             <div class="category_name category_name_write_page">{board}</div>
                             <section id="lecture-name" class="lecturename writing-block">
                                 <div class="item">
-                                    <div class="review-entry">
+                                    <div class="review_title">
                                         <span>{item.lecture_name}</span>
                                     </div>
 
