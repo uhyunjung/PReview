@@ -24,7 +24,6 @@ class Camp_review_main extends Component {
     getUrlParams() {
         let params = {};
         params["search_exist"] = false;
-        params["order_by"] = "date";
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
@@ -33,7 +32,7 @@ class Camp_review_main extends Component {
     }
 
     componentDidMount = () => {
-        {   
+        {
             let params = this.getUrlParams();
             let search;
             if(params.search_exist) {
@@ -45,34 +44,37 @@ class Camp_review_main extends Component {
             console.log(board);
 
             db.collection("postings")
-            .orderBy(params.order_by,"desc")
-            .onSnapshot(snaps => {
-                snaps.forEach(doc => {
-                    let title = doc.data().title.toLowerCase();
-                    console.log(title);
-                    if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
-                        const reviewDiv = document.createElement("div");
+                .onSnapshot(snaps => {
+                    snaps.forEach(doc => {
+                        let title = doc.data().title.toLowerCase();
+                        console.log(title);
+                        if (params.board == doc.data().board || (params.search_exist && title.indexOf(search) != -1)){
+                            const reviewDiv = document.createElement("div");
 
-                        const htmlContent =
-                            "<div class=\"review\">\
-                                <ul>\
-                                    <li class=\"item\">\
-                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                        <div class=\"info\">\
-                                            <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
-                                        </div>\
-                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
-                                        <span class=\"date\">"+doc.data().date+"</span>\
-                                        <div class=\"likebtn\">\
-                                            <i class=\"date\">♥</i>\
-                                            <div class=\"date\">"+doc.data().like+"</div>\
-                                        </div>\
-                                    </li>\
-                                </ul>\
-                            </div>";
+                            const htmlContent =
+                                "<div class=\"review\">\
+                                    <ul>\
+                                        <li class=\"item\">\
+                                            <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                            <div class=\"info\">\
+                                            <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title_camp\">"+doc.data().title+"</div></a>\
+                                            </div>\
+                                            <div class=\"info_side\">\
+                                                <span class=\"date\">"+doc.data().date+"</span>\
+                                                <center>\
+                                                <div class=\"like2\">\
+                                                    <i\" >♥</i>\
+                                                    <div class=\"likepeople2\">"+doc.data().like+"</div>\
+                                                </div>\
+                                            <span class=\"writer\">"+doc.data().writer_id+"</span>\
+                                            </center>\
+                                            </div>\
+                                        </li>\
+                                    </ul>\
+                                </div>";
 
-                        reviewDiv.innerHTML = htmlContent;
-                        if(this.myRef!=null)
+                            reviewDiv.innerHTML = htmlContent;
+                            if(this.myRef!=null)
                         {
                             this.myRef.appendChild(reviewDiv);
                         }
@@ -85,16 +87,16 @@ class Camp_review_main extends Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
-        
+        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
         return (
             <div className="Lecture_review_main" class="main_body">
-                <div class='main_left'>
+            <div className="sidebar">
+                <aside class="sidebar" >
                     <ul class="category_camp">
-                            <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                            <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                            <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                            <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
                     </ul>
                     <div class='schedule'>
                         <article class="mainarticle">
@@ -161,6 +163,16 @@ class Camp_review_main extends Component {
                             </table>
                         </article>
                     </div>
+                    <br></br>
+                    <div class='schedule2'>
+                        <h4 style={{ color: "#27a23c", display: "inline-block" }}>●</h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 대회 </h4>&nbsp;
+                    </div>
+                    <div class='schedule3'>
+                        <p> ◦ 1일(금) Facebook HackerCup R1</p>
+                        <p> ◦ 9일(토) Google CodeJam</p>
+                        <p> ◦ 29일(금) Facebook HackerCup R2</p>
+                    </div>
                     <div class='schedule2'>
                         <h4 style={{ color: "#725ef1", display: "inline-block" }}>● </h4>&nbsp;
                         <h4 style={{ color: "#585858", display: "inline-block" }}> 캠프 </h4>&nbsp;
@@ -170,7 +182,16 @@ class Camp_review_main extends Component {
                         <p> ◦ 11일 Naver 부스트캠프 지원 시작</p>
                         <p> ◦ 25일 우아한테크캠프 최종 발표</p>
                     </div>
-                </div>
+                    <div class='schedule2'>
+                        <h4 style={{ color: "#eb9615", display: "inline-block" }}>● </h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 채용 </h4>&nbsp;
+                    </div>
+                    <div class='schedule3'>
+                        <p> ◦ 13일 Sk c&c 딥러닝 R&D</p>
+                        <p> ◦ 23일 Kakao 공채</p>
+                    </div>
+                </aside>
+            </div>
 
                 <article class="article">
                 <Paper classname="paper" elevation={2}>
@@ -183,21 +204,18 @@ class Camp_review_main extends Component {
                                 <input class="keyword" type="text" name="search" size="80"></input>
                             </form>
                         </div>
+                        <div class="write_button">
                         <Link to={'/Camp_review_write?board='+board}><Button id='write_btn' variant="outlined" type="submit">글작성</Button></Link>
+                        </div>
                     </div>
 
                     <div class="header">
-                        <span>제목</span>
-                        <span> </span>
-                        <span> </span>
-                        <span> </span>
-                        <span> </span>
-                        <span>작성자</span>
+                        <span>링크</span>
+                        <span>내용</span>
                         <div class="btn">
-                            <button><a href={"/Camp_review_main?board="+board}>작성날짜△</a></button>
-                        </div>
-                        <div class="btn">
-                            <button><a href={"/Camp_review_main?board="+board+"&order_by=like"}>좋아요△</a></button>
+                            <button>작성날짜△</button>
+                            <button>조회수△</button>
+                            <button>좋아요</button>
                         </div>
                     </div>
                     <div id="posting" ref={(DOMNodeRef) => {
