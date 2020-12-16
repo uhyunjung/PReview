@@ -154,7 +154,7 @@ aside .category li {
   margin-bottom: 10%;
   width:100%;
   display: inline-block;
-  font-color:#585858;
+  color:#585858;
 
 }
 .category_lecture > li{
@@ -269,7 +269,6 @@ aside .category li {
   margin-bottom:3%;
 }
 
-
  #nav2{
    height:15px;
    margin-top:7px;
@@ -288,6 +287,7 @@ aside .category li {
    color:gray;
    font-size: 13px;
    margin-top:5px;
+   display: inline-block;
  }
 
  #next{

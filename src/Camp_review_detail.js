@@ -100,7 +100,7 @@ class Camp_review_detail extends Component {
                                     htmlContent = this.MakeHTMLContent(ret.data().nickname, doc.data().content, doc.data().date);
 
                                     commentDiv.innerHTML = htmlContent;
-                                    if (this.myRef != null) {
+                                    if ((commentDiv!=null)&&(this.myRef != null)) {
                                         this.myRef.appendChild(commentDiv);
                                     }
                                 })

@@ -119,7 +119,7 @@ class Lecture_review_detail extends Component {
                                     console.log(this.state.new_comment);
                                     console.log(doc.id);
 
-                                    if (this.myRef != null && this.state.new_comment == "" || this.state.new_comment == doc.id) {
+                                    if ((commentDiv!=null)&&(this.myRef != null && this.state.new_comment == "" || this.state.new_comment == doc.id)){
                                         this.myRef.appendChild(commentDiv);
                                         console.log("add!");
                                     }

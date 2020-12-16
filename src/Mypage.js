@@ -10,9 +10,18 @@ class Mypage extends Component {
         this.myRef = React.createRef();
 
         this.state = {
-            open: true,
             uid: ""
         };
+    }
+
+    getUrlParams() {
+        let params = {};
+        params["sign_out"] = false;
+
+        let exist = false;
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
+
+        return params;
     }
 
     // 렌더링 후 완료
@@ -24,46 +33,6 @@ class Mypage extends Component {
             }
         }.bind(this)).bind(this);
 
-
-        db.collection("reviews")
-            .orderBy("date", "desc")
-            .onSnapshot(snaps => {
-                snaps.forEach(doc => {
-                    const reviewDiv = document.createElement("div");
-                    let htmlContent;
-
-                    if (this.state.uid == doc.data().writer_id) {
-                        htmlContent =
-                            "<div class=\"review\">\
-                                <ul>\
-                                    <li class=\"item\">\
-                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                        <div class=\"info\">\
-                                        <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
-                                            <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
-                                            <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                            <Button onClick=\"location.href='/Lecture_review_main?search="+ doc.data().lecture_name + "'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
-                                        </div>\
-                                        <div class=\"like\">\
-                                            <span class=\"date\">"+ doc.data().date + "</span>\
-                                            <div class=\"likebtn\">\
-                                                <i class=\"fas fa-heart\">♥</i>\
-                                            <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                            </div>\
-                                        <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
-                                        </div>\
-                                    </li>\
-                                </ul>\
-                            </div>";
-
-                        reviewDiv.innerHTML = htmlContent;
-                        if (this.myRef != null) {
-                            this.myRef.appendChild(reviewDiv);
-                        }
-                    }
-
-                })
-            })
     }
 
     printStar(star) {
@@ -80,31 +49,27 @@ class Mypage extends Component {
 
     deleteUser = () => {
         {
+            try{
             var user = firebase.auth().currentUser;
-
-            user.delete().then(function () {
-                // User deleted.
-            }).catch(function (error) {
-                alert(error.message);
-            });
-
-
+            
             db.collection("users").doc(user).delete()
                 .then(() => {
+                    window.location.reload(false);
                 })
                 .catch((error) => {
                     alert(error.message);
                 });
+
+            user.delete().then(function () {
+                
+            }).catch(function (error) {
+                alert(error.message);
+            });
+        }
+        catch (error) {
+            window.location.href = './';
+        }   
         };
-    }
-
-
-    handleClickOpen = () => {
-        this.setState(state =>({ open: true }));
-    }
-
-    handleClose = () => {
-        this.setState(state => ({ open: false }));
     }
 
     printStar(star) {
@@ -121,6 +86,17 @@ class Mypage extends Component {
 
     // 렌더링
     render() {
+        let params = this.getUrlParams();
+        let board = params.sign_out ? "마이페이지" : decodeURI(params.board)
+        console.log(board);
+        if(board=="sign_out")
+        {
+            params.sign_out=true;
+        }
+        else {
+            params.sign_out=false;
+        }
+
         return (
             <div className="Lecture_review_main" class="main_body">
                 <div className="sidebar">
@@ -130,12 +106,13 @@ class Mypage extends Component {
                         <ul class="category">
 
                             <li>개인 정보 수정</li>
-                            <a href=""><li onClick={this.handleClickOpen}>회원탈퇴</li>
-                            {this.state ? (
-                            <>
+                            <a href={"/Mypage?board=sign_out"}><li onClick={this.handleClickOpen}>회원탈퇴</li></a>
+                            </ul>
+                    </aside>
+                            {params.sign_out? (
                                 <section id="submit-button">
                                     <Dialog
-                                        open={this.state.open}
+                                        open={params.sign_out}
                                         onClose={this.handleClose}
                                         aria-labelledby="alert-dialog-title"
                                         aria-describedby="alert-dialog-description"
@@ -147,18 +124,15 @@ class Mypage extends Component {
                                                     </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={this.handleClose} color="primary">취소</Button>
+                                            <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
                                             <Link to={'/Login'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
                                         </DialogActions>
                                     </Dialog>
                                 </section>
-                            </>) : (
-                                <>
-                                </>
-                            )
-    }</a>
-                        </ul>
-                    </aside>
+                                ) :(
+                                    <>
+                                    </>
+                                )}
                 </div>
 
                 <article class="article">
