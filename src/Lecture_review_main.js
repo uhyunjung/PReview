@@ -11,12 +11,12 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Lecture_review_main extends React.Component {
     Constructor(props) {
         this.myRef = React.createRef();
+
     }
 
     getUrlParams() {
         let params = {};
         params["search_exist"] = false;
-        params["order_by"] = "date";
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
@@ -27,15 +27,10 @@ class Lecture_review_main extends React.Component {
     // 렌더링 후 완료
     componentDidMount = () => {
         {
-            console.log("bddd");
             let params = this.getUrlParams();
             let search;
             if(params.search_exist) {
                 search = decodeURI(params.search).toLowerCase();
-                if(search.indexOf(23))
-                {
-                    search = search.replace("%23", "#");
-                }
                 console.log(search);
             }
             console.log(params.board);
@@ -43,14 +38,12 @@ class Lecture_review_main extends React.Component {
             console.log(board);
 
             db.collection("reviews")
-            .orderBy(params.order_by,"desc")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
-                    let tag_name = doc.data().tags;
                     console.log(doc);
-                    if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1) || (params.search_exist && tag_name.indexOf(search) != -1)){
-                        
+                    if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
+
                         const reviewDiv = document.createElement("div");
 
                         let htmlContent =
@@ -64,15 +57,17 @@ class Lecture_review_main extends React.Component {
                                             <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                             <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                             <div class=\"tag\">"+ doc.data().tags + "</div>\
-                                            <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                            <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" id=\"moa_btn\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                         </div>\
-                                        <div class=\"like\">\
+                                        <div class=\"info_side\">\
                                             <span class=\"date\">"+ doc.data().date + "</span>\
-                                            <div class=\"likebtn\">\
-                                                <i class=\"fas fa-heart\">♥</i>\
-                                                <div class=\"likepeople\">"+ doc.data().like + "</div>\
+                                            <center>\
+                                            <div class=\"like2\">\
+                                                <i\">♥</i>\
+                                            <div class=\"likepeople2\">"+ doc.data().like + "</div>\
                                             </div>\
-                                            <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
+                                        <span class=\"writer\">"+ doc.data().writer_name + "</span>\
+                                        </center>\
                                         </div>\
                                     </li>\
                                 </ul>\
@@ -89,7 +84,7 @@ class Lecture_review_main extends React.Component {
             })
         }
     }
-   
+
     printStar(star) {
         let ret = "";
 
@@ -121,10 +116,11 @@ class Lecture_review_main extends React.Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
+        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
         let DP = this.makeChartContent()
         const options = {
             height: 260,
+            width: 600,
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             axisY: {
@@ -133,33 +129,38 @@ class Lecture_review_main extends React.Component {
                 maximum: 5,
                 interval: 1
             },
-            data: [{        
-                type: "column", 
+            data: [{
+                type: "column",
+                showInLegend: true,
+                legendMarkerColor: "grey",
+                legendText: "MMbbl = one million barrels",
                 dataPoints: DP
             }]
         }
-        
+
         return (
             <div className="Lecture_review_main" class="main_body">
-                <div class='main_left'>
-                    <p>언어</p>
-                    <ul class="category_camp">
-                        <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
-                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
-                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
-                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
-                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
-                    </ul>
-                    <p>분야</p>
-                    <ul class="category_camp">
-                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
-                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
-                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
-                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
-                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
-                    </ul>
+                <div className="sidebar">
+                    <aside class="sidebar">
+                        <p>언어</p>
+                        <ul class="category">
+                            <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
+                            <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                            <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                            <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                            <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                        </ul>
+                        <p>분야</p>
+                        <ul class="category">
+                            <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                            <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                            <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                            <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                            <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                        </ul>
+                    </aside>
                 </div>
-                <article class="article" style={{width: "43vw"}}>
+                <article class="article">
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
@@ -172,7 +173,7 @@ class Lecture_review_main extends React.Component {
                                 <input class="keyword" type="text" name="search" size="80" placeholder="게시판에서 검색"></input>
                             </form>
                             <div class="write_button">
-                                <Link to={'/Lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글 작성</Button></Link>
+                                <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글작성</Button></Link>
                             </div>
                         </div>
                         <div class="chart">
@@ -182,8 +183,8 @@ class Lecture_review_main extends React.Component {
                             <span>링크</span>
                             <span>내용</span>
                             <div class="btn">
-                            <button><a href={"/Lecture_review_main?board="+board}>작성날짜△</a></button>
-                            <button><a href={"/Lecture_review_main?board="+board+"&order_by=like"}>좋아요△</a></button>
+                                <button>작성날짜△</button>
+                                <button>좋아요</button>
                             </div>
                         </div>
                         <div id="reviews" ref={(DOMNodeRef) => {
@@ -193,7 +194,7 @@ class Lecture_review_main extends React.Component {
                     </Paper>
                 </article>
             </div>
-            
+
         )
     };
 }
