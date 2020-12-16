@@ -240,12 +240,10 @@ const Solution_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div className="sidebarclass">
-            <aside class="sidebar" >
+            <div class='main_left'>
                 <ul class="category_camp">
-                        <li><a href="/Solution_main?board=알고리즘">솔루션</a></li>
-                    </ul>
-              </aside>
+                    <li><a href="/Solution_main?board=알고리즘">솔루션</a></li>
+                </ul>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>

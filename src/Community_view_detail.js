@@ -187,15 +187,13 @@ class Community_view_detail extends Component {
         // 렌더링
         return (
             <div className="Camp_review_detail" class="main_body">
-                <div className="sidebar">
-                    <aside class="sidebar" >
-                        <ul class="category_camp">
-                            <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
-                            <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
-                            <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
-                            <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
-                        </ul>
-                    </aside>
+                <div class='main_left'>
+                    <ul class="category_camp">
+                        <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
+                        <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
+                        <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
+                        <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
+                    </ul>
                 </div>
                 <article class="article">
                     <Paper classname="paper" elevation={3}>
