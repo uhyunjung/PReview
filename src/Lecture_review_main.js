@@ -50,9 +50,11 @@ class Lecture_review_main extends React.Component {
                             "<div class=\"review\">\
                                 <ul>\
                                     <li class=\"item\">\
-                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                        <div id='site_box'>\
+                                            <a href=\"https://www.acmicpc.net/\">백준</a>\
+                                        </div>\
                                         <div class=\"info\">\
-                                        <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                            <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
                                             <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                             <div class=\"tag\">"+ doc.data().tags + "</div>\
                                             <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
@@ -116,6 +118,7 @@ class Lecture_review_main extends React.Component {
         let DP = this.makeChartContent()
         const options = {
             height: 260,
+            width: 600,
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             axisY: {
@@ -134,12 +137,12 @@ class Lecture_review_main extends React.Component {
         }
         
         return (
-            <div className="Lecture_review_main">
+            <div className="Lecture_review_main" class="main_body">
                 <div className="sidebar">
                     <aside class="sidebar">
                         <p>언어</p>
                         <ul class="category">
-                            <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                            <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
                             <li><a href="/Lecture_review_main?board=C#">C#</a></li>
                             <li><a href="/Lecture_review_main?board=Java">Java</a></li>
                             <li><a href="/Lecture_review_main?board=Python">Python</a></li>
@@ -161,15 +164,15 @@ class Lecture_review_main extends React.Component {
                             <div class="category_name">
                             <span>{board}</span>
                             </div>
-                            <div>
-                                <form class="search">
-                                    <button>
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <input class="keyword" type="text" name="search" size="80"></input>
-                                </form>
+                            <form class="search">
+                                <button>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <input class="keyword" type="text" name="search" size="80" placeholder="게시판에서 검색"></input>
+                            </form>
+                            <div class="write_button">
+                                <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글 작성</Button></Link>
                             </div>
-                            <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit">글 작성</Button></Link>
                         </div>
                         <div class="chart">
                             <CanvasJSChart options = {options} />
@@ -181,7 +184,6 @@ class Lecture_review_main extends React.Component {
                                 <button>작성날짜△</button>
                                 <button>좋아요</button>
                             </div>
-
                         </div>
                         <div id="reviews" ref={(DOMNodeRef) => {
                             this.myRef=DOMNodeRef;
