@@ -143,7 +143,7 @@ class Lecture_review_main extends React.Component {
             <div className="Lecture_review_main" class="main_body">
                 <div class='main_left'>
                     <p>언어</p>
-                    <ul class="category">
+                    <ul class="category_camp">
                         <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
                         <li><a href="/Lecture_review_main?board=C#">C#</a></li>
                         <li><a href="/Lecture_review_main?board=Java">Java</a></li>
@@ -151,7 +151,7 @@ class Lecture_review_main extends React.Component {
                         <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
                     </ul>
                     <p>분야</p>
-                    <ul class="category">
+                    <ul class="category_camp">
                         <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
                         <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
                         <li><a href="/Lecture_review_main?board=Server">Server</a></li>
