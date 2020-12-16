@@ -28,11 +28,11 @@ class Main extends Component {
                     const reviewDiv = document.createElement("div");
 
                     let htmlContent =
-                        "<div class=\"review\">\
+                        "<div class=\"main_info\">\
                         <ul>\
                             <li class=\"main_post_item\">\
-                                <div class=\"info\">\
-                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
+                                <div class=\"main_info\">\
+                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"hot_title\">" +"• "+ doc.data().lecture_name + "</div></a>\
                                 </div>\
                             </li>\
                         </ul>\
@@ -167,7 +167,7 @@ class Main extends Component {
                                 <div class="hot_post">
                                 </div>
 
-                                <div id="like_post" class="item" ref={(DOMNodeRef) => {
+                                <div id="like_post" ref={(DOMNodeRef) => {
                                     this.myRef = DOMNodeRef;
                                 }}>
                                 {
@@ -181,7 +181,7 @@ class Main extends Component {
                                             if(board == "reviews") title = doc.data().lecture_name;
                                             else title = doc.data().title;
                                             const htmlContent =
-                                            "<div class=\"review\">\
+                                            "<div class=\"main_info\">\
                                                 <ul>\
                                                     <li class=\"main_post_item\">\
                                                         <div class=\"info\">\
