@@ -6,17 +6,77 @@ import { db } from './firebase.js';
 import './total.css';
 
 class Mypage extends Component {
-    deleteReview = () => { {
-        var userId = firebase.auth().currentUser.uid; 
-          db.collection("users").doc("").delete()
-            .then(() => {
+    Constructor(props) {
+        this.myRef = React.createRef();
+
+        this.state = {
+            isUid: false,
+            uid: ""
+        };
+    }
+
+
+    // 렌더링 후 완료
+    componentDidMount = () => {
+            firebase.auth().onAuthStateChanged(function (user) {
+                {
+                    this.setState({ uid: firebase.auth().currentUser.uid });
+                }
+            }.bind(this)).bind(this);
+
+        
+            db.collection("reviews")
+            .orderBy("date","desc")
+            .onSnapshot(snaps => {
+                snaps.forEach(doc => {
+                        const reviewDiv = document.createElement("div");
+                        let htmlContent;
+
+                        if(this.state.uid==doc.data().writer_id)
+                        {
+                            htmlContent =
+                            "<div class=\"review\">\
+                                <ul>\
+                                    <li class=\"item\">\
+                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                        <div class=\"info\">\
+                                        <a href='/Lecture_review_detail?board="+doc.data().board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
+                                            <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
+                                            <div class=\"tag\">"+ doc.data().tags + "</div>\
+                                            <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
+                                        </div>\
+                                        <div class=\"like\">\
+                                            <span class=\"date\">"+ doc.data().date + "</span>\
+                                            <div class=\"likebtn\">\
+                                                <i class=\"fas fa-heart\">♥</i>\
+                                            <div class=\"likepeople\">"+ doc.data().like + "</div>\
+                                            </div>\
+                                        <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
+                                        </div>\
+                                    </li>\
+                                </ul>\
+                            </div>";
+
+                        reviewDiv.innerHTML = htmlContent;
+                        if(this.myRef!=null)
+                        {
+                            this.myRef.appendChild(reviewDiv);
+                        }
+                        }
+                 
             })
-            .catch((error) => {
-                alert(error.message);
-            });
-  
+        })
+    }
    
-      };
+    printStar(star) {
+        let ret = "";
+
+        for (let i = 0; i < 5; i++) {
+            if (i < star) ret += "★";
+            else ret += "☆";
+        }
+
+        return ret;
     }
 
     printStar(star) {
@@ -32,6 +92,7 @@ class Mypage extends Component {
 
     // 렌더링
     render() {
+
         return (
             <div className="Lecture_review_main" class="main_body">
                 <div className="sidebar">
@@ -163,6 +224,7 @@ class Mypage extends Component {
                     </Paper>
                 </article>
             </div>
+            
         )
     };
 }
