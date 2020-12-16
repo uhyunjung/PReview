@@ -1,3 +1,5 @@
+
+
 * {
   padding: 0;
   margin: 0;
@@ -112,6 +114,7 @@ a:visited{
 }
 
 /* 사이드바 */
+
 aside {
   margin-right: 5px;
   width: 300px;
@@ -125,12 +128,6 @@ aside p {
   font-size: 18px;
   font-weight: bold;
   margin: 10px 0 10px;
-}
-aside .p{
-  color:rgb(88, 88, 88);
-  font-size: 18px;
-  font-weight: bold;
-  margin: 20px 0 10px;
 }
 aside .category {
   color:#585858;
@@ -154,7 +151,7 @@ aside .category li {
   margin-bottom: 10%;
   width:100%;
   display: inline-block;
-  color:#585858;
+  font-color:#585858;
 
 }
 .category_lecture > li{
@@ -180,6 +177,11 @@ aside .category li {
   margin:5px 0 0 15px;
   font-size:13px;
   color:#585858;
+}
+.schedule3 > p{
+  font-size:13px;
+  color:#585858;
+  font-weight: normal;
 }
 
 
@@ -210,7 +212,7 @@ aside .category li {
   float: left;
  }
  #main_right_top{
-   height:280px;
+   height:260px;
    width: 100%;
    float:left;
    border: 1px solid #BDBDBD;
@@ -269,6 +271,7 @@ aside .category li {
   margin-bottom:3%;
 }
 
+
  #nav2{
    height:15px;
    margin-top:7px;
@@ -284,10 +287,9 @@ aside .category li {
   font-weight: bold;
 }
 #main_post_item{
-   color:gray;
-   font-size: 13px;
-   margin-top:5px;
-   display: inline-block;
+
+   margin:2px auto;
+   width:60%;
  }
 
  #next{
@@ -337,13 +339,17 @@ aside .category li {
     border-radius: 2em;
     padding: 0px 4px;
 }
+#like_post{
+  width:100%;
+  height: 100%;
+  padding-top: 2vh;
+}
 /* 리뷰내용 각 항목 */
 .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 7px 0px;
-    width: 100%;
 }
 /* 항목 이름 */
 .review-entry {
@@ -356,14 +362,7 @@ aside .category li {
     margin-right: 1vw;
 
 }
-.review_title {
-    width:100%;
-    text-align: center;
-    color:gray;
-    font-weight:bold;
-    font-size: 20px;
-    margin-right: 1vw;
-}
+
 .entry-name {
     display: block;
     width: 70px;
@@ -388,9 +387,6 @@ aside .category li {
     text-align: left;
     color:gray;
     font-size:14px;
-}
-.posting-content {
-  margin: 20px 0 20px 10px
 }
 
 
@@ -427,10 +423,14 @@ aside .category li {
 /* 강의명, 내용, 제출버튼 구역 */
 .writing-block {
     margin:auto 1.5vw;
-    border-bottom: 1px solid #999999;
+    border-bottom: 2px solid #BDBDBD;
     padding: 5px 0px;
 }
-
+.posting-content{
+  padding:2vh 2vw;
+  color:#585858;
+  font-size:14px;
+}
 
 
 
@@ -459,10 +459,17 @@ aside .category li {
   font-weight: bold;
   width:77px;
   height:30px;
+  color:gray;
   background-color: white;
   border: 2px solid #BDBDBD;
   border-radius: 20px;
   box-shadow: none;
+}
+#delete_btn{
+  text-align: right;
+  padding: 5px auto;
+
+
 }
 
 /*검색 창*/
@@ -489,22 +496,28 @@ aside .category li {
     align-items: center;
     padding: 15px;
   }
-  .review_search_small{
-    display: flex;
-    align-items: center;
-    padding: 15px 0 0 15px;
+  .main_info{
+    width:80%;
+    margin-top:1vh;
+    margin-bottom: 1vh;
+    margin-left: 3px;
   }
   .info {
-    width: 60%;
+    width:60%;
     height: 100%;
+  }
+
+  .info_side{
+    width:40%;
+    height:100%;
   }
   .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 2px solid #BDBDBD;
-    margin-top: 10px;
-    margin-left: 2vw;
+    margin-top: 20px;
+    margin-left: 3vw;
     margin-right: 2vw;
     padding: 10px;
     font-size:13px;
@@ -517,30 +530,12 @@ aside .category li {
     height: 28px;
     font-weight: bold;
     font-size:20px;
-    text-align: center;
+
   }
   .category_name_write_page {
-    width: 200px;
+    width: 400px;
     height:auto;
     padding: 15px 0 0 15px;
-    text-align: left
-  }
-  .mypage_category {
-    color:#444444;
-    width: 150px;
-    height: 28px;
-    font-weight: bold;
-    font-size:20px;
-    text-align: left;
-  }
-  .mypage_category_small {
-    color:#444444;
-    width: 150px;
-    height: 28px;
-    font-weight: bold;
-    font-size:18px;
-    text-align: left;
-    margin-left: 10px;
   }
   .search {
     display: flex;
@@ -565,28 +560,47 @@ aside .category li {
     width: 200px;
   }
   .review {
-    border-bottom: 2px solid #BDBDBD;
     width:90%;
+    border-bottom: 2px solid #BDBDBD;
     padding-bottom: 3px;
-    margin-top:1vh;
+    margin-left: 3vw;
     margin-right: 2vw;
   }
-  #nav_item2:hover > a{
-
+  .like{
+    width:4px;
+    background-color: transparent;
+    border:none;
+    font-size:2vw;
     color:red;
   }
-  
-  .like{
-    width: 20%;
-    font-size:12px;
+  .likepeople{
+    font-size:1vw;
     color:gray;
+    font-weight: bold;
   }
-  #like_post {
-    margin-top:2vh;
+  .like2{
+    width:4px;
+    background-color: transparent;
+    border:none;
+    font-size:1.5vw;
+    color:red;
+    text-align: center;
+    margin:1vh 2vw;
+  }
+  .likepeople2{
+    width:4px;
+    font-size:0.8vw;
+    color:gray;
+    text-align: center;
+    margin-left: 7px;
+    margin-top:3px;
+    margin-bottom:1.5vh;
   }
   .date, .writer{
     font-size:12px;
     color:gray;
+    float:right;
+    margin:3px auto;
   }
   .fas fa-heartBtn {
     color:red;
@@ -596,11 +610,12 @@ aside .category li {
     display: flex;
     align-items: center;
     height: 80px;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid #BDBDBD;
   }
   .writer_info {
     display: inline;
     float: right;
+    margin-bottom: 15px;
   }
   .reviewdetail {
     margin: 10px;
@@ -614,22 +629,99 @@ aside .category li {
   .cons {
     margin: 5px;
   }
-  .go {
-    float: right;
+  .title,
+  .rank,
+  .tag{
+    color:gray;
+    font-weight: bold;
+    font-size:0.9vw;
+    margin:3px auto;
+
   }
-  .comment {
+  .hot_title{
+    color:#585858;
+    font-weight: bold;
+    font-size:0.8vw;
+
+  }
+  .title_camp{
+    color:gray;
+    font-weight: bold;
+    font-size:1vw;
+    margin:3px 2vw;
+  }
+  #moa_btn{
+    background-color: #F0F0F0;
+    border:1px solid #BDBDBD;
+    color:gray;
+    font-weight: bold;
+    padding:3px 3px;
+
+  }
+  #go {
+
+    font-size: 0.7vw;
+    color:#585858;
+    font-weight: bold;
+    background-color: #DDEACB;
+    margin:auto 10px;
+    padding:5px auto;
+    border:2px solid #BDBDBD;
+  }
+  .
+   {
     margin: 10px;
     height: 100px;
   }
   .comment_header,
   .comment_write,
-  .comment_show {
-    margin: 10px;
+  .comment_show,
+  .comment_content{
+    margin: 2vh 3vw;
   }
   .comment_header {
     display: flex;
     justify-content: space-between;
+    font-size: 1vw;
+    color:gray;
+    font-weight: bold;
+
   }
+  #input{
+    height:60vh;
+    width:100%;
+    border:1px solid #BDBDBD;
+    border-radius: 20px;
+    margin-right: 1vw;
+    margin-top :2vh;
+    margin-bottom:2vh;
+  }
+  #comment_input{
+    height:8vh;
+    width:80%;
+    border:1px solid #BDBDBD;
+    border-radius: 20px;
+    margin-right: 1vw;
+    margin-top :2vh;
+    margin-bottom:2vh;
+  }
+  #comment_btn{
+    height:8vh;
+    border:1px solid #BDBDBD;
+    border-radius: 20px;
+    color:gray;
+    font-weight: bold;
+
+  }
+  .comment_nickname,
+  .comment_content,
+  .comment_date,
+  .comment_time{
+    color: #585858;
+    font-size: 12px;
+
+  }
+
 
   .chart {
     margin-top: 30px;
@@ -660,7 +752,7 @@ aside .category li {
   }
   #writer {
     display: inline-block;
-    width: 60px;
+    width: 100px;
     text-align: center;
   }
   #date {
@@ -679,25 +771,11 @@ aside .category li {
     border-radius: 5px;
     padding: 0px 4px;
     font-size: 12px;
-  } 
-
-.btnContainer {
-  float: center;
-  width: 100%;
-}
-
-.abc {
-  margin-top:2vh;
-}
-
-.Paper {
-  width:25%;
-}
-
-.def {
-  margin-left:25%;
-}
-
-.Login {
-  margin-top:3vh;
-}
+  }
+  #login_list{
+    width:30%;
+    color:#585858;
+    font-size: 15px;
+    padding:5px 2px;
+    
+  }
