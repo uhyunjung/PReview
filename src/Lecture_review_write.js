@@ -314,9 +314,9 @@ const Lecture_review_write = () => {
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                <div class="category_name category_name_write_page">
-                    <span>{decodeURI(params.board)}</span>
-                </div>
+                    <div class="category_name category_name_write_page">
+                        <span>{decodeURI(params.board)}</span>
+                    </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div class="item">
