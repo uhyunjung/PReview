@@ -61,7 +61,7 @@ class App extends Component {
                     {/* 메인메뉴 */}
                     <div className='Menu'>
                         <header id="top">
-                            <Link to='/?board=reviews&title=lecture_name&content=pros'><h3><a id='PReview_logo' target="_self">PReview</a></h3></Link>
+                            <Link to='/?board=reviews&title=lecture_name&title=lecture_name&post_location=Lecture_review_detail'><h3><a id='PReview_logo' target="_self">PReview</a></h3></Link>
                             
                             {this.state.isSignedIn ? (
                                 <div id="loginbar">

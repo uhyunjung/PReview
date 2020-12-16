@@ -554,14 +554,24 @@ aside .category li {
   }
   .review {
     border-bottom: 2px solid #BDBDBD;
+    width:90%;
     padding-bottom: 3px;
-    margin-left: 3vw;
+    margin-top:1vh;
+    margin-left: 2vw;
     margin-right: 2vw;
   }
+  #nav_item2:hover > a{
+
+    color:red;
+  }
+  
   .like{
     width: 20%;
     font-size:12px;
     color:gray;
+  }
+  #like_post {
+    margin-top:2vh;
   }
   .date, .writer{
     font-size:12px;

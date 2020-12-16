@@ -9,6 +9,8 @@ class Main extends Component {
         let params = {};
         params["post"] = false;
         params["title"] = false;
+        params["lecture_name"] = false;
+        params["post_location"] = false;
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; params[key + "_exist"] = true; });
@@ -16,11 +18,45 @@ class Main extends Component {
         return params;
     }
 
+    // 렌더링 후 완료
+    componentDidMount = () => {
+
+        db.collection("reviews")
+            .orderBy("like", "desc").limit(5)
+            .onSnapshot(snaps => {
+                snaps.forEach(doc => {
+                    const reviewDiv = document.createElement("div");
+
+                    let htmlContent =
+                        "<div class=\"review\">\
+                        <ul>\
+                            <li class=\"main_post_item\">\
+                                <div class=\"info\">\
+                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
+                                </div>\
+                            </li>\
+                        </ul>\
+                    </div>";
+
+                    reviewDiv.innerHTML = htmlContent;
+                    if (this.myRef != null) {
+                        this.myRef.appendChild(reviewDiv);
+                    }
+
+                })
+            })
+    }
+
+
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.post ? "좋아요 게시물" : decodeURI(params.board)
-        let title = params.post ? "좋아요 게시물" : decodeURI(params.title)
+        let board = params.post ? "좋아요 게시물" : decodeURI(params.board);
+        let title = params.post ? "좋아요 게시물" : decodeURI(params.title);
+        let lecture_name = params.post ? "좋아요 게시물" : decodeURI(params.lecture_name);
+        let post_location = params.post ? "좋아요 게시물" : decodeURI(params.post_location);
+        console.log(lecture_name);
+
         console.log(board);
 
         return (
@@ -124,28 +160,55 @@ class Main extends Component {
                         <p class='small_title'>인기 게시물</p>
                         <nav id='nav2'>
                             <ul class='main_posting'>
-                                <li id='nav_item2' style={{ borderLeft: "none" }}><Link to="/?board=reviews&title=lecture_name">강의 리뷰</Link></li>
-                                <li id='nav_item2'><Link to="/?board=postings&title=title">코딩 캠프 리뷰</Link></li>
-                                <li id='nav_item2'><Link to='/?board=solution&title=title'>솔루션 공유</Link></li>
-                                <li id='nav_item2'><Link to='/?board=community&title=title'>커뮤니티</Link></li>
+                                <li id='nav_item2' style={{ borderLeft: "none" }}><Link to="/?board=reviews&title=lecture_name&post_location=Lecture_review_detail&lecture_name=lecture_name">강의 리뷰</Link></li>
+                                <li id='nav_item2'><Link to="/?board=postings&title=title&post_location=Camp_review_detail">코딩 캠프 리뷰</Link></li>
+                                <li id='nav_item2'><Link to='/?board=solution&title=title&post_location=Solution_detail'>솔루션 공유</Link></li>
+                                <li id='nav_item2'><Link to='/?board=community&title=title&post_location=Community_view_detail'>커뮤니티</Link></li>
                                 <div class="hot_post">
-                                    <p style={{ textAlign: "right", color: "gray", fontSize: "12px", marginRight: "10px" }}>더보기</p>
-                                    </div>
-                                    <div id="like_post">
-                                        {
+
+                                    <div id="like_post" ref={(DOMNodeRef) => {
+                                        this.myRef = DOMNodeRef;
+                                    }}></div>
+                                    <div>
+                                    {lecture_name=="reviews" ? (
+                                        db.collection(board)
+                                            .orderBy("like", "desc").limit(5)
+                                            .onSnapshot((snaps) => {
+                                                document.getElementById("like_post").innerHTML = "";
+                                                snaps.forEach((doc) => {
+                                                    const reviewDiv = document.createElement("div");
+
+                                                    const htmlContent =
+                                                        "<div class=\"review\">\
+                                        <ul>\
+                                            <li class=\"main_post_item\">\
+                                                <div class=\"info\">\
+                                                    <a href='/"+ post_location + "?board=" + doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
+                                                </div>\
+                                            </li>\
+                                        </ul>\
+                                    </div>";
+
+                                                    reviewDiv.innerHTML = htmlContent;
+
+                                                    if ((reviewDiv != null) && (document.getElementById("like_post").innerHTML != null)) {
+                                                        document.getElementById("like_post").appendChild(reviewDiv);
+                                                    }
+                                                })
+                                            })) : (
                                             db.collection(board)
                                                 .orderBy("like", "desc").limit(5)
                                                 .onSnapshot((snaps) => {
                                                     document.getElementById("like_post").innerHTML = "";
                                                     snaps.forEach((doc) => {
                                                         const reviewDiv = document.createElement("div");
-                                                        console.log(title);
+
                                                         const htmlContent =
                                                             "<div class=\"review\">\
                                         <ul>\
                                             <li class=\"main_post_item\">\
                                                 <div class=\"info\">\
-                                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
+                                                    <a href='/"+ post_location + "?board=" + doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
                                                 </div>\
                                             </li>\
                                         </ul>\
@@ -153,12 +216,14 @@ class Main extends Component {
 
                                                         reviewDiv.innerHTML = htmlContent;
 
-                                                        if ((reviewDiv != null) && (document.getElementById("like_post") != null)) {
+                                                        if ((reviewDiv != null) && (document.getElementById("like_post").innerHTML != null)) {
                                                             document.getElementById("like_post").appendChild(reviewDiv);
                                                         }
                                                     })
-                                                })}
-                                  
+                                                })
+                                            )
+                                            }
+                                            </div>
                                 </div>
                             </ul>
                         </nav>
