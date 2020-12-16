@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Paper, Button } from '@material-ui/core';
+import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { db } from './firebase.js';
 import './total.css';
 
 class Mypage extends Component {
-    Constructor(props) {
+    Constructor() {
         this.myRef = React.createRef();
 
         this.state = {
-            isUid: false,
+            open : false,
             uid: ""
         };
     }
@@ -18,6 +18,7 @@ class Mypage extends Component {
 
     // 렌더링 후 완료
     componentDidMount = () => {
+
             firebase.auth().onAuthStateChanged(function (user) {
                 {
                     this.setState({ uid: firebase.auth().currentUser.uid });
@@ -79,6 +80,36 @@ class Mypage extends Component {
         return ret;
     }
 
+
+    deleteUser = () => {
+        {
+            var user = firebase.auth().currentUser;
+
+            user.delete().then(function() {
+                // User deleted.
+              }).catch(function(error) {
+                alert(error.message);
+              });
+            
+            
+            db.collection("users").doc(user).delete()
+                .then(() => {
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        };
+    }
+
+    
+    handleClickOpen = () => {
+        this.setState({open : true});
+    }
+
+    handleClose = () => {
+        this.setState({open : false});
+    }
+
     printStar(star) {
         let ret = "";
 
@@ -88,11 +119,12 @@ class Mypage extends Component {
         }
 
         return ret;
+
     }
 
     // 렌더링
     render() {
-
+        
         return (
             <div className="Lecture_review_main" class="main_body">
                 <div className="sidebar">
@@ -100,8 +132,30 @@ class Mypage extends Component {
                         <div class="p"><a href="/Mypage">내가 작성한 글</a></div>
                         <div class="p"><a>계정 정보</a></div>
                         <ul class="category">
-                            <li><a href="#">개인 정보 수정</a></li>
-                            <li><a href="#">회원 탈퇴</a></li>
+
+                            <li><a href="/Lecture_review_main?board=Algorithm">개인 정보 수정</a></li>
+                            <li onClick={this.handleClickOpen}>회원탈퇴</li>
+                                        <>
+                                            <section id="submit-button">
+                                                <Dialog
+                                                    open={false}
+                                                    onClose={this.handleClose}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <DialogTitle id="alert-dialog-title">{"탈퇴"}</DialogTitle>
+                                                    <DialogContent>
+                                                        <DialogContentText id="alert-dialog-description">
+                                                            탈퇴하시겠습니까?
+                                                    </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <Button onClick={this.handleClose} color="primary">취소</Button>
+                                                        <Link to={'/Main'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
+                                                    </DialogActions>
+                                                </Dialog>
+                                        </section>
+                                        </>
                         </ul>
                     </aside>
                 </div>
@@ -224,9 +278,9 @@ class Mypage extends Component {
                     </Paper>
                 </article>
             </div>
-            
         )
     };
+
 }
 
 export default Mypage;

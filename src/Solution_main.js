@@ -5,6 +5,11 @@ import './total.css';
 import { db } from './firebase.js';
 
 class Solution_main extends Component {
+    Constructor(props) {
+        this.myRef = React.createRef();
+
+    }
+
         // 렌더링 후 완료
         getUrlParams() {
             let params = {};
@@ -42,7 +47,7 @@ class Solution_main extends Component {
                                             <li class=\"item\">\
                                                 <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
                                                 <div class=\"info\">\
-                                                <a href='/Camp_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                                <a href='/Solution_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                                 </div>\
                                                 <div class=\"like\">\
                                                     <span class=\"date\">"+doc.data().date+"</span>\
@@ -50,7 +55,7 @@ class Solution_main extends Component {
                                                         <i class=\"fas fa-heart\">♥</i>\
                                                     <div class=\"likepeople\">"+doc.data().like+"</div>\
                                                     </div>\
-                                                <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
+                                                <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
                                                 </div>\
                                             </li>\
                                         </ul>\
@@ -70,13 +75,13 @@ class Solution_main extends Component {
         // 렌더링
         render() {
             let params = this.getUrlParams();
-            let board = params.search_exist ? "커뮤니티" : decodeURI(params.board)
+            let board = params.search_exist ? "솔루션" : decodeURI(params.board)
     
             return (
                 <div className="Lecture_review_main">
                     <div className="sidebar">
                         <aside class="sidebar">
-                            <Link to='/Solution_main'><p>솔루션</p></Link>
+                            <li><a href="/Solution_main?board=솔루션">솔루션</a></li>
                             <br></br>
                         </aside>
                     </div>

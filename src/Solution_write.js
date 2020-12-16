@@ -146,7 +146,7 @@ const Listbox = styled('ul')`
 const today = new Date();
 
 // 게시글 작성
-const Camp_review_write = () => {
+const Solution_write = () => {
     // 알림창
     const [open, setOpen] = React.useState(false);
 
@@ -175,54 +175,53 @@ const Camp_review_write = () => {
     };
 
     let params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; });
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 
+   // 데이터 변수
+   const [writer_id, setWriterId] = useState("");
+   const [writer_name, setWriterName] = useState("");
+   const [board, setBoard] = useState(params.board);
+   const [title, setTitle] = useState("");
+   const [content, setContent] = useState("");
 
-    // 데이터 변수
-    const [writer_id, setWriterId] = useState("");
-    const [writer_name, setWriterName] = useState("");
-    const [board, setBoard] = useState(params.board);
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+   // 데이터 저장
+   const handleSubmit = (e) => {
+       e.preventDefault();
+       handleClose();
 
-    // 데이터 저장
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleClose();
+       // 빈칸 방지
+       if ((title == "" || content == "")) {
+           handleClickBar();
+       }
+       else {
+           db.collection("users").doc(firebase.auth().currentUser.uid).get()
+               .then(doc => {
 
-        // 빈칸 방지
-        if ((title == "" || content == "")) {
-            handleClickBar();
-        }
-        else {
-            db.collection("users").doc(firebase.auth().currentUser.uid).get()
-                .then(doc => {
+                   db.collection("solution").add({
+                       writer_id: firebase.auth().currentUser.uid,
+                       writer_name: doc.data().nickname,
+                       board: board,
+                       title: title,
+                       content: content,
+                       date: today.toLocaleString(),
+                       like: 0,
+                       visit: 0,
+                   })
+                       .then((docRef) => {
+                           window.location.href = "/Solution_detail?board=" + params.board + "&id=" + docRef.id;
+                       })
+                       .catch((error) => {
+                           alert(error.message);
+                       });
+               });
 
-                    db.collection("postings").add({
-                        writer_id: firebase.auth().currentUser.uid,
-                        writer_name: doc.data().nickname,
-                        board: board,
-                        title: title,
-                        content: content,
-                        date: today.toLocaleString(),
-                        like: 0,
-                        visit: 0,
-                    })
-                        .then((docRef) => {
-                            window.location.href = "/Camp_review_detail?board=" + params.board + "&id=" + docRef.id;
-                        })
-                        .catch((error) => {
-                            alert(error.message);
-                        });
-                });
-
-            setWriterId("");
-            setBoard("");
-            setTitle("");
-            setContent("");
-            setWriterName("");
-        }
-    };
+           setWriterId("");
+           setBoard("");
+           setTitle("");
+           setContent("");
+           setWriterName("");
+       }
+   };
 
     // 엔터키
     const keyHandleClickOpen = (e) => {
@@ -242,32 +241,29 @@ const Camp_review_write = () => {
                 </Snackbar>
             </div>
             <div className="sidebarclass">
-                <aside class="sidebar" >
-                    <ul class="category_camp">
-                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
+            <aside class="sidebar" >
+                <ul class="category_camp">
+                        <li><a href="/Solution_main?board=알고리즘">솔루션</a></li>
                     </ul>
-                </aside>
+              </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                    <div class="category_name">
-                        <span style={{ fontSize: "16px" }}>{decodeURI(params.board)}</span>
-                    </div>
+                <div class="category_name">
+                    <span style={{fontSize:"16px"}}>{decodeURI(params.board)}</span>
+                </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
                             <div id='review'>
                                 <div id="review_header">
                                     <span id="title">제목 : </span>
-                                    <input id="title_input" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                                    <input id="title_input" type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                                 </div>
-                                <hr id="line" />
+                                <hr id="line"/>
                                 <div id="write_box">
-                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)}/>
                                 </div>
-                                <hr id="line" />
+                                <hr id="line"/>
                             </div>
                         </section>
 
@@ -287,7 +283,7 @@ const Camp_review_write = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">취소</Button>
-                                    <Link to='/Community_review_detail'><Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button></Link>
+                                    <Link to='/Solution_detail'><Button type="submit" onClick={handleSubmit} color="primary" autoFocus>확인</Button></Link>
                                 </DialogActions>
                             </Dialog>
                         </section>
@@ -299,15 +295,4 @@ const Camp_review_write = () => {
 
 }
 
-
-// 태그 종류
-const tagContent = [
-    { title: '#쉬워요 ' },
-    { title: '#적당해요 ' },
-    { title: '#어려워요 ' },
-    { title: '#효과적이에요 ' },
-    { title: '#전체구조를보여줘요 ' },
-    { title: '#실무적이에요' }
-];
-
-export default Camp_review_write;
+export default Solution_write;
