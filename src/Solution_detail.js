@@ -268,4 +268,4 @@ class Solution_detail extends Component {
     }
 }
 
-export default Solution_detail;
+export default Solution_detail
