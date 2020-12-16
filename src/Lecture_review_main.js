@@ -141,25 +141,23 @@ class Lecture_review_main extends React.Component {
         
         return (
             <div className="Lecture_review_main" class="main_body">
-                <div className="sidebar">
-                    <aside class="sidebar">
-                        <p>언어</p>
-                        <ul class="category">
-                            <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
-                            <li><a href="/Lecture_review_main?board=C#">C#</a></li>
-                            <li><a href="/Lecture_review_main?board=Java">Java</a></li>
-                            <li><a href="/Lecture_review_main?board=Python">Python</a></li>
-                            <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
-                        </ul>
-                        <p>분야</p>
-                        <ul class="category">
-                            <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
-                            <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
-                            <li><a href="/Lecture_review_main?board=Server">Server</a></li>
-                            <li><a href="/Lecture_review_main?board=Database">Database</a></li>
-                            <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
-                        </ul>
-                    </aside>
+                <div class='main_left'>
+                    <p>언어</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                    </ul>
+                    <p>분야</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                    </ul>
                 </div>
                 <article class="article" style={{width: "43vw"}}>
                     <Paper classname="paper" elevation={2}>

@@ -99,40 +99,38 @@ class Mypage extends Component {
 
         return (
             <div className="Lecture_review_main" class="main_body">
-                <div className="sidebar">
-                    <aside class="sidebar">
-                        <div class="p"><a href="/Mypage">내가 작성한 글</a></div>
-                        <div class="p"><a>계정 정보</a></div>
-                        <ul class="category">
+                <div class='main_left'>
+                    <div class="p"><a href="/Mypage">내가 작성한 글</a></div>
+                    <div class="p"><a>계정 정보</a></div>
+                    <ul class="category">
 
-                            <li>개인 정보 수정</li>
-                            <a href={"/Mypage?board=sign_out"}><li onClick={this.handleClickOpen}>회원탈퇴</li></a>
-                            </ul>
-                    </aside>
-                            {params.sign_out? (
-                                <section id="submit-button">
-                                    <Dialog
-                                        open={params.sign_out}
-                                        onClose={this.handleClose}
-                                        aria-labelledby="alert-dialog-title"
-                                        aria-describedby="alert-dialog-description"
-                                    >
-                                        <DialogTitle id="alert-dialog-title">{"탈퇴"}</DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText id="alert-dialog-description">
-                                                탈퇴하시겠습니까?
-                                                    </DialogContentText>
-                                        </DialogContent>
-                                        <DialogActions>
-                                            <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
-                                            <Link to={'/Login'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
-                                        </DialogActions>
-                                    </Dialog>
-                                </section>
-                                ) :(
-                                    <>
-                                    </>
-                                )}
+                        <li>개인 정보 수정</li>
+                        <a href={"/Mypage?board=sign_out"}><li onClick={this.handleClickOpen}>회원탈퇴</li></a>
+                        </ul>
+                        {params.sign_out? (
+                            <section id="submit-button">
+                                <Dialog
+                                    open={params.sign_out}
+                                    onClose={this.handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">{"탈퇴"}</DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            탈퇴하시겠습니까?
+                                                </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Link to={'/Mypage'}><Button color="primary">취소</Button></Link>
+                                        <Link to={'/Login'}><Button type="submit" onClick={this.deleteUser} color="primary" autoFocus>확인</Button></Link>
+                                    </DialogActions>
+                                </Dialog>
+                            </section>
+                            ) :(
+                                <>
+                                </>
+                            )}
                 </div>
 
                 <article class="article">

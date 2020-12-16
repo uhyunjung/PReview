@@ -186,12 +186,10 @@ class Solution_detail extends Component {
         // 렌더링
         return (
             <div className="Camp_review_detail" class="main_body">
-                <div className="sidebar">
-                    <aside class="sidebar">
-                        <ul class="category_camp">
-                            <li><a href="/Solution_main?board=솔루션">솔루션</a></li>
-                        </ul>
-                    </aside>
+                <div class='main_left'>
+                    <ul class="category_camp">
+                        <li><a href="/Solution_main?board=솔루션">솔루션</a></li>
+                    </ul>
                 </div>
                 <article class="article">
                     <Paper classname="paper" elevation={3}>

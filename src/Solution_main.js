@@ -79,11 +79,10 @@ class Solution_main extends Component {
     
             return (
                 <div className="Lecture_review_main" class="main_body">
-                    <div className="sidebar">
-                        <aside class="sidebar">
+                    <div class='main_left'>
+                        <ul class="category_camp">
                             <li><a href="/Solution_main?board=솔루션">솔루션</a></li>
-                            <br></br>
-                        </aside>
+                        </ul>
                     </div>
                     <article class="article">
                     <Paper classname="paper" elevation={2}>

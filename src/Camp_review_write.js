@@ -241,15 +241,13 @@ const Camp_review_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div className="sidebarclass">
-                <aside class="sidebar" >
-                    <ul class="category_camp">
-                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
-                    </ul>
-                </aside>
+            <div class='main_left'>
+                <ul class="category_camp">
+                    <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                    <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                    <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                    <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                </ul>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
