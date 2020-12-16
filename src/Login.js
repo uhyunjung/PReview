@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Grid, Paper, Button } from '@material-ui/core';
+import { Grid, Paper, Button, TextField } from '@material-ui/core';
 import { db } from './firebase';
 
 const Login = () => {
@@ -157,32 +157,36 @@ const Login = () => {
     <div className="Login">
       <Grid container justify="center" wrap="wrap">
         <Paper className='Paper'>
-          <label>사용자 이메일</label>
-          <input type="text" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <div class="def">
+          <br></br>
+          <TextField label="사용자 이메일" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} />
           <p className="errorMsg">{emailError}</p>
-          <label>비밀번호</label>
-          <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          
+          <TextField label="비밀번호" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           <p className="errorMsg">{passwordError}</p>
           <div className="btnContainer" onKeyPress={keyHandleSignUp}>
             {hasAccount ? (
               <>
-                <button onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</button>
+                <p class="abc"></p>
+                <Button variant="outlined" label="Outlined" onClick={handleLogin} onKeyPress={keyHandleLogin}>로그인</Button>
+                
                 <p>계정이 없으면 <Button onClick={() => setHasAccount(!hasAccount)}>회원가입</Button></p>
               </>
             ) : (
                 <>
-                  <label>이름</label>
-                  <input type="text" required value={name} onChange={(e) => setName(e.target.value)} />
-                  <label>닉네임</label>
-                  <input type="text" required value={nickname} onChange={(e) => setNickname(e.target.value)} />
-                  <button onClick={handleSignUp}>회원가입</button>
+                  
+                  <TextField label="이름" type="text" required value={name} onChange={(e) => setName(e.target.value)} />
+                  <p></p>
+                  <TextField label="닉네임" type="text" required value={nickname} onChange={(e) => setNickname(e.target.value)} />
+                  <p class="abc"></p>
+                  <Button variant="outlined" label="Outlined" onClick={handleSignUp}>회원가입</Button>
                   <p>계정이 있으면 <Button onClick={() => setHasAccount(!hasAccount)}>로그인</Button></p>
                 </>
               )}
+              
           </div>
-
+          </div>
           <hr></hr>
-          회원가입
           <StyledFirebaseAuth
             uiConfig={uiConfig}
             firebaseAuth={firebase.auth()}

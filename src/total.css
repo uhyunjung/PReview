@@ -680,3 +680,24 @@ aside .category li {
     padding: 0px 4px;
     font-size: 12px;
   } 
+
+.btnContainer {
+  float: center;
+  width: 100%;
+}
+
+.abc {
+  margin-top:2vh;
+}
+
+.Paper {
+  width:25%;
+}
+
+.def {
+  margin-left:25%;
+}
+
+.Login {
+  margin-top:3vh;
+}
