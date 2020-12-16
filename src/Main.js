@@ -165,65 +165,38 @@ class Main extends Component {
                                 <li id='nav_item2'><Link to='/?board=solution&title=title&post_location=Solution_detail'>솔루션 공유</Link></li>
                                 <li id='nav_item2'><Link to='/?board=community&title=title&post_location=Community_view_detail'>커뮤니티</Link></li>
                                 <div class="hot_post">
+                                </div>
+                                <div id="like_post">
+                                {
+                                    db.collection(board)
+                                    .orderBy("like", "desc").limit(5)
+                                    .onSnapshot((snaps) => {
+                                        document.getElementById("like_post").innerHTML = "";
+                                        snaps.forEach((doc) => {
+                                            const reviewDiv = document.createElement("div");
+                                            let title;
+                                            if(board == "reviews") title = doc.data().lecture_name;
+                                            else title = doc.data().title;
+                                            const htmlContent =
+                                            "<div class=\"review\">\
+                                                <ul>\
+                                                    <li class=\"main_post_item\">\
+                                                        <div class=\"info\">\
+                                                            <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + title + "</div></a>\
+                                                        </div>\
+                                                    </li>\
+                                                </ul>\
+                                            </div>";
 
-                                    <div id="like_post" ref={(DOMNodeRef) => {
-                                        this.myRef = DOMNodeRef;
-                                    }}></div>
-                                    <div>
-                                    {lecture_name=="reviews" ? (
-                                        db.collection(board)
-                                            .orderBy("like", "desc").limit(5)
-                                            .onSnapshot((snaps) => {
-                                                document.getElementById("like_post").innerHTML = "";
-                                                snaps.forEach((doc) => {
-                                                    const reviewDiv = document.createElement("div");
+                                            reviewDiv.innerHTML = htmlContent;
 
-                                                    const htmlContent =
-                                                        "<div class=\"review\">\
-                                        <ul>\
-                                            <li class=\"main_post_item\">\
-                                                <div class=\"info\">\
-                                                    <a href='/"+ post_location + "?board=" + doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
-
-                                                    reviewDiv.innerHTML = htmlContent;
-
-                                                    if ((reviewDiv != null) && (document.getElementById("like_post").innerHTML != null)) {
-                                                        document.getElementById("like_post").appendChild(reviewDiv);
-                                                    }
-                                                })
-                                            })) : (
-                                            db.collection(board)
-                                                .orderBy("like", "desc").limit(5)
-                                                .onSnapshot((snaps) => {
-                                                    document.getElementById("like_post").innerHTML = "";
-                                                    snaps.forEach((doc) => {
-                                                        const reviewDiv = document.createElement("div");
-
-                                                        const htmlContent =
-                                                            "<div class=\"review\">\
-                                        <ul>\
-                                            <li class=\"main_post_item\">\
-                                                <div class=\"info\">\
-                                                    <a href='/"+ post_location + "?board=" + doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
-
-                                                        reviewDiv.innerHTML = htmlContent;
-
-                                                        if ((reviewDiv != null) && (document.getElementById("like_post").innerHTML != null)) {
-                                                            document.getElementById("like_post").appendChild(reviewDiv);
-                                                        }
-                                                    })
-                                                })
-                                            )
+                                            if ((reviewDiv != null) && (document.getElementById("like_post") != null)) {
+                                                document.getElementById("like_post").appendChild(reviewDiv);
                                             }
-                                            </div>
+                                        })
+                                    })
+                                }
+
                                 </div>
                             </ul>
                         </nav>
