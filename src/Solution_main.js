@@ -48,16 +48,14 @@ class Solution_main extends Component {
                                     <ul>\
                                         <li class=\"item\">\
                                             <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                            <div class=\"info\">\
+                                                <div class=\"info\">\
                                             <a href='/Solution_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                             </div>\
-                                            <div class=\"like\">\
-                                                <span class=\"date\">"+doc.data().date+"</span>\
-                                                <div class=\"likebtn\">\
-                                                    <i class=\"fas fa-heart\">♥</i>\
-                                                <div class=\"likepeople\">"+doc.data().like+"</div>\
-                                                </div>\
                                             <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
+                                            <span class=\"date\">"+doc.data().date+"</span>\
+                                            <div class=\"likebtn\">\
+                                                <i class=\"date\">♥</i>\
+                                                <div class=\"date\">"+doc.data().like+"</div>\
                                             </div>\
                                         </li>\
                                     </ul>\
@@ -80,12 +78,11 @@ class Solution_main extends Component {
             let board = params.search_exist ? "솔루션" : decodeURI(params.board)
     
             return (
-                <div className="Lecture_review_main">
-                    <div className="sidebar">
-                        <aside class="sidebar">
+                <div className="Lecture_review_main" class="main_body">
+                    <div class='main_left'>
+                        <ul class="category_camp">
                             <li><a href="/Solution_main?board=솔루션">솔루션</a></li>
-                            <br></br>
-                        </aside>
+                        </ul>
                     </div>
                     <article class="article">
                     <Paper classname="paper" elevation={2}>
@@ -102,11 +99,17 @@ class Solution_main extends Component {
                         </div>
     
                         <div class="header">
-                            <span>링크</span>
-                            <span>내용</span>
+                            <span>제목</span>
+                            <span> </span>
+                            <span> </span>
+                            <span> </span>
+                            <span> </span>
+                            <span>작성자</span>
                             <div class="btn">
-                            <button><a href={"/Solution_main?board="+board}>작성날짜△</a></button>
-                            <button><a href={"/Solution_main?board="+board+"&order_by=like"}>좋아요△</a></button>
+                                <button><a href={"/Solution_main?board="+board}>작성날짜△</a></button>
+                            </div>
+                            <div class="btn">
+                                <button><a href={"/Solution_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                             </div>
                         </div>
                         <div id="posting" ref={(DOMNodeRef) => {

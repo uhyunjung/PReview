@@ -147,7 +147,7 @@ const Listbox = styled('ul')`
 const today = new Date();
 
 // 게시글 작성
-const Lecture_review_write = () => {
+const Lecture_review_edit = () => {
     // 알림창
     const [open, setOpen] = React.useState(false);
 
@@ -192,6 +192,8 @@ const Lecture_review_write = () => {
     const [date, setDate] = useState("");
     const [like, setLike] = useState("");
     const [board, setBoard] = useState(params.board);
+
+    
 
     // 데이터 저장
     const handleSubmit = (e) => {
@@ -284,7 +286,7 @@ const Lecture_review_write = () => {
 
     // 렌더링
     return (
-        <div className="Lecture_review_write" class="main_body">
+        <div className="Lecture_review_edit" class="main_body">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -292,23 +294,25 @@ const Lecture_review_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div class='main_left'>
-                <p>언어</p>
-                <ul class="category">
-                    <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
-                    <li><a href="/Lecture_review_main?board=C#">C#</a></li>
-                    <li><a href="/Lecture_review_main?board=Java">Java</a></li>
-                    <li><a href="/Lecture_review_main?board=Python">Python</a></li>
-                    <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
-                </ul>
-                <p>분야</p>
-                <ul class="category">
-                    <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
-                    <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
-                    <li><a href="/Lecture_review_main?board=Server">Server</a></li>
-                    <li><a href="/Lecture_review_main?board=Database">Database</a></li>
-                    <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
-                </ul>
+            <div className="sidebarclass">
+                <aside class="sidebar">
+                    <p>언어</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                    </ul>
+                    <p>분야</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                    </ul>
+                </aside>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
@@ -457,4 +461,4 @@ const tagContent = [
     { title: '#실무적이에요' }
 ];
 
-export default Lecture_review_write;
+export default Lecture_review_edit;

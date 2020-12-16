@@ -186,80 +186,84 @@ class Community_view_detail extends Component {
 
         // 렌더링
         return (
-            <div className="Camp_review_detail">
-                <div className="sidebar">
-                    <aside class="sidebar" >
-                        <ul class="category_camp">
-                            <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
-                            <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
-                            <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
-                            <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
-                        </ul>
-                    </aside>
+            <div className="Camp_review_detail" class="main_body">
+                <div class='main_left'>
+                    <ul class="category_camp">
+                        <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
+                        <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
+                        <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
+                        <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
+                    </ul>
                 </div>
-                <article>
+                <article class="article">
                     <Paper classname="paper" elevation={3}>
-                        <div id="review_header">
-                            <div id="review_title">{item.title}</div>
-                            <div id="writer_info">
-                                <span id="writer">{item.writer_name}</span>
-                                <span id="date">{item.date}</span>
-                            </div>
-                        </div>
-                        <hr id="line" />
-                        <div id="review_content">
-                            {item.content}
-                        </div>
+                        <div id="detail">
+                            <div class="category_name category_name_write_page">{board}</div>
+                            <section id="lecture-name" class="lecturename writing-block">
+                                <div class="item">
+                                    <div class="review_title">
+                                        <span>{item.title}</span>
+                                    </div>
 
-                        <div>
-                            {this.state.isUid ? (
-                                <>
-                                    <section id="submit-button">
-                                        <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
-                                        <Dialog
-                                            open={this.state.open}
-                                            onClose={this.handleClose}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description"
-                                        >
-                                            <DialogTitle id="alert-dialog-title">{"리뷰 삭제"}</DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText id="alert-dialog-description">
-                                                    리뷰를 삭제하시겠습니까?
-                                                    </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button onClick={this.handleClose} color="primary">취소</Button>
-                                                <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
-                                            </DialogActions>
-                                        </Dialog>
-                                    </section>
-                                </>) : (
-                                    <>
-                                    </>)}
-                        </div>
+                                    <div class="writer_info">
+                                        <span class="writer">{item.writer_name}</span><br></br>
+                                        <span class="date">{item.date}</span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="contants" class="writing-block">
+                                <div class="posting-content">
+                                    <span>{item.content}</span>
+                                </div>
 
-                        <hr id="line" />
-
-                        <div class="comment_header">
-                            <div class="comment_title">댓글</div>
-                            <div>
-                                <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
-                                <span class="likepeople">{item.like}</span>
-                            </div>
-                        </div>
-
-                        <div class="comment_content">
-                            <div id="comment">
-                                <form className="form" onSubmit={this.handleSubmitComment}>
-                                    <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                    <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
-                                </form>
+                                <div>
+                                    {this.state.isUid ? (
+                                        <>
+                                            <section id="submit-button">
+                                                <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
+                                                <Dialog
+                                                    open={this.state.open}
+                                                    onClose={this.handleClose}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <DialogTitle id="alert-dialog-title">{"리뷰 삭제"}</DialogTitle>
+                                                    <DialogContent>
+                                                        <DialogContentText id="alert-dialog-description">
+                                                            리뷰를 삭제하시겠습니까?
+                                                            </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <Button onClick={this.handleClose} color="primary">취소</Button>
+                                                        <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                    </DialogActions>
+                                                </Dialog>
+                                            </section>
+                                        </>) : (
+                                            <>
+                                            </>)}
+                                </div>
+                                </section>
+                            <div class="comment_header">
+                                <div class="comment_title">댓글</div>
+                                <div>
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
+                                    <span class="likepeople">{item.like}</span>
+                                </div>
                             </div>
 
-                            <div class="item" ref={(DOMNodeRef) => {
-                                this.myRef = DOMNodeRef;
-                            }}></div>
+                            <div class="comment_content">
+                                <div id="comment">
+                                    <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                        <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
+                                </div>
+
+                                <div class="item" ref={(DOMNodeRef) => {
+                                    this.myRef = DOMNodeRef;
+                                }}></div>
+                            </div>
                         </div>
                     </Paper>
                 </article>

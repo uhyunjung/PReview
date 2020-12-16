@@ -211,25 +211,23 @@ class Lecture_review_detail extends Component {
         // 렌더링
         return (
             <div className="Lecture_review_detail" class="main_body">
-                <div className="sidebar">
-                    <aside class="sidebar">
-                        <p>언어</p>
-                        <ul class="category">
-                            <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
-                            <li><a href="/Lecture_review_main?board=C#">C#</a></li>
-                            <li><a href="/Lecture_review_main?board=Java">Java</a></li>
-                            <li><a href="/Lecture_review_main?board=Python">Python</a></li>
-                            <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
-                        </ul>
-                        <p>분야</p>
-                        <ul class="category">
-                            <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
-                            <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
-                            <li><a href="/Lecture_review_main?board=Server">Server</a></li>
-                            <li><a href="/Lecture_review_main?board=Database">Database</a></li>
-                            <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
-                        </ul>
-                    </aside>
+                <div class='main_left'>
+                    <p>언어</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                        <li><a href="/Lecture_review_main?board=C#">C#</a></li>
+                        <li><a href="/Lecture_review_main?board=Java">Java</a></li>
+                        <li><a href="/Lecture_review_main?board=Python">Python</a></li>
+                        <li><a href="/Lecture_review_main?board=Javascript">Javascript</a></li>
+                    </ul>
+                    <p>분야</p>
+                    <ul class="category">
+                        <li><a href="/Lecture_review_main?board=Algorithm">Algorithm</a></li>
+                        <li><a href="/Lecture_review_main?board=FrontEnd">FrontEnd</a></li>
+                        <li><a href="/Lecture_review_main?board=Server">Server</a></li>
+                        <li><a href="/Lecture_review_main?board=Database">Database</a></li>
+                        <li><a href="/Lecture_review_main?board=ML/DL">ML/DL</a></li>
+                    </ul>
                 </div>
                 <article class="article">
                     <Paper classname="paper" elevation={3}>
@@ -294,6 +292,7 @@ class Lecture_review_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
+                                                <Button variant="outlined"><Link to={"/Lecture_review_edit?board="+item.board+"&id="+params.id}>수정</Link></Button>
                                                 <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}
@@ -309,10 +308,11 @@ class Lecture_review_detail extends Component {
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button onClick={this.handleClose} color="primary">취소</Button>
-                                                        <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                        <Link to={'/Lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                     </DialogActions>
                                                 </Dialog>
                                             </section>
+                                                
                                         </>) : (
                                             <>
                                             </>)}

@@ -232,7 +232,7 @@ const Community_view_write = () => {
 
     // 렌더링
     return (
-        <div className="Camp_review_write">
+        <div className="Camp_review_write" class="main_body">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -240,33 +240,33 @@ const Community_view_write = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div className="sidebarclass">
-                <aside class="sidebar" >
-                    <ul class="category_camp">
-                        <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
-                        <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
-                        <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
-                        <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
-                    </ul>
-                </aside>
+            <div class='main_left'>
+                <ul class="category_camp">
+                    <li><a href="/Community_view_main?board=자유게시판">자유게시판</a></li>
+                    <li><a href="/Community_view_main?board=질문게시판">질문게시판</a></li>
+                    <li><a href="/Community_view_main?board=강의 수강원 모집">강의 수강원 모집</a></li>
+                    <li><a href="/Community_view_main?board=프로젝트 참가자 모집">프로젝트 참가자 모집</a></li>
+                </ul>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
-                    <div class="category_name">
-                        <span style={{ fontSize: "16px" }}>{decodeURI(params.board)}</span>
+                    <div class="category_name category_name_write_page">
+                        <span>{decodeURI(params.board)}</span>
                     </div>
                     <form className="form" onSubmit={handleSubmit}>
                         <section id="lecture-name" class="writing-block">
-                            <div id='review'>
-                                <div id="review_header">
-                                    <span id="title">제목 : </span>
-                                    <input id="title_input" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <div class="item">
+                                <div class="review-entry">
+                                    <span>제목 :</span>
                                 </div>
-                                <hr id="line" />
-                                <div id="write_box">
-                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+                                <div class="review-content">
+                                    <input id="title_input" class="short-text" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                                 </div>
-                                <hr id="line" />
+                            </div>
+                        </section>
+                        <section id="contants" class="writing-block">
+                            <div id="write_box" class="review-content">
+                                <input id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
                             </div>
                         </section>
 

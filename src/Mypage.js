@@ -160,6 +160,7 @@ class Mypage extends Component {
 
         return (
             <div className="Lecture_review_main" class="main_body">
+
                 <div className={classes.root}>
                     <Snackbar open={false} autoHideDuration={6000} onClose={this.handleCloseBar}>
                         <Alert onClose={this.handleCloseBar} severity="error">
@@ -228,6 +229,7 @@ class Mypage extends Component {
                             <>
                             </>
                         )}
+
                 </div>
 
                 <article class="article">
