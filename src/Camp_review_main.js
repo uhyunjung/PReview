@@ -65,7 +65,7 @@ class Camp_review_main extends Component {
                                                     <i class=\"fas fa-heart\">♥</i>\
                                                 <div class=\"likepeople\">"+doc.data().like+"</div>\
                                                 </div>\
-                                            <span class=\"writer\">작성자 : "+doc.data().writer_id+"</span>\
+                                            <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
                                             </div>\
                                         </li>\
                                     </ul>\
@@ -85,7 +85,8 @@ class Camp_review_main extends Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
+        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
+        
         return (
             <div className="Lecture_review_main">
             <div className="sidebar">

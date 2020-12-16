@@ -15,8 +15,8 @@ import Camp_review_main from './Camp_review_main';
 import Camp_review_write from './Camp_review_write';
 import Camp_review_detail from './Camp_review_detail';
 import Solution_main from './Solution_main';
-import Solution_write from './Solution_main';
-import Solution_detail from './Solution_main';
+import Solution_write from './Solution_write';
+import Solution_detail from './Solution_detail';
 import Community_view_main from './Community_view_main';
 import Community_view_write from './Community_view_write';
 import Community_view_detail from './Community_view_detail';
@@ -122,13 +122,13 @@ class App extends Component {
                                         <li id='in_nav_item'><a href="/Camp_review_main?board=AI">  AI</a></li>
                                     </ul>
                                 </li>
-                                <li id='nav_item'><Link to='/Solution_main'>솔루션 공유</Link></li>
-                                <li id='nav_item'><Link to="/Community_view_main">커뮤니티</Link>
+                                <li id='nav_item'><Link to='/Solution_main?board=솔루션'>솔루션 공유</Link></li>
+                                <li id='nav_item'><Link to="/Community_view_main?board=자유게시판">커뮤니티</Link>
                                 <ul id='in_nav'>
-                                  <li id='in_nav_item'><a href="community_view_free.html">  자유게시판</a></li>
-                                  <li id='in_nav_item'><a href="community_view_qna.html">  질문게시판</a></li>
-                                  <li id='in_nav_item'><a href="community_view_crewgether.html">  강의 수강원 모집</a></li>
-                                  <li id='in_nav_item'><a href="community_view_projectgether.html">  프로젝트 참가자 모집</a></li>
+                                  <li id='in_nav_item'><a href="Community_view_main?board=자유게시판">  자유게시판</a></li>
+                                  <li id='in_nav_item'><a href="Community_view_main?board=질문게시판">  질문게시판</a></li>
+                                  <li id='in_nav_item'><a href="Community_view_main?board=강의 수강원 모집">  강의 수강원 모집</a></li>
+                                  <li id='in_nav_item'><a href="Community_view_main?board=프로젝트 참가자 모집">  프로젝트 참가자 모집</a></li>
                                 </ul>
                                 </li>
                             </ul>

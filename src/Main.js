@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './total.css';
 
 class Main extends Component {
@@ -105,10 +106,10 @@ class Main extends Component {
                         <p class='small_title'>인기 게시물</p>
                         <nav id='nav2'>
                             <ul>
-                                <li id='nav_item2' style={{ borderLeft: "none" }}><a href="">강의 리뷰</a></li>
-                                <li id='nav_item2'><a href="">코딩 캠프 리뷰</a></li>
-                                <li id='nav_item2'><a href="">솔루션 공유</a></li>
-                                <li id='nav_item2'><a href="">커뮤니티 </a> </li>
+                                <li id='nav_item2' style={{ borderLeft: "none" }}><Link to="/Lecture_review_main?board=C/C++">강의 리뷰</Link></li>
+                                <li id='nav_item2'><Link to="/Camp_review_main?board=알고리즘">코딩 캠프 리뷰</Link></li>
+                                <li id='nav_item2'><Link to='/Solution_main?board=솔루션'>솔루션 공유</Link></li>
+                                <li id='nav_item2'><Link to='/Community_view_main?board=프로젝트 참가자 모집'>커뮤니티</Link></li>
                             </ul>
                         </nav>
                         <hr id="line"></hr>
