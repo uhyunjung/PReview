@@ -294,7 +294,7 @@ class Lecture_review_detail extends Component {
                                         <span class="entry-name">장점</span>
                                     </div>
                                     <div class="review-content-normal">
-                                        <span>{item.pros}</span>
+                                        <pre>{item.pros}</pre>
                                     </div>
                                 </div>
                                 <div id="cons" class="item">
@@ -302,7 +302,7 @@ class Lecture_review_detail extends Component {
                                         <span class="entry-name">단점</span>
                                     </div>
                                     <div class="review-content-normal">
-                                        <span>{item.cons}</span>
+                                        <pre>{item.cons}</pre>
                                     </div>
                                 </div>
                                 <div>

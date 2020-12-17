@@ -400,7 +400,7 @@ const Lecture_review_write = () => {
                                     <span class="entry-name">장점</span>
                                 </div>
                                 <div class="review-content">
-                                    <input type="text" id="pros" class="long-text" value={pros} onChange={(e) => setPros(e.target.value)}></input>
+                                    <textarea type="text" id="pros" class="long-text" value={pros} onChange={(e) => setPros(e.target.value)}></textarea>
                                 </div>
                             </div>
 
@@ -409,7 +409,7 @@ const Lecture_review_write = () => {
                                     <span class="entry-name">단점</span>
                                 </div>
                                 <div class="review-content">
-                                    <input type="text" id="cons" class="long-text" value={cons} onChange={(e) => setCons(e.target.value)} />
+                                    <textarea type="text" id="cons" class="long-text" value={cons} onChange={(e) => setCons(e.target.value)} />
                                 </div>
                             </div>
 

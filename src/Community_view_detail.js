@@ -231,7 +231,7 @@ class Community_view_detail extends Component {
                           </section>
                           <section id="contants" class="writing-block">
                               <div class="posting-content">
-                                  <span>{item.content}</span>
+                                  <pre>{item.content}</pre>
                               </div>
 
                               <div>

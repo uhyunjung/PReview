@@ -322,7 +322,7 @@ const Solution_write = () => {
                         </section>
                         <section id="contants" class="writing-block">
                             <div id="write_box" class="review-content">
-                                <input id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
+                                <textarea id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
                             </div>
                         </section>
 
@@ -334,10 +334,10 @@ const Solution_write = () => {
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
-                                <DialogTitle id="alert-dialog-title">{"리뷰 작성"}</DialogTitle>
+                                <DialogTitle id="alert-dialog-title">{"게시글 작성"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-description">
-                                        리뷰를 저장하시겠습니까?
+                                        게시글을 저장하시겠습니까?
                                         </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>

@@ -216,15 +216,88 @@ const Camp_review_edit = () => {
                     </Alert>
                 </Snackbar>
             </div>
-            <div className="sidebarclass">
-            <aside class="sidebar" >
-                <ul class="category_camp">
-                        <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
-                        <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
-                        <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
-                        <li><a href="/Camp_review_main?board=AI">AI</a></li>
-                    </ul>
-              </aside>
+            <div class="main_left">
+                <ul class="category_camp" style={{marginBottom: "0"}}>
+                    <li><a href="/Camp_review_main?board=알고리즘">알고리즘</a></li>
+                    <li><a href="/Camp_review_main?board=웹프로그래밍">웹프로그래밍</a></li>
+                    <li><a href="/Camp_review_main?board=데이터 분석">데이터분석</a></li>
+                    <li><a href="/Camp_review_main?board=AI">AI</a></li>
+                </ul>
+                <div class='schedule'>
+                    <article class="mainarticle">
+                        <p class='small_title_cal'>12월의 일정</p>
+                        <table class="tg">
+                            <thead>
+                                <tr>
+                                    <th class="sunday">일</th>
+                                    <th class="weekday">월</th>
+                                    <th class="weekday">화</th>
+                                    <th class="weekday">수</th>
+                                    <th class="weekday">목</th>
+                                    <th class="weekday">금</th>
+                                    <th class="saturday">토</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                    <td class="day"></td>
+                                </tr>
+                                <tr>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#725ef1" }}>●</td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style={{ color: "#725ef1" }}>●</td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                </tr>
+                                <tr>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                </tr>
+                                <tr>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#725ef1" }}>●</td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day"></td>
+                                    <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                    <td class="day"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+                </div>
+                <br></br>
+                <div class='schedule2'>
+                    <h4 style={{ color: "#725ef1", display: "inline-block" }}>● </h4>&nbsp;
+                    <h4 style={{ color: "#585858", display: "inline-block" }}> 캠프 </h4>&nbsp;
+                </div>
+                <div class='schedule3'>
+                    <p> ◦ 7일 SSAFY 지원 마감</p>
+                    <p> ◦ 11일 Naver 부스트캠프 지원 시작</p>
+                    <p> ◦ 25일 우아한테크캠프 최종 발표</p>
+                </div>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
@@ -246,24 +319,24 @@ const Camp_review_edit = () => {
                           </section>
 
                                 <section id = "constants" class="writing-block">
-                                    <input id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)}/>
+                                    <textarea id="input" type="text" value={content} onChange={(e) => setContent(e.target.value)}/>
                                 </section>
 
 
 
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 수정</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
-                                <DialogTitle id="alert-dialog-title">{"리뷰 작성"}</DialogTitle>
+                                <DialogTitle id="alert-dialog-title">{"리뷰 수정"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-description">
-                                        리뷰를 저장하시겠습니까?
+                                        리뷰를 수정하시겠습니까?
                                         </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
