@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import './total.css';
 import { Snackbar, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import CloseIcon from '@material-ui/icons/Close';
-import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';

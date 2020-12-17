@@ -29,7 +29,6 @@ class Solution_main extends Component {
             params["search_exist"] = false;
             params["order_by"] = "date";
 
-            let exist = false;
             window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
 
             return params;

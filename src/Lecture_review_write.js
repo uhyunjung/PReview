@@ -8,7 +8,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
-import { Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 function Alert(props) {
@@ -200,7 +199,7 @@ const Lecture_review_write = () => {
         handleClose();
 
         // 빈칸 방지
-        if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
+        if ((lecture_name == "") || (star == "") || (period == "") || (cost == "") || (pros == "") || (cons == "") || (link == "")) {
             handleClickBar();
         }
         else {

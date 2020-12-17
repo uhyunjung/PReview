@@ -8,7 +8,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
-import { Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 function Alert(props) {
