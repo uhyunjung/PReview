@@ -135,6 +135,8 @@ class Lecture_review_detail extends Component {
                                         this.myRef.appendChild(commentDiv);
                                     }
                                 })
+                                .catch((error) => {
+                                  });
                         }
                     })
                 })
