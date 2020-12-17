@@ -100,7 +100,7 @@ class Camp_review_main extends Component {
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
+        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
         return (
             <div className="Lecture_review_main" class="main_body">
             <div class="main_left">
