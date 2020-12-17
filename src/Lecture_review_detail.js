@@ -347,7 +347,7 @@ class Lecture_review_detail extends Component {
                                 <span class="likepeople">{item.like}</span> </button>
 
                             </div>
-
+                        </div>
                         <div class="comment_content">
                             <div id="comment">
                                 <form className="form" class="comment_form" onSubmit={this.handleSubmitComment}>
