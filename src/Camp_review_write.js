@@ -193,8 +193,12 @@ const Camp_review_write = () => {
             handleClickBar();
         }
         else {
+            db.collection("users").doc(firebase.auth().currentUser.uid).get()
+               .then(doc => {
+
             db.collection("postings").add({
                 writer_id: firebase.auth().currentUser.uid,
+                writer_name: doc.data().nickname,
                 board : board,
                 title: title,
                 content: content,
@@ -208,6 +212,7 @@ const Camp_review_write = () => {
                 .catch((error) => {
                     alert(error.message);
                 });
+            });
 
             setWriterId("");
             setBoard("");
