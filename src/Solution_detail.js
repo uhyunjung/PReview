@@ -174,7 +174,7 @@ class Solution_detail extends Component {
         {
             let params = this.getUrlParams();
             let review = db.collection("solution").doc(params.id);
-
+            
             db.collection("solution").doc(review.id).delete()
                 .then(() => {
                 })
@@ -198,6 +198,7 @@ class Solution_detail extends Component {
 
         let params = this.getUrlParams();
         let board = decodeURI(params.board);
+        let editUrl ="/Solution_edit?board="+board+"&id="+params.id;
 
         // 렌더링
         return (
@@ -304,6 +305,7 @@ class Solution_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
+                                            <a href={editUrl}><Button variant="outlined" style={{ marginRight: "1vw" }} id='update_btn'>수정</Button></a>
                                                 <Button variant="outlined" onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}

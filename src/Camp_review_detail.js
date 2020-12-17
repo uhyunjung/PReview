@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
-import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './total.css';
-import { db, auth } from './firebase';
+import { db } from './firebase';
 
 class Camp_review_detail extends Component {
     // Paper 태그 스타일
@@ -199,6 +199,7 @@ class Camp_review_detail extends Component {
 
         let params = this.getUrlParams();
         let board = decodeURI(params.board);
+        let editUrl ="/Camp_review_edit?board="+board+"&id="+params.id;
 
         // 렌더링
         return (
@@ -240,6 +241,7 @@ class Camp_review_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
+                                            <a href={editUrl}><Button variant="outlined" style={{ marginRight: "1vw" }} id='update_btn'>수정</Button></a>
                                                 <Button variant="outlined" id="delete_btn" onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}
