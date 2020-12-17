@@ -59,6 +59,7 @@ PReview
 ## ⚙️ 언어 및 환경
 ![image](https://user-images.githubusercontent.com/67186222/102082427-48d51b00-3e55-11eb-90a8-9f285b42512c.png)
 ![image](https://user-images.githubusercontent.com/67186222/102082473-61453580-3e55-11eb-8029-9aac0d8fda16.png)
+![image](https://user-images.githubusercontent.com/67186222/102452300-79979900-407d-11eb-8630-3c25404fd143.png)
 
 
 ## 😀 개발 규칙
