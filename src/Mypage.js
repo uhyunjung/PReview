@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Snackbar, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@material-ui/core';
+import { Snackbar, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@material-ui/core';
 import { db } from './firebase.js';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -301,7 +301,7 @@ class Mypage extends Component {
                                                     <a href="+doc.data().link+">Link</a>\
                                                 </div>\
                                                 <div class=\"info\">\
-                                                    <a href='/Lecture_review_detail?baord="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
+                                                    <a href='/Lecture_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().lecture_name + "</div></a>\
                                                     <div class=\"rank\">"+ this.printStar(doc.data().star) + "</div>\
                                                     <div class=\"tag\">"+ doc.data().tags + "</div>\
                                                     <Button onClick=\"location.href='/Lecture_review_main?search="+ doc.data().lecture_name + "'\" variant=\"outlined\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\

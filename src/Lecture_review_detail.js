@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import './total.css';
-import { db, auth } from './firebase';
+import { db } from './firebase';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { ControlPointDuplicateOutlined } from '@material-ui/icons';
 
 class Lecture_review_detail extends Component {
     // Paper 태그 스타일

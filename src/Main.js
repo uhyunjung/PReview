@@ -16,7 +16,6 @@ class Main extends Component {
         params["lecture_name"] = false;
         params["post_location"] = false;
 
-        let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) { params[key] = value; params[key + "_exist"] = true; });
 
         return params;

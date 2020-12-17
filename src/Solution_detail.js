@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
-import { Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './total.css';
-import { db, auth } from './firebase';
+import { db } from './firebase';
 
 class Solution_detail extends Component {
     // Paper 태그 스타일

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db } from './firebase.js';
-import { ContactsOutlined, SpeakerNotesOutlined } from '@material-ui/icons';
 import CanvasJSReact from './canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
