@@ -22,7 +22,7 @@ class Lecture_review_detail extends Component {
         this.myRef = React.createRef();
 
         this.state = {
-            open : false,
+            open: false,
             isUid: false,
             items: [],
             content: "",
@@ -80,6 +80,7 @@ class Lecture_review_detail extends Component {
             let review = db.collection("reviews").doc(params.id).get().then(doc => {
                 firebase.auth().onAuthStateChanged(function (user) {
                     {
+                        if(user) {
                         this.setState({ uid: firebase.auth().currentUser.uid });
 
                         if (doc.data().writer_id == this.state.uid) {
@@ -88,6 +89,10 @@ class Lecture_review_detail extends Component {
                         else {
                             this.setState({ isUid: false });
                         }
+                    }
+                    else{
+                        alert("로그인을 먼저 해주세요");
+                    }
                     }
                 }.bind(this)).bind(this);
             });
@@ -143,6 +148,7 @@ class Lecture_review_detail extends Component {
             return;
         }
         else {
+            if(firebase.auth().currentUser) {
             db.collection("comments").add({
                 commentWriter_id: firebase.auth().currentUser.uid,
                 content: this.state.content,
@@ -154,7 +160,11 @@ class Lecture_review_detail extends Component {
                 })
                 .catch((error) => {
                     alert(error.message);
-                });
+                });   
+            }
+            else {
+                alert("로그인을 먼저 해주세요");
+            }
         }
     }
 
@@ -174,12 +184,18 @@ class Lecture_review_detail extends Component {
         };
     }
 
+    updateReview = () => {
+        let params = this.getUrlParams();
+        
+
+    }
+
     handleClickOpen = () => {
-        this.setState({open : true});
+        this.setState({ open: true });
     }
 
     handleClose = () => {
-        this.setState({open : false});
+        this.setState({ open: false });
     }
 
     render() {
@@ -187,6 +203,7 @@ class Lecture_review_detail extends Component {
 
         let params = this.getUrlParams();
         let board = decodeURI(params.board);
+        let editUrl ="/Lecture_review_edit?board="+board+"&id="+params.id;
 
         // 렌더링
         return (
@@ -216,8 +233,8 @@ class Lecture_review_detail extends Component {
                         <div id="detail">
                             <div class="category_name category_name_write_page">{board}</div>
                             <section id="lecture-name" class="lecturename writing-block">
-                                <div class="item"style={{width:"100%"}}>
-                                    <div class="review-entry" style={{fontSize:"1em", textAlign:"left", width:"100%" }}>
+                                <div class="item" style={{ width: "100%" }}>
+                                    <div class="review-entry" style={{ fontSize: "1em", textAlign: "left", width: "100%" }}>
                                         <span>{item.lecture_name}</span>
                                     </div>
 
@@ -229,7 +246,7 @@ class Lecture_review_detail extends Component {
                             </section>
 
                             <section id="contants" class="writing-block">
-                                <div class="star" class ="item">
+                                <div class="star" class="item">
                                     <div class="review-entry">
                                         <span class="entry-name">별점</span>
                                     </div>
@@ -249,7 +266,7 @@ class Lecture_review_detail extends Component {
                                     <div class="review-entry">
                                         <span class="entry-name">수강 정보</span>
                                     </div>
-                                    <div class="review-content" style={{fontWeight:"normal"}}>
+                                    <div class="review-content" style={{ fontWeight: "normal" }}>
                                         <span>수강 기간 : {item.period}</span>
                                         <span> / 수강 비용 : 월 {item.cost}원</span>
                                     </div>
@@ -274,9 +291,9 @@ class Lecture_review_detail extends Component {
                                     {this.state.isUid ? (
                                         <>
                                             <section id="submit-button">
-                                              <Button variant="outlined" id='go'>◀강의 바로가기▶ </Button>
-                                              <Button variant="contained" id='delete_btn'onClick={this.handleClickOpen}>삭제</Button>
-
+                                                <Button variant="outlined" id='go'>◀강의 바로가기▶ </Button>
+                                                <a href={editUrl}><Button variant="outlined" style={{ marginRight: "1vw" }} id='update_btn'>수정</Button></a>
+                                                <Button variant="outlined" id='delete_btn' onClick={this.handleClickOpen}>삭제</Button>
                                                 <Dialog
                                                     open={this.state.open}
                                                     onClose={this.handleClose}
@@ -294,34 +311,34 @@ class Lecture_review_detail extends Component {
                                                         <Link to={'/Lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                     </DialogActions>
                                                 </Dialog>
-                                        </section>
+                                            </section>
                                         </>) : (
                                             <>
-                                </>)}
+                                            </>)}
                                 </div>
                             </section>
 
-                        <div class="comment_header">
-                            <div class="comment_title">댓글</div>
-                            <div>
-                                <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
-                                <span class="likepeople">{item.like}</span> </button>
-                            </div>
-                        </div>
-
-                        <div class="comment_content">
-                            <div id="comment">
-                                <form className="form" onSubmit={this.handleSubmitComment}>
-                                    <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                    <Button variant="outlined"  id="comment_btn"type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
-                                </form>
+                            <div class="comment_header">
+                                <div class="comment_title">댓글</div>
+                                <div>
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
+                                        <span class="likepeople">{item.like}</span> </button>
+                                </div>
                             </div>
 
-                            <div class="item" ref={(DOMNodeRef) => {
-                                this.myRef = DOMNodeRef;
-                            }}></div>
+                            <div class="comment_content">
+                                <div id="comment">
+                                    <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                        <Button variant="outlined" id="comment_btn" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
+                                </div>
 
-                        </div>
+                                <div class="item" ref={(DOMNodeRef) => {
+                                    this.myRef = DOMNodeRef;
+                                }}></div>
+
+                            </div>
                         </div>
                     </Paper>
                 </article>

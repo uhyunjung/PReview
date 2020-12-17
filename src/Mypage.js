@@ -121,6 +121,22 @@ class Mypage extends Component {
         if ((this.state.new_name) || (this.state.new_nick) || (this.state.new_name == "") || (this.state.new_nick == "")) {
             this.handleClickBar();
         }
+    
+        db.collection("reviews").where("writer_id", "==", firebase.auth().currentUser.uid)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            doc.set(
+                {
+                    writer_name : this.state.new_nick
+                }
+            )
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
 
         db.collection("users").doc(firebase.auth().currentUser.uid).set(
             {

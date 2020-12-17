@@ -15,12 +15,15 @@ import Lecture_review_edit from './Lecture_review_edit';
 import Camp_review_main from './Camp_review_main';
 import Camp_review_write from './Camp_review_write';
 import Camp_review_detail from './Camp_review_detail';
+import Camp_review_edit from './Camp_review_edit';
 import Solution_main from './Solution_main';
 import Solution_write from './Solution_write';
 import Solution_detail from './Solution_detail';
+import Solution_edit from './Solution_edit';
 import Community_view_main from './Community_view_main';
 import Community_view_write from './Community_view_write';
 import Community_view_detail from './Community_view_detail';
+import Community_view_edit from './Community_view_edit';
 import Mypage from './Mypage';
 
 class App extends Component {
@@ -142,16 +145,19 @@ class App extends Component {
                             <Route path='/Lecture_review_main' component={Lecture_review_main} />
                             <Route path='/Lecture_review_write' component={this.state.isSignedIn ? (Lecture_review_write) : (Login)} />
                             <Route path='/Lecture_review_detail' component={Lecture_review_detail} />
-                            <Route path='/Lecture_review_edit' component={this.state.isSignedIn ? (Lecture_review_edit) : (Login)} />
+                            <Route path='/Lecture_review_edit' component={Lecture_review_edit} />
                             <Route path='/Camp_review_main' component={Camp_review_main} />
                             <Route path='/Camp_review_write' component={this.state.isSignedIn ? (Camp_review_write) : (Login)} />
                             <Route path='/Camp_review_detail' component={Camp_review_detail} />
+                            <Route path='/Camp_review_edit' component={Camp_review_edit} />
                             <Route path='/Community_view_main' component={Community_view_main} />
                             <Route path='/Community_view_write' component={this.state.isSignedIn ? (Community_view_write) : (Login)} />
                             <Route path='/Community_view_detail' component={Community_view_detail} />
+                            <Route path='/Community_view_edit' component={Community_view_edit} />
                             <Route path='/Solution_main' component={Solution_main} />
                             <Route path='/Solution_write' component={this.state.isSignedIn ? (Solution_write) : (Login)} />
                             <Route path='/Solution_detail' component={Solution_detail} />
+                            <Route path='/Solution_edit' component={Solution_edit} />
                             <Route path='/Mypage' component={Mypage} />
                         </Switch>
                     </div>
