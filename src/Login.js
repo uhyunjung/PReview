@@ -43,6 +43,8 @@ const Login = () => {
 
   const handleSignUp = () => {
     clearErrors();
+    if((name!="")&&(nickname!=""))
+    {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch(err => {
         switch (err.code) {
@@ -65,6 +67,10 @@ const Login = () => {
       .catch((error) => {
         alert(error.message);
       });
+    }
+    else {
+      alert("이름 및 닉네임을 입력해주세요");
+    }
   };
 
   const authListener = () => {

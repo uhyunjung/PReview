@@ -39,11 +39,13 @@ PReview
 │   ├── Main.js                                        - 메인 페이지
 │   ├── Login.js                                       - 로그인 페이지
 │   ├── Mypage.js                                      - 마이페이지
-│   └── Lecture_review_main, detail, write, edit.js          - 강의 리뷰 페이지
-│   ├── Camp_review_main, detail, write, edit.js             - 캠프 리뷰 페이지
-│   ├── Solution_main, detail, write, edit.js                - 솔루션 페이지
-│   ├── Community_view_main, detail, write, edit.js          - 커뮤니티 페이지
+│   └── Lecture_review_main, detail, write, edit.js    - 강의 리뷰 페이지
+│   ├── Camp_review_main, detail, write, edit.js       - 캠프 리뷰 페이지
+│   ├── Solution_main, detail, write, edit.js          - 솔루션 페이지
+│   ├── Community_view_main, detail, write, edit.js    - 커뮤니티 페이지
 │   └── total.css                                      - css 파일
+│
+├── before/                                            - 수정 전 파일들(실행 파일X)
 │ 
 ├── .gitignore
 ├── .firebaserc                                        - firebase 설정 파일
