@@ -21,6 +21,8 @@ class Lecture_review_detail extends Component {
 
         this.myRef = React.createRef();
 
+        this.comments = [];
+
         this.state = {
             open : false,
             isUid: false,
@@ -106,10 +108,12 @@ class Lecture_review_detail extends Component {
             });
 
             db.collection("comments")
+            .orderBy("date", "asc")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
-                        if (posting == this.state.posting_id) {
+                        if (posting == this.state.posting_id && this.comments.indexOf(doc.id) == -1) {
+                            this.comments.push(doc.id);
                             const commentDiv = document.createElement("div");
 
                             let htmlContent;
@@ -134,11 +138,11 @@ class Lecture_review_detail extends Component {
 
     MakeHTMLContent(name, content, date) {
         let htmlContent =
-            "<div class=\"review\">\
+        "<div class=\"comment_item\">\
             <ul>\
                 <li class=\"item\">\
                     <div class=\"comment_nickname\">"+ name + "</div>\
-                    <div class=\"comment_content\">"+ content + "</div>\
+                    <div class=\"comment_comment\">"+ content + "</div>\
                     <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
                 </li>\
             </ul>\
@@ -208,7 +212,7 @@ class Lecture_review_detail extends Component {
                     <aside class="sidebar">
                         <p>언어</p>
                         <ul class="category">
-                            <li><a href="/Lecture_review_main?board=C/C++">C / C++</a></li>
+                            <li><a href="/Lecture_review_main?board=C/C++">C/C++</a></li>
                             <li><a href="/Lecture_review_main?board=C#">C#</a></li>
                             <li><a href="/Lecture_review_main?board=Java">Java</a></li>
                             <li><a href="/Lecture_review_main?board=Python">Python</a></li>
@@ -332,7 +336,7 @@ class Lecture_review_detail extends Component {
                                 </form>
                             </div>
 
-                            <div class="item" ref={(DOMNodeRef) => {
+                            <div class="comment_list" ref={(DOMNodeRef) => {
                                 this.myRef = DOMNodeRef;
                             }}></div>
 

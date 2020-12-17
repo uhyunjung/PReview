@@ -747,6 +747,27 @@ aside .category li {
   .comment_content{
     padding: 0 0 0 50px;
   }
+  .comment {
+    display: flex;
+    width:80%;
+    margin-top:3px;
+    margin-bottom: 1vh;
+    margin-left: 3px;
+  }
+  .comment_item {
+    padding-bottom: 5px;
+    width:100%;
+    font-size: 13px;
+    border-bottom-width: 1px;
+    border-bottom-color: #777777;
+    border-bottom-style: solid
+  }
+  .comment_list {
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+  }
   #input{
     height:60vh;
     width:100%;
@@ -773,13 +794,18 @@ aside .category li {
     font-weight: bold;
 
   }
-  .comment_nickname,
-  .comment_content,
-  .comment_date,
-  .comment_time{
+  .comment_content {
     color: #585858;
     font-size: 12px;
-
+  }
+  .comment_nickname{
+    width: 20%;
+  }
+  .comment_comment{
+    width: 65%;
+  }
+  .comment_date{
+    width: 15%;
   }
 
 
