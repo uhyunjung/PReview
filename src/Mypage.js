@@ -338,24 +338,24 @@ class Mypage extends Component {
                                                 const postingDiv = document.createElement("div");
 
                                                 const htmlContent =
-                                                    "<div class=\"review\">\
-                                        <ul>\
-                                            <li class=\"item\">\
-                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                                <div class=\"info\">\
-                                                <a href='/Camp_review_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
-                                                </div>\
-                                                <div class=\"like\">\
-                                                    <span class=\"date\">"+ doc.data().date + "</span>\
-                                                    <div class=\"likebtn\">\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                    </div>\
-                                                <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
+                                                "<div class=\"review\">\
+                                                <ul>\
+                                                    <li class=\"item\">\
+                                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                                            <div class=\"info_board\">\
+                                                        <a href='/Camp_review_detail?board="+doc.data().board+"&id="+doc.id+"'><div class=\"title_camp\">"+doc.data().title+"</div></a>\
+                                                        </div>\
+                                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
+                                                        <span class=\"date\">"+this.editDate(doc.data().date)+"</span>\
+                                                        <div class=\"center\">\
+                                                            <div class=\"like1\">\
+                                                                <i class=\"like_board\">♥</i>\
+                                                                <div class=\"likepeople_board\">"+doc.data().like+"</div>\
+                                                            </div>\
+                                                        </div>\
+                                                    </li>\
+                                                </ul>\
+                                            </div>";
                                                 postingDiv.innerHTML = htmlContent;
 
                                                 document.getElementById("postings").appendChild(postingDiv);
@@ -390,24 +390,24 @@ class Mypage extends Component {
                                                 const postingDiv = document.createElement("div");
 
                                                 const htmlContent =
-                                                    "<div class=\"review\">\
-                                        <ul>\
-                                            <li class=\"item\">\
-                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                                <div class=\"info\">\
-                                                <a href='/Solution_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
-                                                </div>\
-                                                <div class=\"like\">\
-                                                    <span class=\"date\">"+ doc.data().date + "</span>\
-                                                    <div class=\"likebtn\">\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                    </div>\
-                                                <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
+                                                "<div class=\"review\">\
+                                                <ul>\
+                                                    <li class=\"item\">\
+                                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                                            <div class=\"info\">\
+                                                        <a href='/Solution_detail?board="+doc.data().board+"&id="+doc.id+"'><div class=\"title_camp\">"+doc.data().title+"</div></a>\
+                                                        </div>\
+                                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
+                                                        <span class=\"date\">"+this.editDate(doc.data().date)+"</span>\
+                                                        <div class=\"center\">\
+                                                            <div class=\"like1\">\
+                                                                <i class=\"like_board\">♥</i>\
+                                                                <div class=\"likepeople_board\">"+doc.data().like+"</div>\
+                                                            </div>\
+                                                        </div>\
+                                                    </li>\
+                                                </ul>\
+                                            </div>";
                                                 postingDiv.innerHTML = htmlContent;
 
                                                 document.getElementById("solution").appendChild(postingDiv);
@@ -442,24 +442,25 @@ class Mypage extends Component {
                                                 const postingDiv = document.createElement("div");
 
                                                 const htmlContent =
-                                                    "<div class=\"review\">\
-                                        <ul>\
-                                            <li class=\"item\">\
-                                                <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
-                                                <div class=\"info\">\
-                                                <a href='/Community_view_detail?board="+ doc.data().board + "&id=" + doc.id + "'><div class=\"title\">" + doc.data().title + "</div></a>\
-                                                </div>\
-                                                <div class=\"like\">\
-                                                    <span class=\"date\">"+ doc.data().date + "</span>\
-                                                    <div class=\"likebtn\">\
-                                                        <i class=\"fas fa-heart\">♥</i>\
-                                                    <div class=\"likepeople\">"+ doc.data().like + "</div>\
-                                                    </div>\
-                                                <span class=\"writer\">작성자 : "+ doc.data().writer_name + "</span>\
-                                                </div>\
-                                            </li>\
-                                        </ul>\
-                                    </div>";
+                                                "<div class=\"review\">\
+                                                <ul>\
+                                                    <li class=\"item\">\
+                                                        <a href=\"#\"><img src=\"image.jpg\" alt=\"\" width=\"100\"></img></a>\
+                                                        <div class=\"info\">\
+                                                            <a href='/Community_view_detail?board="+doc.data().board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
+                                                        </div>\
+                                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
+                                                        <span class=\"date\">"+this.editDate(doc.data().date)+"</span>\
+                                                        <div class=\"center\">\
+                                                            <div class=\"like1\">\
+                                                                <i class=\"like_board\">♥</i>\
+                                                                <div class=\"likepeople_board\">"+doc.data().like+"</div>\
+                                                            </div>\
+                                                        </div>\
+                                                    </li>\
+                                                </ul>\
+                                            </div>";
+                
                                                 postingDiv.innerHTML = htmlContent;
 
                                                 document.getElementById("community").appendChild(postingDiv);
