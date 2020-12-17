@@ -3,15 +3,22 @@ import { Link } from 'react-router-dom';
 import { Paper, Button } from '@material-ui/core';
 import './total.css';
 import { db } from './firebase.js';
-import { ContactsOutlined } from '@material-ui/icons';
+import { ContactsOutlined, SpeakerNotesOutlined } from '@material-ui/icons';
 import CanvasJSReact from './canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Lecture_review_main extends React.Component {
-    Constructor(props) {
+    constructor(props) {
+        super(props);
+
         this.myRef = React.createRef();
 
+        this.lectureList = [];
+
+        this.dataPoints = [];
+
+        this.options = [];
     }
 
     getUrlParams() {
@@ -33,8 +40,6 @@ class Lecture_review_main extends React.Component {
         if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
         else ret = date.substring(0, 14);
 
-        console.log(ret);
-
         return ret;
     }
 
@@ -45,19 +50,28 @@ class Lecture_review_main extends React.Component {
             let search;
             if(params.search_exist) {
                 search = decodeURI(params.search).toLowerCase();
-                console.log(search);
             }
-            console.log(params.board);
             let board = decodeURI(params.board);
-            console.log(board);
 
             db.collection("reviews")
             .orderBy(params.order_by, "desc")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
-                    console.log(doc);
+
                     if (params.board == doc.data().board || (params.search_exist && lec_name.indexOf(search) != -1)){
+                        if(this.lectureList.indexOf(doc.data().lecture_name) != -1){
+                            this.dataPoints.forEach(dp => {
+                                if(dp.label == doc.data().lecture_name){
+                                    dp.y += Number(doc.data().star);
+                                }
+                            })
+                            
+                        }
+                        else {
+                            this.lectureList.push(doc.data().lecture_name);
+                            this.dataPoints.push({label: doc.data().lecture_name, y: Number(doc.data().star)});
+                        }
 
                         const reviewDiv = document.createElement("div");
 
@@ -97,6 +111,8 @@ class Lecture_review_main extends React.Component {
                     }
                 })
             })
+
+            this.render();
         }
     }
 
@@ -111,41 +127,28 @@ class Lecture_review_main extends React.Component {
         return ret;
     }
 
-    makeChartContent() {
-        let dataPoints = [];
-        let DP;
-
-        db.collection("lecture").orderBy("review_num", "desc")
-        .onSnapshot(snaps => {
-            snaps.forEach(doc => {
-                DP = {y: doc.data().star, label: doc.data().name};
-                dataPoints.push(DP);
-            })
-        })
-
-        console.log(dataPoints);
-
-        return dataPoints;
-    }
-
     // 렌더링
     render() {
         let params = this.getUrlParams();
-        let board = params.search_exist ? "캠프 리뷰" : decodeURI(params.board)
-        let DP = this.makeChartContent()
+        let board = params.search_exist ? "강의 리뷰" : decodeURI(params.board)
+
         const options = {
             height: 260,
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
+            dataPointMaxWidth: 30,
             axisY: {
                 title: "Star",
                 minimum: 0,
                 maximum: 5,
                 interval: 1
             },
+            axisx: {
+                labelAutoFit: true,
+            },
             data: [{
-                type: "column",
-                dataPoints: DP
+                type: "bar",
+                dataPoints: this.dataPoints
             }]
         }
 
