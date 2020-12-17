@@ -378,7 +378,7 @@ const Lecture_review_edit = () => {
                                     <span class="entry-name">장점</span>
                                 </div>
                                 <div class="review-content">
-                                    <input type="text" id="pros" class="long-text" value={pros} onChange={(e) => setPros(e.target.value)}></input>
+                                    <textarea type="text" id="pros" class="long-text" value={pros} onChange={(e) => setPros(e.target.value)}></textarea>
                                 </div>
                             </div>
 
@@ -387,7 +387,7 @@ const Lecture_review_edit = () => {
                                     <span class="entry-name">단점</span>
                                 </div>
                                 <div class="review-content">
-                                    <input type="text" id="cons" class="long-text" value={cons} onChange={(e) => setCons(e.target.value)} />
+                                    <textarea type="text" id="cons" class="long-text" value={cons} onChange={(e) => setCons(e.target.value)} />
                                 </div>
                             </div>
 
@@ -402,17 +402,17 @@ const Lecture_review_edit = () => {
                         </section>
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 수정</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
-                                <DialogTitle id="alert-dialog-title">{"리뷰 작성"}</DialogTitle>
+                                <DialogTitle id="alert-dialog-title">{"리뷰 수정"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-description">
-                                        리뷰를 저장하시겠습니까?
+                                        리뷰를 수정하시겠습니까?
                                         </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>

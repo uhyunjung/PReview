@@ -146,22 +146,22 @@ const Community_view_edit = () => {
                         </section>
                         <section id="contants" class="writing-block">
                             <div id="write_box" class="review-content">
-                                <input id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
+                                <textarea id="input" type="text" class="long-text" value={content} onChange={(e) => setContent(e.target.value)} />
                             </div>
                         </section>
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 수정</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
-                                <DialogTitle id="alert-dialog-title">{"리뷰 작성"}</DialogTitle>
+                                <DialogTitle id="alert-dialog-title">{"게시글 수정"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-description">
-                                        리뷰를 저장하시겠습니까?
+                                        게시글을 수정하시겠습니까?
                                         </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>

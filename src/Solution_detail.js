@@ -298,7 +298,7 @@ class Solution_detail extends Component {
                             </section>
                             <section id="contants" class="writing-block">
                                 <div class="posting-content">
-                                    <span>{item.content}</span>
+                                    <pre>{item.content}</pre>
                                 </div>
 
                                 <div>
@@ -313,7 +313,7 @@ class Solution_detail extends Component {
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
                                                 >
-                                                    <DialogTitle id="alert-dialog-title">{"리뷰 삭제"}</DialogTitle>
+                                                    <DialogTitle id="alert-dialog-title">{"게시글 삭제"}</DialogTitle>
                                                     <DialogContent>
                                                         <DialogContentText id="alert-dialog-description">
                                                             게시글을 삭제하시겠습니까?
