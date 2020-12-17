@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './total.css';
-import { Snackbar, NoSsr, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Snackbar, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
@@ -8,22 +8,14 @@ import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { SentimentSatisfied } from '@material-ui/icons';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-// Paper 태그 스타일
-const styles = ({ spacing: { unit } }) => ({
-    paper: {
-        margin: `${unit * 3}px auto`,
-        padding: unit * 2,
-        maxWidth: 400
-    }
-})
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -37,12 +29,10 @@ const InputWrapper = styled('div')`
 &:hover {
     border-color: #40a9ff;
   }
-
   &.focused {
     border-color: #40a9ff;
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
   }
-
   & input {
     font-size: 14px;
     height: 30px;
@@ -75,22 +65,18 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-
   #x {
       font-size:25px;
   }
-
   &:focus {
     border-color: #40a9ff;
     background-color: #e6f7ff;
   }
-
   & span {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-
   & svg {
     font-size: 12px;
     cursor: pointer;
@@ -110,33 +96,26 @@ const Listbox = styled('ul')`
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1;
-
   & li {
     padding: 5px 12px;
     display: flex;
-
     & span {
       flex-grow: 1;
     }
-
     & svg {
       color: transparent;
     }
   }
-
   & li[aria-selected='true'] {
     background-color: #fafafa;
     font-weight: 600;
-
     & svg {
       color: #1890ff;
     }
   }
-
   & li[data-focus='true'] {
     background-color: #e6f7ff;
     cursor: pointer;
-
     & svg {
       color: #000;
     }
@@ -152,11 +131,11 @@ const Lecture_review_edit = () => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setOpen(() =>true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setOpen(() =>false);
     };
 
     // 빈칸 방지
@@ -172,7 +151,7 @@ const Lecture_review_edit = () => {
             return;
         }
 
-        setOpenBar(false);
+        setOpenBar(() =>false);
     };
 
     let params = {};
@@ -193,8 +172,6 @@ const Lecture_review_edit = () => {
     const [like, setLike] = useState("");
     const [board, setBoard] = useState(params.board);
 
-    
-
     // 데이터 저장
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -208,7 +185,7 @@ const Lecture_review_edit = () => {
             db.collection("users").doc(firebase.auth().currentUser.uid).get()
                 .then(doc => {
 
-                    db.collection("reviews").add({
+                    db.collection("reviews").doc(params.id).set({
                         writer_id: firebase.auth().currentUser.uid,
                         writer_name: doc.data().nickname,
                         lecture_name: lecture_name,
@@ -224,7 +201,7 @@ const Lecture_review_edit = () => {
                         board: board
                     })
                         .then((docRef) => {
-                            window.location.href = "/Lecture_review_detail?board=" + params.board + "&id=" + docRef.id;
+                            window.location.href = "/Lecture_review_detail?board=" + params.board + "&id=" + params.id;
                         })
                         .catch((error) => {
                             alert(error.message);
@@ -284,9 +261,10 @@ const Lecture_review_edit = () => {
         }
     }
 
+
     // 렌더링
     return (
-        <div className="Lecture_review_edit" class="main_body">
+        <div className="Lecture_review_write" class="main_body">
             <div className={classes.root}>
                 <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
                     <Alert onClose={handleCloseBar} severity="error">
@@ -424,7 +402,7 @@ const Lecture_review_edit = () => {
                         </section>
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글작성</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}

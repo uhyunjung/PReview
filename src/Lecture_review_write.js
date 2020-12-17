@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './total.css';
-import { Snackbar, NoSsr, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Snackbar, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
@@ -8,22 +8,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
 import { db } from './firebase.js';
 import firebase from 'firebase';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { SentimentSatisfied } from '@material-ui/icons';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-// Paper 태그 스타일
-const styles = ({ spacing: { unit } }) => ({
-    paper: {
-        margin: `${unit * 3}px auto`,
-        padding: unit * 2,
-        maxWidth: 400
-    }
-})
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -179,6 +170,29 @@ const Lecture_review_write = () => {
     const [date, setDate] = useState("");
     const [like, setLike] = useState("");
     const [board, setBoard] = useState(params.board);
+    const [id, setId] = useState(params.id);
+    const [items, setItems] = useState([]);
+
+    if(params.id!=null)
+    {
+        let review = db.collection("reviews").doc(params.id);
+        review.get().then(res => {
+            setItems(res.data());
+        });
+
+        setWriterId(items.writer_id);
+        setWriterName(items.writer_name);
+        setLectureName(items.lecture_name);
+        setStar(items.star);
+        setTags(items.tags);
+        setPeriod(items.period);
+        setCost(items.cost);
+        setLink(items.link);
+        setDate(items.date);
+        setLike(items.like);
+        setBoard(items.board);
+    }
+    
 
     // 데이터 저장
     const handleSubmit = (e) => {
@@ -268,6 +282,7 @@ const Lecture_review_write = () => {
             handleClickOpen();
         }
     }
+
 
     // 렌더링
     return (
