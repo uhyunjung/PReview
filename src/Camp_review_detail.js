@@ -18,6 +18,8 @@ class Camp_review_detail extends Component {
     constructor(props) {
         super(props);
 
+        this.comments = [];
+
         this.state = {
             open: false,
             isUid: false,
@@ -29,6 +31,19 @@ class Camp_review_detail extends Component {
             commentName: "",
             uid: ""
         };
+    }
+
+    editDate(date){
+        let today = new Date();
+        let curr = today.toLocaleString().substring(0, 13);
+
+        let ret;
+        if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
+        else ret = date.substring(0, 14);
+
+        console.log(ret);
+
+        return ret;
     }
 
     likeUpdate() {
@@ -83,11 +98,12 @@ class Camp_review_detail extends Component {
             });
 
             db.collection("comments")
-                .orderBy("date", "desc")
+                .orderBy("date", "asc")
                 .onSnapshot(snaps => {
                     snaps.forEach(doc => {
                         let posting = doc.data().posting_id;
-                        if (posting == this.state.posting_id) {
+                        if (posting == this.state.posting_id && this.comments.indexOf(doc.id) == -1) {
+                            this.comments.push(doc.id);
                             const commentDiv = document.createElement("div");
 
                             let htmlContent;
@@ -112,15 +128,15 @@ class Camp_review_detail extends Component {
 
     MakeHTMLContent(name, content, date) {
         let htmlContent =
-            "<div class=\"review\">\
-            <ul>\
-                <li class=\"item\">\
-                    <div class=\"comment_nickname\">"+ name + "</div>\
-                    <div class=\"comment_content\">"+ content + "</div>\
-                    <div class=\"comment_date\">"+ date + "</div>\
-                </li>\
-            </ul>\
-        </div>";
+        "<div class=\"comment_item\">\
+        <ul>\
+            <li class=\"item\">\
+                <div class=\"comment_nickname\">"+ name + "</div>\
+                <div class=\"comment_comment\">"+ content + "</div>\
+                <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
+            </li>\
+        </ul>\
+    </div>";
 
         return htmlContent
     }
@@ -211,8 +227,8 @@ class Camp_review_detail extends Component {
                                     </div>
 
                                     <div class="writer_info">
-                                        <span class="writer">{item.writer_name}</span><br></br>
-                                        <span class="date">{item.date}</span>
+                                        <span class="writer">{item.writer_name}</span>
+                                        <span class="date">{this.editDate(String(item.date))}</span>
                                     </div>
                                 </div>
                             </section>
@@ -241,7 +257,7 @@ class Camp_review_detail extends Component {
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button onClick={this.handleClose} color="primary">취소</Button>
-                                                        <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                        <Link to={'/Camp_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                     </DialogActions>
                                                 </Dialog>
                                             </section>
@@ -254,9 +270,9 @@ class Camp_review_detail extends Component {
                             </section>
                             <div class="comment_header">
                                 <div class="comment_title">댓글</div>
-                                <div>
-                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i>
-                                    <span class="likepeople">{item.like}</span> </button>
+                                <div class="like1">
+                                    <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
+                                    <span class="likepeople">{item.like}</span>
                                 </div>
                             </div>
 
@@ -268,7 +284,7 @@ class Camp_review_detail extends Component {
                                     </form>
                                 </div>
 
-                                <div class="item" ref={(DOMNodeRef) => {
+                                <div class="comment_list" ref={(DOMNodeRef) => {
                                     this.myRef = DOMNodeRef;
                                 }}></div>
                             </div>

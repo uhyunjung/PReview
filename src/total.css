@@ -28,6 +28,14 @@ body {
   height:100%;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 a{
   text-decoration:none;
 }
@@ -432,8 +440,6 @@ aside .category li {
   font-size:14px;
 }
 
-
-
 #main-sec {
     display: flex;
 }
@@ -498,17 +504,24 @@ aside .category li {
   }
   .main_info{
     width:80%;
-    margin-top:1vh;
+    margin-top:3px;
     margin-bottom: 1vh;
     margin-left: 3px;
   }
   .info {
-    width:60%;
+    width:65%;
+    height: 100%;
+  }
+  .info_board {
+    width: 60%;
     height: 100%;
   }
 
   .info_side{
-    width:40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:15%;
     height:100%;
   }
   .header {
@@ -536,6 +549,24 @@ aside .category li {
     width: 400px;
     height:auto;
     padding: 15px 0 0 15px;
+  }
+  .mypage_category {
+    color:#444444;
+    width: 150px;
+    height: 28px;
+    font-weight: bold;
+    font-size:20px;
+    text-align: left;
+  }
+  .mypage_category_small {
+    color:#444444;
+    width: 150px;
+    height: 28px;
+    font-weight: bold;
+    font-size:18px;
+    text-align: left;
+    margin-left: 25px;
+    margin-top: 25px;
   }
   .search {
     display: flex;
@@ -567,25 +598,50 @@ aside .category li {
     margin-right: 2vw;
   }
   .like{
-    width:4px;
+    display: flex;
+    align-items: center;
+    width:30px;
     background-color: transparent;
     border:none;
-    font-size:2vw;
+    font-size:30px;
+    color:red;
+  }
+  .like_board{
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    width:30px;
+    background-color: transparent;
+    border:none;
     color:red;
   }
   .likepeople{
-    font-size:1vw;
+    font-size:19px;
     color:gray;
     font-weight: bold;
+    margin-top: 4px;
+  }
+  .likepeople_board{
+    margin-left: 3px;
+    font-size:14px;
+    color:gray;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  .like1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
   }
   .like2{
-    width:4px;
+    width:20px;
+    margin-top: 4px;
     background-color: transparent;
     border:none;
-    font-size:1.5vw;
+    font-size:23px;
     color:red;
     text-align: center;
-    margin:1vh 2vw;
   }
   .likepeople2{
     width:4px;
@@ -595,6 +651,10 @@ aside .category li {
     margin-left: 7px;
     margin-top:3px;
     margin-bottom:1.5vh;
+  }
+  .writer{
+    width: 110px;
+    text-align: center;
   }
   .date, .writer{
     font-size:12px;
@@ -613,9 +673,15 @@ aside .category li {
     border-bottom: 2px solid #BDBDBD;
   }
   .writer_info {
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     float: right;
     margin-bottom: 15px;
+  }
+  .writer_info .writer{
+    width: 120px;
   }
   .reviewdetail {
     margin: 10px;
@@ -647,8 +713,8 @@ aside .category li {
   .title_camp{
     color:gray;
     font-weight: bold;
-    font-size:1vw;
-    margin:3px 2vw;
+    font-size:15px;
+    margin: 3px 10px;
   }
   #moa_btn{
     background-color: #F0F0F0;
@@ -668,20 +734,39 @@ aside .category li {
     padding:5px auto;
     border:2px solid #BDBDBD;
   }
- 
-  .comment_header,
-  .comment_write,
-  .comment_show,
-  .comment_content{
-    margin: 2vh 3vw;
-  }
-  .comment_header {
+  .comment_header{
+    padding: 10px 35px 0;
     display: flex;
     justify-content: space-between;
     font-size: 1vw;
     color:gray;
     font-weight: bold;
-
+  }
+  .comment_write,
+  .comment_show,
+  .comment_content{
+    padding: 0 0 0 50px;
+  }
+  .comment {
+    display: flex;
+    width:80%;
+    margin-top:3px;
+    margin-bottom: 1vh;
+    margin-left: 3px;
+  }
+  .comment_item {
+    padding-bottom: 5px;
+    width:100%;
+    font-size: 13px;
+    border-bottom-width: 1px;
+    border-bottom-color: #777777;
+    border-bottom-style: solid
+  }
+  .comment_list {
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
   }
   #input{
     height:60vh;
@@ -709,13 +794,18 @@ aside .category li {
     font-weight: bold;
 
   }
-  .comment_nickname,
-  .comment_content,
-  .comment_date,
-  .comment_time{
+  .comment_content {
     color: #585858;
     font-size: 12px;
-
+  }
+  .comment_nickname{
+    width: 20%;
+  }
+  .comment_comment{
+    width: 65%;
+  }
+  .comment_date{
+    width: 15%;
   }
 
 

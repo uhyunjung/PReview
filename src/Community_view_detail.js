@@ -19,6 +19,8 @@ class Community_view_detail extends Component {
   constructor(props) {
       super(props);
 
+      this.comments = [];
+
       this.state = {
           open: false,
           isUid: false,
@@ -31,6 +33,19 @@ class Community_view_detail extends Component {
           uid: ""
       };
   }
+
+  editDate(date){
+    let today = new Date();
+    let curr = today.toLocaleString().substring(0, 13);
+
+    let ret;
+    if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
+    else ret = date.substring(0, 14);
+
+    console.log(ret);
+
+    return ret;
+}
 
   likeUpdate() {
       let params = this.getUrlParams();
@@ -85,11 +100,12 @@ class Community_view_detail extends Component {
           });
 
           db.collection("comments")
-              .orderBy("date", "desc")
+              .orderBy("date", "asc")
               .onSnapshot(snaps => {
                   snaps.forEach(doc => {
                       let posting = doc.data().posting_id;
-                      if (posting == this.state.posting_id) {
+                      if (posting == this.state.posting_id && this.comments.indexOf(doc.id) == -1) {
+                        this.comments.push(doc.id);
                           const commentDiv = document.createElement("div");
 
                           let htmlContent;
@@ -112,16 +128,16 @@ class Community_view_detail extends Component {
   }
 
   MakeHTMLContent(name, content, date) {
-      let htmlContent =
-          "<div class=\"review\">\
-          <ul>\
-              <li class=\"item\">\
-                  <div class=\"comment_nickname\">"+ name + "</div>\
-                  <div class=\"comment_content\">"+ content + "</div>\
-                  <div class=\"comment_date\">"+ date + "</div>\
-              </li>\
-          </ul>\
-      </div>";
+        let htmlContent =
+        "<div class=\"comment_item\">\
+            <ul>\
+                <li class=\"item\">\
+                    <div class=\"comment_nickname\">"+ name + "</div>\
+                    <div class=\"comment_comment\">"+ content + "</div>\
+                    <div class=\"comment_date\">"+ this.editDate(date) + "</div>\
+                </li>\
+            </ul>\
+        </div>";
 
       return htmlContent
   }
@@ -202,14 +218,14 @@ class Community_view_detail extends Component {
                       <div id="detail">
                           <div class="category_name category_name_write_page">{board}</div>
                           <section id="lecture-name" class="lecturename writing-block">
-                              <div class="item">
-                                  <div class="review_title">
+                          <div class="item" style={{width:"100%"}}>
+                                    <div class="review-entry" style={{fontSize:"1em", textAlign:"left", width:"100%" }}>
                                       <span>{item.title}</span>
                                   </div>
 
                                   <div class="writer_info">
-                                      <span class="writer">{item.writer_name}</span><br></br>
-                                      <span class="date">{item.date}</span>
+                                      <span class="writer">{item.writer_name}</span>
+                                      <span class="date">{this.editDate(String(item.date))}</span>
                                   </div>
                               </div>
                           </section>
@@ -233,12 +249,12 @@ class Community_view_detail extends Component {
                                                   <DialogTitle id="alert-dialog-title">{"리뷰 삭제"}</DialogTitle>
                                                   <DialogContent>
                                                       <DialogContentText id="alert-dialog-description">
-                                                          리뷰를 삭제하시겠습니까?
+                                                          게시글을 삭제하시겠습니까?
                                                           </DialogContentText>
                                                   </DialogContent>
                                                   <DialogActions>
                                                       <Button onClick={this.handleClose} color="primary">취소</Button>
-                                                      <Link to={'/lecture_review_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
+                                                      <Link to={'/Community_view_main?board=' + item.board}><Button type="submit" onClick={this.deleteReview} color="primary" autoFocus>확인</Button></Link>
                                                   </DialogActions>
                                               </Dialog>
                                           </section>
@@ -249,7 +265,7 @@ class Community_view_detail extends Component {
                               </section>
                           <div class="comment_header">
                               <div class="comment_title">댓글</div>
-                              <div>
+                              <div class="like1">
                                   <button class="like" onClick={() => { this.likeUpdate() }}><i class="far fa-heart">♥</i></button>
                                   <span class="likepeople">{item.like}</span>
                               </div>
@@ -257,13 +273,13 @@ class Community_view_detail extends Component {
 
                           <div class="comment_content">
                               <div id="comment">
-                                  <form className="form" onSubmit={this.handleSubmitComment}>
-                                      <input id="input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
-                                      <Button variant="contained" type="submit" onClick={this.handleSubmitComment}>댓글 작성</Button>
-                                  </form>
+                                <form className="form" onSubmit={this.handleSubmitComment}>
+                                        <input id="comment_input" type="text" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })}></input>
+                                        <Button variant="outlined" type="submit" id="comment_btn" onClick={this.handleSubmitComment}>댓글 작성</Button>
+                                    </form>
                               </div>
 
-                              <div class="item" ref={(DOMNodeRef) => {
+                              <div class="comment_list" ref={(DOMNodeRef) => {
                                   this.myRef = DOMNodeRef;
                               }}></div>
                           </div>

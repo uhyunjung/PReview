@@ -10,6 +10,19 @@ class Community_view_main extends Component {
 
     }
 
+    editDate(date){
+        let today = new Date();
+        let curr = today.toLocaleString().substring(0, 13);
+
+        let ret;
+        if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
+        else ret = date.substring(0, 14);
+
+        console.log(ret);
+
+        return ret;
+    }
+
     // 렌더링 후 완료
     getUrlParams() {
         let params = {};
@@ -51,11 +64,13 @@ class Community_view_main extends Component {
                                         <div class=\"info\">\
                                             <a href='/Community_view_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+doc.data().title+"</div></a>\
                                         </div>\
-                                        <span class=\"writer\">작성자 : "+doc.data().writer_name+"</span>\
-                                        <span class=\"date\">"+doc.data().date+"</span>\
-                                        <div class=\"likebtn\">\
-                                            <i class=\"date\">♥</i>\
-                                            <div class=\"date\">"+doc.data().like+"</div>\
+                                        <span class=\"writer\">"+doc.data().writer_name+"</span>\
+                                        <span class=\"date\">"+this.editDate(doc.data().date)+"</span>\
+                                        <div class=\"center\">\
+                                            <div class=\"like1\">\
+                                                <i class=\"like_board\">♥</i>\
+                                                <div class=\"likepeople_board\">"+doc.data().like+"</div>\
+                                            </div>\
                                         </div>\
                                     </li>\
                                 </ul>\

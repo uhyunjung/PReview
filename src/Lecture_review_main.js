@@ -17,11 +17,25 @@ class Lecture_review_main extends React.Component {
     getUrlParams() {
         let params = {};
         params["search_exist"] = false;
+        params["order_by"] = "date"
 
         let exist = false;
         window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; params[key+"_exist"] = true;});
 
         return params;
+    }
+
+    editDate(date){
+        let today = new Date();
+        let curr = today.toLocaleString().substring(0, 13);
+
+        let ret;
+        if(date.indexOf(curr) != -1) ret = date.substring(14, date.length);
+        else ret = date.substring(0, 14);
+
+        console.log(ret);
+
+        return ret;
     }
 
     // 렌더링 후 완료
@@ -38,6 +52,7 @@ class Lecture_review_main extends React.Component {
             console.log(board);
 
             db.collection("reviews")
+            .orderBy(params.order_by, "desc")
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
                     let lec_name = doc.data().lecture_name.toLowerCase();
@@ -51,7 +66,7 @@ class Lecture_review_main extends React.Component {
                                 <ul>\
                                     <li class=\"item\">\
                                         <div id='site_box'>\
-                                            <a href=\"https://www.acmicpc.net/\">백준</a>\
+                                            <a href="+doc.data().link+">Link</a>\
                                         </div>\
                                         <div class=\"info\">\
                                             <a href='/Lecture_review_detail?board="+board+"&id="+doc.id+"'><div class=\"title\">"+ doc.data().lecture_name + "</div></a>\
@@ -60,14 +75,14 @@ class Lecture_review_main extends React.Component {
                                             <Button onClick=\"location.href='/Lecture_review_main?search="+doc.data().lecture_name+"'\" variant=\"outlined\" id=\"moa_btn\" color=\"primary\" type=\"submit\">이 강의만 모아보기</Button>\
                                         </div>\
                                         <div class=\"info_side\">\
-                                            <span class=\"date\">"+ doc.data().date + "</span>\
-                                            <center>\
-                                            <div class=\"like2\">\
-                                                <i\">♥</i>\
-                                            <div class=\"likepeople2\">"+ doc.data().like + "</div>\
+                                            <span class=\"date\">"+ this.editDate(doc.data().date) + "</span>\
+                                            <div class = \"center\">\
+                                                <div class=\"like2\">\
+                                                    <i>♥</i>\
+                                                    <div class=\"likepeople2\">"+ doc.data().like + "</div>\
+                                                </div>\
+                                                <span class=\"writer\">"+ doc.data().writer_name + "</span>\
                                             </div>\
-                                        <span class=\"writer\">"+ doc.data().writer_name + "</span>\
-                                        </center>\
                                         </div>\
                                     </li>\
                                 </ul>\
@@ -120,7 +135,6 @@ class Lecture_review_main extends React.Component {
         let DP = this.makeChartContent()
         const options = {
             height: 260,
-            width: 600,
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             axisY: {
@@ -131,9 +145,6 @@ class Lecture_review_main extends React.Component {
             },
             data: [{
                 type: "column",
-                showInLegend: true,
-                legendMarkerColor: "grey",
-                legendText: "MMbbl = one million barrels",
                 dataPoints: DP
             }]
         }
@@ -160,7 +171,7 @@ class Lecture_review_main extends React.Component {
                         </ul>
                     </aside>
                 </div>
-                <article class="article">
+                <article class="article" style={{width: "43vw"}}>
                     <Paper classname="paper" elevation={2}>
                         <div class="review_search">
                             <div class="category_name">
@@ -173,7 +184,7 @@ class Lecture_review_main extends React.Component {
                                 <input class="keyword" type="text" name="search" size="80" placeholder="게시판에서 검색"></input>
                             </form>
                             <div class="write_button">
-                                <Link to={'/lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글작성</Button></Link>
+                                <Link to={'/Lecture_review_write?board='+board}><Button variant="contained" type="submit" id="write_btn">글작성</Button></Link>
                             </div>
                         </div>
                         <div class="chart">
@@ -183,8 +194,8 @@ class Lecture_review_main extends React.Component {
                             <span>링크</span>
                             <span>내용</span>
                             <div class="btn">
-                                <button>작성날짜△</button>
-                                <button>좋아요</button>
+                            <button><a href={"/Lecture_review_main?board="+board}>작성날짜△</a></button>
+                            <button><a href={"/Lecture_review_main?board="+board+"&order_by=like"}>좋아요△</a></button>
                             </div>
                         </div>
                         <div id="reviews" ref={(DOMNodeRef) => {

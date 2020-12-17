@@ -228,9 +228,81 @@ const Solution_write = () => {
                 </Snackbar>
             </div>
             <div class='main_left'>
-                <ul class="category_camp">
-                    <li><a href="/Solution_main?board=알고리즘">솔루션</a></li>
-                </ul>
+            <div class='schedule'>
+                        <article class="mainarticle">
+                            <p class='small_title_cal'>12월의 일정</p>
+                            <table class="tg">
+                                <thead>
+                                    <tr>
+                                        <th class="sunday">일</th>
+                                        <th class="weekday">월</th>
+                                        <th class="weekday">화</th>
+                                        <th class="weekday">수</th>
+                                        <th class="weekday">목</th>
+                                        <th class="weekday">금</th>
+                                        <th class="saturday">토</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                        <td class="day"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#725ef1" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style={{ color: "#725ef1" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#eb9615" }}>●</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#725ef1" }}>●</td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day"></td>
+                                        <td class="day" style={{ color: "#27a23c" }}>●</td>
+                                        <td class="day"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </article>
+                    </div>
+                    <br></br>
+                    <div class='schedule2'>
+                        <h4 style={{ color: "#27a23c", display: "inline-block" }}>●</h4>&nbsp;
+                        <h4 style={{ color: "#585858", display: "inline-block" }}> 대회 </h4>&nbsp;
+                    </div>
+                    <div class='schedule3'>
+                        <p> ◦ 1일(금) Facebook HackerCup R1</p>
+                        <p> ◦ 9일(토) Google CodeJam</p>
+                        <p> ◦ 29일(금) Facebook HackerCup R2</p>
+                    </div>
             </div>
             <article class="article">
                 <Paper classname="paper" elevation={3}>
