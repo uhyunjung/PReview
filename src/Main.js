@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './total.css';
-import firebase from "firebase";
 import { db } from "./firebase.js";
 
 class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.list = [];
+    }
+
     getUrlParams() {
         let params = {};
         params["post"] = false;
@@ -25,6 +29,9 @@ class Main extends Component {
             .orderBy("like", "desc").limit(5)
             .onSnapshot(snaps => {
                 snaps.forEach(doc => {
+                    if(this.list.indexOf(doc.id) == -1)
+                    {
+                    this.list.push(doc.id);
                     const reviewDiv = document.createElement("div");
 
                     let htmlContent =
@@ -42,7 +49,7 @@ class Main extends Component {
                     if (this.myRef != null) {
                         this.myRef.appendChild(reviewDiv);
                     }
-
+                }
                 })
             })
     }
@@ -176,6 +183,9 @@ class Main extends Component {
                                     .onSnapshot((snaps) => {
                                         document.getElementById("like_post").innerHTML = "";
                                         snaps.forEach((doc) => {
+                                           
+                                            this.list.push(doc.id);
+
                                             const reviewDiv = document.createElement("div");
                                             let title;
                                             if(board == "reviews") title = doc.data().lecture_name;
@@ -195,7 +205,8 @@ class Main extends Component {
 
                                             if ((reviewDiv != null) && (document.getElementById("like_post") != null)) {
                                                 document.getElementById("like_post").appendChild(reviewDiv);
-                                            }
+                                        }
+                                        
                                         })
                                     })
                                 }
