@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './total.css';
-import { db } from "./firebase.js";
+import '../total.css';
+import { db } from "../api/firebase.js";
 
 class Main extends Component {
     constructor(props) {

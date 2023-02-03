@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-import './total.css';
-import { db } from './firebase';
+import '../total.css';
+import { db } from '../api/firebase';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 
@@ -265,7 +265,7 @@ class Lecture_review_detail extends Component {
                             </section>
 
                             <section id="contants" class="writing-block">
-                                <div class="star" class="item">
+                                <div id="star" class="item">
                                     <div class="review-entry">
                                         <span class="entry-name">별점</span>
                                     </div>

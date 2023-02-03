@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import './total.css';
+import '../total.css';
 import { Snackbar, Select, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import MuiAlert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
-import { db } from './firebase.js';
-import firebase from 'firebase';
+import { db } from '../api/firebase.js';
+import firebase from '../api/firebase';
 import { makeStyles } from '@material-ui/core/styles';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -124,16 +125,16 @@ const Listbox = styled('ul')`
 const today = new Date();
 
 // 게시글 작성
-const Lecture_review_write = () => {
+const Lecture_review_edit = () => {
     // 알림창
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setOpen(() =>true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setOpen(() =>false);
     };
 
     // 빈칸 방지
@@ -149,7 +150,7 @@ const Lecture_review_write = () => {
             return;
         }
 
-        setOpenBar(false);
+        setOpenBar(() =>false);
     };
 
     let params = {};
@@ -169,29 +170,6 @@ const Lecture_review_write = () => {
     const [date, setDate] = useState("");
     const [like, setLike] = useState("");
     const [board, setBoard] = useState(params.board);
-    const [id, setId] = useState(params.id);
-    const [items, setItems] = useState([]);
-
-    if(params.id!=null)
-    {
-        let review = db.collection("reviews").doc(params.id);
-        review.get().then(res => {
-            setItems(res.data());
-        });
-
-        setWriterId(items.writer_id);
-        setWriterName(items.writer_name);
-        setLectureName(items.lecture_name);
-        setStar(items.star);
-        setTags(items.tags);
-        setPeriod(items.period);
-        setCost(items.cost);
-        setLink(items.link);
-        setDate(items.date);
-        setLike(items.like);
-        setBoard(items.board);
-    }
-    
 
     // 데이터 저장
     const handleSubmit = (e) => {
@@ -199,14 +177,14 @@ const Lecture_review_write = () => {
         handleClose();
 
         // 빈칸 방지
-        if ((lecture_name == "") || (star == "") || (period == "") || (cost == "") || (pros == "") || (cons == "") || (link == "")) {
+        if ((lecture_name == "") || (star == null) || (tags == null) || (period == null) || (cost == null) || (pros == null) || (cons == null) || (link == null) || (date == null)) {
             handleClickBar();
         }
         else {
             db.collection("users").doc(firebase.auth().currentUser.uid).get()
                 .then(doc => {
 
-                    db.collection("reviews").add({
+                    db.collection("reviews").doc(params.id).set({
                         writer_id: firebase.auth().currentUser.uid,
                         writer_name: doc.data().nickname,
                         lecture_name: lecture_name,
@@ -222,7 +200,7 @@ const Lecture_review_write = () => {
                         board: board
                     })
                         .then((docRef) => {
-                            window.location.href = "/Lecture_review_detail?board=" + params.board + "&id=" + docRef.id;
+                            window.location.href = "/Lecture_review_detail?board=" + params.board + "&id=" + params.id;
                         })
                         .catch((error) => {
                             alert(error.message);
@@ -423,17 +401,17 @@ const Lecture_review_write = () => {
                         </section>
 
                         <section id="submit-button">
-                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글작성</Button>
+                            <Button variant="contained" onClick={handleClickOpen} onKeyPress={keyHandleClickOpen}>글 수정</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
-                                <DialogTitle id="alert-dialog-title">{"리뷰 작성"}</DialogTitle>
+                                <DialogTitle id="alert-dialog-title">{"리뷰 수정"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-description">
-                                        리뷰를 저장하시겠습니까?
+                                        리뷰를 수정하시겠습니까?
                                         </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
@@ -460,4 +438,4 @@ const tagContent = [
     { title: '#실무적이에요' }
 ];
 
-export default Lecture_review_write;
+export default Lecture_review_edit;

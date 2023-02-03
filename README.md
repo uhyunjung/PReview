@@ -24,6 +24,10 @@ PReview는 코딩 강의 및 코딩 캠프에 대한 리뷰, 코딩 문제 및 �
 5. Keyword Search(검색)-Search by tags and keywords
 6. Visualization(시각화)-The number of reviews and average of star rating
 
+## 📽️ 발표 자료 및 데모 영상
+|<div align="center"/>중간 발표| <div align="center"/>기말 발표|<div align="center"/>프로토타입|<div align="center"/>데모 영상|<div align="center"/>최종 영상|
+| :------------------------ | :--------------------------- |:--------------------------- |:--------------------------- |:--------|
+|🔗[**중간 발표**](https://drive.google.com/file/d/1o2WvCAlyi5EbhThbdL9dZpxas0ddrYH6/view?usp=sharing)|🔗[**기말 발표**](https://drive.google.com/file/d/15-w65Qmd0Yz7R1brTH43aB4kG4yhHscE/view?usp=share_link)|🔗[**프로토타입**](https://drive.google.com/file/d/1d-QxbySSE2yt8f5qI-rUwE_F4ExNk7sM/view?usp=sharing)|🔗[**데모 영상**](https://drive.google.com/file/d/1-dVBquSm6KsZyJJXENz4DREVepsbcSxs/view?usp=sharing)|🔗[**최종 영상**](https://drive.google.com/file/d/1wuepieW2DY6pPqMXcNicBvDdQDR_AkIx/view?usp=sharing)|
 
 ## 📁 디렉토리 구조
 ```

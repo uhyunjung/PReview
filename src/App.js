@@ -6,25 +6,25 @@ import firebase from 'firebase';
 import {  Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 
 // 모든 페이지
-import Main from './Main';
-import Login from './Login';
-import Lecture_review_main from './Lecture_review_main';
-import Lecture_review_write from './Lecture_review_write';
-import Lecture_review_detail from './Lecture_review_detail';
-import Lecture_review_edit from './Lecture_review_edit';
-import Camp_review_main from './Camp_review_main';
-import Camp_review_write from './Camp_review_write';
-import Camp_review_detail from './Camp_review_detail';
-import Camp_review_edit from './Camp_review_edit';
-import Solution_main from './Solution_main';
-import Solution_write from './Solution_write';
-import Solution_detail from './Solution_detail';
-import Solution_edit from './Solution_edit';
-import Community_view_main from './Community_view_main';
-import Community_view_write from './Community_view_write';
-import Community_view_detail from './Community_view_detail';
-import Community_view_edit from './Community_view_edit';
-import Mypage from './Mypage';
+import Main from './user/Main';
+import Login from './user/Login';
+import Lecture_review_main from './lecture_review/Lecture_review_main';
+import Lecture_review_write from './lecture_review/Lecture_review_write';
+import Lecture_review_detail from './lecture_review/Lecture_review_detail';
+import Lecture_review_edit from './lecture_review/Lecture_review_edit';
+import Camp_review_main from './camp_review/Camp_review_main';
+import Camp_review_write from './camp_review/Camp_review_write';
+import Camp_review_detail from './camp_review/Camp_review_detail';
+import Camp_review_edit from './camp_review/Camp_review_edit';
+import Solution_main from './solution/Solution_main';
+import Solution_write from './solution/Solution_write';
+import Solution_detail from './solution/Solution_detail';
+import Solution_edit from './solution/Solution_edit';
+import Community_view_main from './community_view/Community_view_main';
+import Community_view_write from './community_view/Community_view_write';
+import Community_view_detail from './community_view/Community_view_detail';
+import Community_view_edit from './community_view/Community_view_edit';
+import Mypage from './user/Mypage';
 
 class App extends Component {
     // 로그인 상태

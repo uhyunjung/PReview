@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from '../api/firebase';
 import { Link } from 'react-router-dom';
 import { Snackbar, Paper, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@material-ui/core';
-import { db } from './firebase.js';
+import { db } from '../api/firebase.js';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import './total.css';
+import '../total.css';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

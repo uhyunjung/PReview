@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase';
+import firebase from '../api/firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Grid, Paper, Button, TextField } from '@material-ui/core';
-import { db } from './firebase';
+import { db } from '../api/firebase';
 
 const Login = () => {
   const [user, setUser] = React.useState("");
