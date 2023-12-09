@@ -1,4 +1,4 @@
-## ❤️ 2020-2 오픈SW플랫폼 프로젝트
+## ❤️ 오픈SW플랫폼 프로젝트
 
 ![6](https://user-images.githubusercontent.com/67186222/99868507-7d630780-2c06-11eb-9ef3-495048b7c05a.JPG)
 <br/><br/>
